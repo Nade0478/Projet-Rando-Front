@@ -46,6 +46,16 @@ const AddCategory = () => {
           Créer une catégorie
         </Button>
       </Form>
+      {Object.keys(validationError).length > 0 && (
+        <div className="mt-3">
+          <h6>Erreurs de validation:</h6>
+          <ul>
+            {Object.entries(validationError).map(([key, value]) => (
+              <li key={key}>{value}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

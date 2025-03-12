@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Blog from "./pages/Blog"; 
 import Home from "./pages/Home"; 
 import Contact from "./pages/Contact";
+import User from "./pages/User";
 
 import TermsAndConditions from "./pages/TermsAndConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -42,7 +43,6 @@ const App = () => {
           <Route path="/Cateory/Add" element={<AddCategory />} /> 
           <Route path="/Category/Edit/:category" element={<EditCategory />} /> 
 
-
           <Route path="/Place" element={<Place />} /> 
           <Route path="/Place/Add" element={<AddPlace />} /> 
           <Route path="/Place/Edit/:place" element={<EditPlace />} /> 
@@ -50,6 +50,8 @@ const App = () => {
           <Route path="/Opinion" element={<Opinion />} /> 
           <Route path="/Opinion/Add" element={<AddOpinion />} /> 
           <Route path="/Opinion/Edit/:opinion" element={<EditOpinion />} /> 
+
+          <Route path="/User" element={<User />} /> 
 
           <Route path="/Terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />

@@ -1,35 +1,51 @@
-body {
-  align-items: center;
-  font-family: "Lato", sans-serif;
+h1{
+  background-color: #a89e92;
+  text-align: center;
+  font-family: 'Inknut Antiqua', sans-serif;
+  color: #025a31;
 }
 
-h1 {
-  margin-bottom: 60px;
+p{
+  color: #000;
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
 }
 
-label {
-  color: #000000;
-}
-
-.btn-send {
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  width: 80%;
-  margin-left: 3px;
-}
-
-.btn-select {
-  background-color: #198754;
-  color: white;
-}
-
-.form-group .help-block.with-errors {
-  color: #19440c;
-  margin-top: 5px;
-}
-.form-group .card {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-/*# sourceMappingURL=style-contact.css.map */
+form div{
+  margin-bottom: 10px;
+  }
+  form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 700;
+  }
+  form input,form textarea{
+  width: 100%;
+  padding: 9px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  outline: none;
+  }
+  form button{
+  display: block;
+  margin: auto;
+  background-color:#0c4205;
+  border:none;
+  padding: 10px 20px;
+  color:#fff;
+  border-radius:5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  }
+  form button:hover{
+  background-color:#163a13;
+  }
+  form label{
+    margin-bottom: 0;
+    display: flex;
+    align-items: right !important;
+  }

@@ -1,0 +1,15 @@
+/ Styles simples pour le composant
+const styles = {
+  container: {
+    padding: '20px',
+    fontFamily: 'Arial, sans-serif',
+  },
+  header: {
+    color: '#333',
+  },
+  info: {
+    backgroundColor: '#f9f9f9',
+    padding: '10px',
+    borderRadius: '5px',
+  },
+};

@@ -5,7 +5,10 @@ import Menu from "../../components/Menu";
 import axios from "axios"; 
 import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
- 
+import FilterDropdown from "../../components/FilterDropdown";
+
+
+
 const Category = () => { 
   const [category, setCategory] = useState([]); 
  

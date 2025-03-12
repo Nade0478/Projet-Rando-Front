@@ -2,9 +2,10 @@ import React from 'react';
 import Menu from '../components/Menu';
 import FormContact from '../components/FormContact';
 import Footer from '../components/Footer';
-import '../styles/style-contact.scss';
+// import '../styles/style-contact.min.css';
+import '../styles/style-contact.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+
  
 const Contact = () => { 
     return ( 

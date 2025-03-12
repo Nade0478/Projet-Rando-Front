@@ -8,9 +8,9 @@ import Footer from "../../components/Footer";
 import FilterDropdown from "../../components/FilterDropdown";
 
 const Article = () => {
-  const [articles, setArticles] = useState([]);
-  const [titles, setTitles] = useState([]);
-  const [selectedTitle, setSelectedTitle] = useState(null);
+  const [article, setArticle] = useState([]);
+  const [title_article, setTitle_article] = useState([]);
+  const [selectedTitle_article, setSelectedTitle_article] = useState(null);
 
   useEffect(() => {
     displayArticle();
@@ -18,8 +18,8 @@ const Article = () => {
 
   const displayArticle = async () => {
     await axios.get("http://127.0.0.1:8000/api/article").then((res) => {
-      setArticles(res.data.data); // Utilisation de "data" depuis la réponse de l'API
-      setTitles(res.data.data.map(article => article.title_article));
+      setArticle(res.data.data); // Utilisation de "data" depuis la réponse de l'API
+      setTitle_article(res.data.data.map(article => article.title_article));
     });
   };
 
@@ -27,9 +27,9 @@ const Article = () => {
     axios.delete(`http://127.0.0.1:8000/api/article/${id}`).then(displayArticle);
   };
 
-  const filteredArticles = articles.filter((article) => {
+  const filteredArticles = article.filter((article) => {
     return (
-      !selectedTitle || article.title_article === selectedTitle
+      !selectedTitle_article || article.title_article === selectedTitle_article
     );
   });
 
@@ -39,9 +39,9 @@ const Article = () => {
       <div className="container mt-5">
         <div className="d-flex justify-content-between mb-3">
           <FilterDropdown
-            items={titles}
-            selectedItem={selectedTitle}
-            onChange={setSelectedTitle}
+            items={title_article}
+            selectedItem={selectedTitle_article}
+            onChange={setSelectedTitle_article}
           />
         </div>
         <Table striped bordered hover>
