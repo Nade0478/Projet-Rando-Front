@@ -1,0 +1,30 @@
+import React from 'react';
+import emailjs from 'emailjs-com';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import Dashboard from '../../components/admin/Dashboard';
+
+const DashboardPage = () => {
+  const sendEmail = () => {
+    emailjs.send(/* paramètres pour envoyer un email */)
+      .then((response) => {
+        console.log('Email envoyé avec succès !', response);
+      })
+      .catch((error) => {
+        console.error('Erreur lors de l\'envoi de l\'email :', error);
+      });
+  };
+
+  return (
+    <div className="container">
+      <h1>Bienvenue sur ma page de </h1>
+      <hr />
+      <Dashboard />
+      <button onClick={sendEmail}>Envoyer un email</button>
+    </div>
+  );
+};
+
+export default DashboardPage;
+

@@ -18,6 +18,7 @@ const Article = () => {
 
   const displayArticle = async () => {
     await axios.get("http://127.0.0.1:8000/api/article").then((res) => {
+      setArticle(res.data); // Utilisation de "data" depuis la réponse de l'API
       setArticle(res.data.data); // Utilisation de "data" depuis la réponse de l'API
       setTitle_article(res.data.data.map(article => article.title_article));
     });

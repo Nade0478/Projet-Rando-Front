@@ -4,7 +4,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Blog from "./pages/Blog"; 
 import Home from "./pages/Home"; 
 import Contact from "./pages/Contact";
-import User from "./pages/User";
+import User from "./pages/admin/User";
+// import AddUser from "./pages/Admin/AddUser";
+// import UserEdit from "./pages/Admin/UserEdit";
+
+import DashboardPage from "./pages/admin/DashboardPage";
 
 import TermsAndConditions from "./pages/TermsAndConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -26,6 +30,8 @@ import EditCategory from "./pages/category/EditCategory";
 import Place from "./pages/place/Place";
 import AddPlace from "./pages/place/AddPlace";
 import EditPlace from "./pages/place/EditPlace";
+import UserProfil from "./pages/UserProfil";
+
 
 const App = () => { 
   return ( 
@@ -40,7 +46,7 @@ const App = () => {
           <Route path="/Article/Edit/:article" element={<EditArticle />} /> 
 
           <Route path="/Category" element={<Category />} /> 
-          <Route path="/Cateory/Add" element={<AddCategory />} /> 
+          <Route path="/Category/Add" element={<AddCategory />} /> 
           <Route path="/Category/Edit/:category" element={<EditCategory />} /> 
 
           <Route path="/Place" element={<Place />} /> 
@@ -51,7 +57,17 @@ const App = () => {
           <Route path="/Opinion/Add" element={<AddOpinion />} /> 
           <Route path="/Opinion/Edit/:opinion" element={<EditOpinion />} /> 
 
-          <Route path="/User" element={<User />} /> 
+          <Route path="/Dashboard" element={<DashboardPage />} /> 
+          <Route path="/User" element={<UserProfil />} /> 
+          <Route path="/user" element={<User />} /> 
+
+          {/* <Route path="/User/Add" element={<AddUser />} />  */}
+          {/* <Route path="/User/Edit/:user" element={<EditUser />} />  */}
+          <Route path="/User" element={<User />} />
+
+          {/* Auth routes */}
+          {/* <Route path="/Auth/Register" element={<Register />} /> 
+          <Route path="/Auth/Login" element={<Login />} />  */}
 
           <Route path="/Terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
@@ -63,4 +79,4 @@ const App = () => {
   ); 
 }; 
  
-export default App; 
+export default App;

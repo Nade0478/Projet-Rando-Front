@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useTable } from 'react-table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'emailjs-com';
+import ContactForm from './ContactForm';
 
 const Dashboard = () => {
   const [emails, setEmails] = useState([]);
@@ -10,7 +12,10 @@ const Dashboard = () => {
     // Simuler la réception de mails (remplacer par une vraie API dans un cas réel)
     const fetchedEmails = [
       { name: 'Alice', message: 'Salut, je suis intéressée par vos services.' },
-      { name: 'Bob', message: 'Bonjour, j\'aimerais en savoir plus sur votre produit.' },
+      {
+        name: 'Bob',
+        message: 'Bonjour, je souhaite en savoir plus sur votre produit.'
+      }
     ];
     setEmails(fetchedEmails);
   }, []);
@@ -55,6 +60,7 @@ const Dashboard = () => {
           })}
         </tbody>
       </table>
+      <ContactForm />
     </div>
   );
 };
