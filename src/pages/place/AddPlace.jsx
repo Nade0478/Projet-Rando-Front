@@ -1,206 +1,238 @@
-import React, { useState } from "react"; 
-import Form from "react-bootstrap/Form"; 
-import Button from "react-bootstrap/Button"; 
-import Row from "react-bootstrap/Row"; 
-import Col from "react-bootstrap/Col"; 
-import axios from "axios"; 
-import { useNavigate } from "react-router-dom"; 
-import Menu from "../../components/Menu"; 
- 
-const AddPlace = () => { 
-  const navigate = useNavigate(); 
- 
-  const [namePlace, setNamePlace] = useState(""); 
-  const [longitudePlace, setLongitudePlace] = useState(""); 
-  const [latitudePlace, setLatitudePlace] = useState(""); 
-  const [descriptionPlace, setDescriptionPlace] = useState(""); 
-  const [imagePlace, setImagePlace] = useState(""); 
-  const [mapPlace, setMapPlace] = useState(""); 
-  const [distancePlace, setDistancePlace] = useState(""); 
-  const [difficultyPlace, setDifficultyPlace] = useState(""); 
-  const [estimatedTimePlace, setEstimatedTimePlace] = useState(""); 
-  const [validationError, setValidationError] = useState({}); 
- 
-  const changeHandler = (place) => { 
-    setImagePlace(place.target.files[0]); 
-  }; 
- 
-  const addPlace = async (e) => { 
-    e.preventDefault(); 
- 
-    const formData = new FormData(); 
-    formData.append("name_place", namePlace); 
-    formData.append("longitude_place", longitudePlace); 
-    formData.append("latitude_place", latitudePlace); 
-    formData.append("description_place", descriptionPlace); 
-    formData.append("image_place", imagePlace); 
-    formData.append("map_place", mapPlace); 
-    formData.append("distance_place", distancePlace); 
-    formData.append("difficulty_place", difficultyPlace); 
-    formData.append("estimated_time_place", estimatedTimePlace); 
- 
-    await axios 
-      .post(`http://127.0.0.1:8000/api/place`, formData) 
-      .then(() => navigate("/place")) 
-      .catch(({ response }) => { 
-        if (response.status === 422) { 
-          setValidationError(response.data.errors); 
-        }  
-      }); 
-  }; 
- 
-  return ( 
-    <div> 
-      <Menu /> 
-      <div className="container mt-5"> 
-        <div className="row justify-content-center"> 
-          <div className="col-12 col-sm-12 col-md-6"> 
-            <div className="card"> 
-              <div className="card-body"> 
-                <h4 className="card-title">Création d'un nouveau lieu de randonnée</h4> 
-                <hr /> 
-                <div className="form-wrapper"> 
-                  {Object.keys(validationError).length > 0 && ( 
-                    <div className="row"> 
-                      <div className="col-12"> 
-                        <div className="alert alert-danger"> 
-                          <ul className="mb-0"> 
-                            {Object.entries(validationError).map( 
-                              ([key, value]) => ( 
-                                <li key={key}>{value}</li> 
-                              ) 
-                            )} 
-                          </ul> 
-                        </div> 
-                      </div> 
-                    </div> 
-                  )} 
-                  <Form onSubmit={addPlace}> 
-                    <Row> 
-                      <Col> 
-                        <Form.Group controlId="NamePlace"> 
-                          <Form.Label>Nom</Form.Label> 
-                          <Form.Control 
-                            type="text" 
-                            value={namePlace} 
-                            onChange={(place) => setNamePlace(place.target.value)} 
-                          /> 
-                        </Form.Group> 
-                      </Col> 
-                    </Row> 
-                    <Row> 
-                      <Col> 
-                        <Form.Group controlId="LongitudePlace"> 
-                          <Form.Label>Longitude</Form.Label> 
-                          <Form.Control 
-                            type="text" 
-                            value={longitudePlace} 
-                            onChange={(place) => setLongitudePlace(place.target.value)} 
-                          /> 
-                        </Form.Group> 
-                      </Col> 
-                    </Row> 
-                    <Row> 
-                      <Col> 
-                        <Form.Group controlId="LatitudePlace"> 
-                          <Form.Label>Latitude</Form.Label> 
-                          <Form.Control 
-                            type="text" 
-                            value={latitudePlace} 
-                            onChange={(place) => setLatitudePlace(place.target.value)} 
-                          /> 
-                        </Form.Group> 
-                      </Col> 
-                    </Row> 
-                    <Row> 
-                      <Col> 
-                        <Form.Group controlId="DescriptionPlace"> 
-                          <Form.Label>Description</Form.Label> 
-                          <Form.Control 
-                            type="text" 
-                            value={descriptionPlace} 
-                            onChange={(place) => setDescriptionPlace(place.target.value)} 
-                          /> 
-                        </Form.Group> 
-                      </Col> 
-                    </Row> 
-                    <Row> 
-                      <Col> 
-                        <Form.Group controlId="DistancePlace"> 
-                          <Form.Label>Distance</Form.Label> 
-                          <Form.Control 
-                            type="number" 
-                            value={distancePlace} 
-                            onChange={(place) => setDistancePlace(place.target.value)} 
-                          /> 
-                        </Form.Group> 
-                      </Col> 
-                    </Row> 
-                    <Row> 
-                      <Col> 
-                        <Form.Group controlId="DifficultyPlace"> 
-                          <Form.Label>Difficulté</Form.Label> 
-                          <Form.Control 
-                            type="text" 
-                            value={difficultyPlace} 
-                            onChange={(place) => setDifficultyPlace(place.target.value)} 
-                          /> 
-                        </Form.Group> 
-                      </Col> 
-                    </Row> 
-                    <Row> 
-                      <Col> 
-                        <Form.Group controlId="EstimatedTimePlace"> 
-                          <Form.Label>Temps estimé</Form.Label> 
-                          <Form.Control 
-                            type="text" 
-                            value={estimatedTimePlace} 
-                            onChange={(place) => setEstimatedTimePlace(place.target.value)} 
-                          /> 
-                        </Form.Group> 
-                      </Col> 
-                    </Row> 
-                    <Row> 
-                      <Col> 
-                        <Form.Group controlId="MapPlace" className="mb-3"> 
-                          <Form.Label>Carte</Form.Label> 
-                          <Form.Control 
-                            type="url" 
-                            value={mapPlace} 
-                            onChange={(place) => setMapPlace(place.target.value)} 
-                          /> 
-                        </Form.Group> 
-                      </Col> 
-                    </Row> 
-                    <Row> 
-                      <Col> 
-                        <Form.Group controlId="ImagePlace" className="mb-3"> 
-                          <Form.Label>Image</Form.Label> 
-                          <Form.Control 
-                            type="file" 
-                            onChange={changeHandler} 
-                          /> 
-                        </Form.Group> 
-                      </Col> 
-                    </Row> 
-                    <Button 
-                      variant="primary" 
-                      className="mt-2" 
-                      size="lg" 
-                      block="block" 
-                      type="submit" 
-                    > 
-                      Créer un nouveau lieu 
-                    </Button> 
-                  </Form> 
-                </div> 
-              </div> 
-            </div> 
-          </div> 
-        </div> 
-      </div> 
-    </div> 
-  ); 
-}; 
- 
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Footer from "../../components/Footer";
+import Menu from "../../components/Menu";
+
+const AddPlace = () => {
+  const [name_place, setName_place] = useState("");
+  const [image_place, setImage_place] = useState(null);
+  const [longitude_place, setLongitude_place] = useState("");
+  const [latitude_place, setLatitude_place] = useState("");
+  const [description_place, setDescription_place] = useState("");
+  const [map_place, setMap_place] = useState(null);
+  const [distance_place, setDistance_place] = useState("");
+  const [difficulty_place, setDifficulty_place] = useState("");
+  const [estimated_time_place, setEstimated_time_place] = useState("");
+  const [validationError, setValidationError] = useState({});
+
+  const navigate = useNavigate();
+
+  const addPlace = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("name_place", name_place);
+    formData.append("longitude_place", longitude_place);
+    formData.append("latitude_place", latitude_place);
+    formData.append("description_place", description_place);
+    formData.append("distance_place", distance_place);
+    formData.append("difficulty_place", difficulty_place);
+    formData.append("estimated_time_place", estimated_time_place);
+    if (image_place) {
+      formData.append("image_place", image_place);
+    }
+    if (map_place) {
+      formData.append("map_place", map_place);
+    }
+
+    await axios
+      .post(`http://127.0.0.1:8000/api/place`, formData)
+      .then(() => navigate("/place"))
+      .catch(({ response }) => {
+        if (response.status === 422) {
+          setValidationError(response.data.errors);
+        }
+      });
+  };
+
+  const changeImageHandler = (e) => {
+    setImage_place(e.target.files[0]);
+  };
+
+  const changeMapHandler = (e) => {
+    setMap_place(e.target.files[0]);
+  };
+
+  return (
+    <div>
+      <Menu />
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-12 col-sm-12 col-md-6">
+            <div className="card">
+              <div className="card-body">
+                <h4 className="card-title">Création d'un nouvel endroit</h4>
+                <hr />
+                <div className="form-wrapper">
+                  {Object.keys(validationError).length > 0 && (
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="alert alert-danger">
+                          <ul className="mb-0">
+                            {Object.entries(validationError).map(
+                              ([key, value]) => (
+                                <li key={key}>{value}</li>
+                              )
+                            )}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  <Form onSubmit={addPlace}>
+                    <Row>
+                      <Col>
+                        <Form.Group controlId="name_place">
+                          <Form.Label>Nom de l'endroit</Form.Label>
+                          <Form.Control
+                            type="text"
+                            value={name_place}
+                            onChange={(place) => {
+                              setName_place(place.target.value);
+                            }}
+                            required
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <Form.Group controlId="longitude_place">
+                          <Form.Label>Longitude</Form.Label>
+                          <Form.Control
+                            type="text"
+                            value={longitude_place}
+                            onChange={(place) => {
+                              setLongitude_place(place.target.value);
+                            }}
+                            required
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <Form.Group controlId="latitude_place">
+                          <Form.Label>Latitude</Form.Label>
+                          <Form.Control
+                            type="text"
+                            value={latitude_place}
+                            onChange={(place) => {
+                              setLatitude_place(place.target.value);
+                            }}
+                            required
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <Form.Group controlId="description_place">
+                          <Form.Label>Description</Form.Label>
+                          <Form.Control
+                            as="textarea"
+                            value={description_place}
+                            onChange={(place) => {
+                              setDescription_place(place.target.value);
+                            }}
+                            required
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <Form.Group controlId="image_place" className="mb-3">
+                          <Form.Label>Image</Form.Label>
+                          <Form.Control
+                            type="file"
+                            onChange={changeImageHandler}
+                            required
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <Form.Group controlId="map_place" className="mb-3">
+                          <Form.Label>Carte</Form.Label>
+                          <Form.Control
+                            type="file"
+                            onChange={changeMapHandler}
+                            required
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <Form.Group controlId="distance_place">
+                          <Form.Label>Distance</Form.Label>
+                          <Form.Control
+                            type="text"
+                            value={distance_place}
+                            onChange={(place) => {
+                              setDistance_place(place.target.value);
+                            }}
+                            required
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <Form.Group controlId="difficulty_place">
+                          <Form.Label>Difficulté</Form.Label>
+                          <Form.Control
+                            type="text"
+                            value={difficulty_place}
+                            onChange={(place) => {
+                              setDifficulty_place(place.target.value);
+                            }}
+                            required
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <Form.Group controlId="estimated_time_place">
+                          <Form.Label>Temps estimé</Form.Label>
+                          <Form.Control
+                            type="text"
+                            value={estimated_time_place}
+                            onChange={(place) => {
+                              setEstimated_time_place(place.target.value);
+                            }}
+                            required
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Button
+                      variant="warning"
+                      className="mt-2"
+                      size="lg"
+                      block="block"
+                      type="submit"
+                    >
+                      Créer
+                    </Button>
+                  </Form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
 export default AddPlace;

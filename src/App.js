@@ -30,6 +30,7 @@ import EditCategory from "./pages/category/EditCategory";
 import Place from "./pages/place/Place";
 import AddPlace from "./pages/place/AddPlace";
 import EditPlace from "./pages/place/EditPlace";
+
 import UserProfil from "./pages/UserProfil";
 
 

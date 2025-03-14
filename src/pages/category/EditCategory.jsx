@@ -87,7 +87,7 @@ const EditCategory = () => {
                       </Col> 
                     </Row> 
                     <Button 
-                      variant="primary" 
+                      variant="warning" 
                       className="mt-2" 
                       size="lg" 
                       block="block" 

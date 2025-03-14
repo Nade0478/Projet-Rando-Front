@@ -1,31 +1,50 @@
-import React, { useEffect, useState } from "react"; 
-import Table from "react-bootstrap/Table"; 
-import Button from "react-bootstrap/Button"; 
-import Menu from "../../components/Menu"; 
-import axios from "axios"; 
+import React, { useEffect, useState } from "react";
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+import Menu from "../../components/Menu";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import Footer from "../../components/Footer";
+import FilterDropdown from "../../components/FilterDropdown";
 
 const Place = () => { 
-  const [places, setPlaces] = useState([]); 
+  const [place, setPlace] = useState([]); 
+  const [name_place, setName_place] = useState([]);
+  const [selectedName_place, setSelectedName_place] = useState(null);
 
-  useEffect(() => { 
-    displayPlaces(); 
-  }, []); 
+  useEffect(() => {
+    displayPlace();
+  }, []);
 
-  const displayPlaces = async () => { 
-    await axios.get("http://127.0.0.1:8000/api/place").then((res) => { 
-      setPlaces(res.data.data); // Utilisation de "data" depuis la réponse de l'API
-    }); 
-  }; 
-
-  const deletePlace = (id) => { 
-    axios.delete(`http://127.0.0.1:8000/api/place/${id}`).then(displayPlaces); 
+  const displayPlace = async () => {
+    await axios.get("http://127.0.0.1:8000/api/place").then((res) => {
+      setPlace(res.data); // Utilisation de "data" depuis la réponse de l'API
+      setPlace(res.data); // Utilisation de "data" depuis la réponse de l'API
+      setName_place(res.data.map(place => place.name_place));
+    });
   };
 
-  return ( 
-    <div> 
-      <Menu /> 
-      <div className="container mt-5"> 
+  const deletePlace = (id) => {
+    axios.delete(`http://127.0.0.1:8000/api/place/${id}`).then(displayPlace);
+  };
+
+  const filteredPlaces = place.filter((place) => {
+    return (
+      !selectedName_place || place.name_place === selectedName_place
+    );
+  });
+
+  return (
+    <div>
+      <Menu />
+      <div className="container mt-5">
+        <div className="d-flex justify-content-between mb-3">
+          <FilterDropdown
+            items={name_place}
+            selectedItem={selectedName_place}
+            onChange={setSelectedName_place}
+          />
+        </div>
         <Table striped bordered hover> 
           <thead> 
             <tr> 
@@ -42,7 +61,7 @@ const Place = () => {
             </tr> 
           </thead> 
           <tbody> 
-            {places.map((place) => ( 
+            {filteredPlaces.map((place) => ( 
               <tr key={place.id}> 
                 <td>{place.name_place}</td> 
                 <td>
@@ -80,6 +99,7 @@ const Place = () => {
             ))} 
           </tbody> 
         </Table> 
+        <Footer />
       </div> 
     </div> 
   ); 
