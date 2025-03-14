@@ -17,22 +17,42 @@ const Opinion = () => {
   }, []);
 
   const displayOpinion = async () => {
-    await axios.get("http://127.0.0.1:8000/api/opinion").then((res) => {
-      setOpinion(res.data); 
-      setOpinion(res.data.data); 
-      setTitle_opinion(res.data.data.map(opinion => opinion.title_opinion));
-    });
+    try {
+      const res = await axios.get("http://127.0.0.1:8000/api/opinion");
+      console.log(res.data); // Inspectez les données de l'API
+
+      // Vérifiez si res.data est valide avant d'utiliser map()
+      if (res.data && Array.isArray(res.data)) {
+        setOpinion(res.data);
+        setTitle_opinion(res.data.map((opinion) => opinion.title_opinion));
+      } else {
+        setOpinion([]);
+        setTitle_opinion([]);
+      }
+    } catch (error) {
+      console.error("Erreur lors de la récupération des opinions :", error);
+      setOpinion([]);
+      setTitle_opinion([]);
+    }
   };
 
   const deleteOpinion = (id) => {
-    axios.delete(`http://127.0.0.1:8000/api/opinion/${id}`).then(displayOpinion);
+    axios
+      .delete(`http://127.0.0.1:8000/api/opinion/${id}`)
+      .then(displayOpinion)
+      .catch((error) =>
+        console.error("Erreur lors de la suppression de l'opinion :", error)
+      );
   };
 
-  const filteredOpinions = opinion.filter((opinion) => {
-    return (
-      !selectedTitle_opinion || opinion.title_opinion === selectedTitle_opinion
-    );
-  });
+  const filteredOpinions = Array.isArray(opinion)
+    ? opinion.filter((opinion) => {
+        return (
+          !selectedTitle_opinion ||
+          opinion.title_opinion === selectedTitle_opinion
+        );
+      })
+    : [];
 
   return (
     <div>
@@ -48,7 +68,7 @@ const Opinion = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-            <th>Titre de l'opinion</th>
+              <th>Titre de l'opinion</th>
               <th>Contenu</th>
               <th>Note</th>
               <th>Auteur</th>
@@ -62,8 +82,8 @@ const Opinion = () => {
                 <td>{opinion.title_opinion}</td>
                 <td>{opinion.content_opinion}</td>
                 <td>{opinion.note_opinion}</td>
-                <td>{opinion.place.name}</td>
-                <td>{opinion.user.name}</td>
+                <td>{opinion.place?.name_place || "Non défini"}</td>
+                <td>{opinion.user?.name || "Non défini"}</td>
                 <td>
                   <Link
                     to={`/opinion/edit/${opinion.id}`}
