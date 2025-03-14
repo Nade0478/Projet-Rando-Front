@@ -1,68 +1,83 @@
-import React, { useState, useEffect } from 'react';
-import { useTable } from 'react-table';
+
+import React, { useState } from 'react';
+import '../styles/style-contact.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import 'emailjs-com';
-import ContactForm from './ContactForm';
 
-const Dashboard = () => {
-  const [emails, setEmails] = useState([]);
+const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+    agree: false,
+  });
 
-  useEffect(() => {
-    // Simuler la réception de mails (remplacer par une vraie API dans un cas réel)
-    const fetchedEmails = [
-      { name: 'Alice', message: 'Salut, je suis intéressée par vos services.' },
-      {
-        name: 'Bob',
-        message: 'Bonjour, je souhaite en savoir plus sur votre produit.'
-      }
-    ];
-    setEmails(fetchedEmails);
-  }, []);
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value,
+    });
+  };
 
-  const columns = React.useMemo(
-    () => [
-      { Header: 'Nom', accessor: 'name' },
-      { Header: 'Message', accessor: 'message' },
-    ],
-    []
-  );
-
-  const data = React.useMemo(() => emails, [emails]);
-
-  const tableInstance = useTable({ columns, data });
-
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.agree) {
+      // Logic to handle form submission
+      console.log('Form submitted:', formData);
+    } else {
+      alert('Please agree to the terms and conditions.');
+    }
+  };
 
   return (
-    <div className="container">
-      <h1>Dashboard Admin</h1>
-      <table className="table table-striped" {...getTableProps()}>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map(row => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <ContactForm />
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="name">Nom:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="message">Message:</label>
+        <textarea
+          id="message"
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            name="agree"
+            checked={formData.agree}
+            onChange={handleChange}
+          />
+          I agree to the <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">terms and conditions</a>.
+        </label>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
   );
 };
 
-export default Dashboard;
+export default ContactForm;
