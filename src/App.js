@@ -33,6 +33,8 @@ import EditPlace from "./pages/place/EditPlace";
 
 import UserProfil from "./pages/UserProfil";
 
+import Role from "./pages/Role";
+
 
 const App = () => { 
   return ( 
@@ -65,6 +67,8 @@ const App = () => {
           {/* <Route path="/User/Add" element={<AddUser />} />  */}
           {/* <Route path="/User/Edit/:user" element={<EditUser />} />  */}
           <Route path="/User" element={<User />} />
+
+          <Route path="/role" element={<Role />} />
 
           {/* Auth routes */}
           {/* <Route path="/Auth/Register" element={<Register />} /> 

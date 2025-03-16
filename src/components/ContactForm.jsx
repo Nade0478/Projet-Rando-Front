@@ -76,6 +76,11 @@ const ContactForm = () => {
         </label>
       </div>
       <button type="submit">Submit</button>
+      <p>
+        <small>
+          This form is a placeholder and will not actually send any data.
+        </small>
+      </p>
     </form>
   );
 };

@@ -11,7 +11,7 @@ import { AiOutlineEye, AiTwotoneEyeInvisible } from "react-icons/ai";
 function RegisterForm() { 
   document.title = "Inscription au site"; 
 
-  let navigate = useNavigate(); 
+  const navigate = useNavigate(); 
 
   const { 
     register, 
@@ -26,7 +26,7 @@ function RegisterForm() {
 
   const [showPassword, setShowPassword] = useState(false); 
 
-  const onSubmit = (data) => { 
+  const onSubmit = () => { 
     registerForm(); 
   }; 
 
@@ -36,6 +36,7 @@ function RegisterForm() {
       formData.append("email", email); 
       formData.append("password", password); 
       formData.append("name", name);
+
       const res = await axios.post( 
         "http://127.0.0.1:8000/api/register/", 
         formData, 
@@ -43,14 +44,24 @@ function RegisterForm() {
           headers: { "Content-Type": "multipart/form-data" }, 
         } 
       ); 
+
       if (res.status === 200) { 
         localStorage.setItem("access_token", res.data.token); 
-        navigate("/", { replace: true }); 
+
+        // Gestion des rôles et redirection
+        const userRole = res.data.user_role; 
+        if (userRole === "user") { 
+          navigate("/UserProfil", { replace: true }); 
+        } else if (userRole === "admin") { 
+          navigate("/admin/DashboardPage", { replace: true }); 
+        } else { 
+          navigate("/home", { replace: true }); 
+        } 
       } else { 
-        console.log("Une erreur est survenue");
+        console.error("Une erreur est survenue lors de l'inscription."); 
       } 
     } catch (err) { 
-      console.log(err); 
+      console.error("Erreur serveur :", err); 
     } 
   }; 
 
@@ -107,15 +118,13 @@ function RegisterForm() {
                 value: 
                   /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#:$%^&])/, 
                 message: 
-                  "Le mot de passe doit contenir une minuscule, une majuscule, un chiffre et un caractère spéciale", 
+                  "Le mot de passe doit contenir une minuscule, une majuscule, un chiffre et un caractère spécial", 
               }, 
             })} 
           /> 
         </InputGroup> 
         {errors.password && ( 
-          <Form.Text className="text-danger"> 
-            {errors.password.message} 
-          </Form.Text> 
+          <Form.Text className="text-danger">{errors.password.message}</Form.Text> 
         )} 
       </Form.Group> 
 

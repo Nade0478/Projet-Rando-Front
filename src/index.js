@@ -8,6 +8,8 @@ import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'react-bootstrap/Button';
+import 'react-bootstrap/Form';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
