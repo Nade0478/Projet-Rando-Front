@@ -12,9 +12,9 @@ function ControlledCarousel() {
   };
 
   const images = [
-    '/public/Image-sentier1.png',
-    '/public/randonneur-sentier3.png',
-    '/public/sentier2.png'
+    '/public/Assets/Images/Home/nature1.jpg',
+    '/public/Assets/Images/Home/nature2.jpg',
+    '/public/Assets/Images/Home/nature3.jpg',
   ];
 
   return (

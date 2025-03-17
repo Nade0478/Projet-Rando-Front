@@ -30,7 +30,7 @@ import EditCategory from "./pages/category/EditCategory";
 import Place from "./pages/place/Place";
 import AddPlace from "./pages/place/AddPlace";
 import EditPlace from "./pages/place/EditPlace";
-import PagePlace from "./pages/place/PagePlace";
+import ShowPlace from "./pages/place/ShowPlace";
 
 import UserProfil from "./pages/UserProfil";
 
@@ -56,8 +56,7 @@ const App = () => {
           <Route path="/Place" element={<Place />} /> 
           <Route path="/Place/Add" element={<AddPlace />} /> 
           <Route path="/Place/Edit/:place" element={<EditPlace />} /> 
-          <Route path="/PagePlace" element={<PagePlace />} /> 
-
+          <Route path="/place/show/:id" element={<ShowPlace />} /> {/* Route vers ShowPlace */}
           <Route path="/Opinion" element={<Opinion />} /> 
           <Route path="/Opinion/Add" element={<AddOpinion />} /> 
           <Route path="/Opinion/Edit/:opinion" element={<EditOpinion />} /> 

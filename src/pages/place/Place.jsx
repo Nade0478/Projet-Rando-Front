@@ -3,41 +3,66 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Menu from "../../components/Menu";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import du hook useNavigate
 import Footer from "../../components/Footer";
 import FilterDropdown from "../../components/FilterDropdown";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+
+const customIcon = new L.Icon({
+  iconUrl: "src/Images/Autre/icon-randonneur.png", // Remplacez par l'URL de votre icône
+  iconSize: [25, 25],
+  iconAnchor: [16, 32],
+  popupAnchor: [0, -32],
+});
 
 const Place = () => { 
-  const [place, setPlace] = useState([]); 
-  const [name_place, setName_place] = useState([]);
-  const [selectedName_place, setSelectedName_place] = useState(null);
+  const [place, setPlace] = useState([]); // Liste des lieux
+  const [name_place, setName_place] = useState([]); // Liste des noms de lieux
+  const [selectedName_place, setSelectedName_place] = useState(null); // Nom sélectionné pour le filtre
+  const navigate = useNavigate(); // Hook pour gérer les redirections
 
+  // Charger les lieux au montage du composant
   useEffect(() => {
     displayPlace();
   }, []);
 
+  // Fonction pour récupérer les lieux depuis l'API
   const displayPlace = async () => {
-    await axios.get("http://127.0.0.1:8000/api/place").then((res) => {
-      setPlace(res.data); // Utilisation de "data" depuis la réponse de l'API
-      setName_place(res.data.map(place => place.name_place));
-    });
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/api/place");
+      setPlace(response.data); // Met à jour les lieux
+      setName_place(response.data.map((place) => place.name_place)); // Met à jour la liste des noms
+    } catch (error) {
+      console.error("Erreur lors de la récupération des lieux :", error);
+    }
   };
 
-  const deletePlace = (id) => {
-    axios.delete(`http://127.0.0.1:8000/api/place/${id}`).then(displayPlace);
+  // Fonction pour supprimer un lieu
+  const deletePlace = async (id) => {
+    try {
+      await axios.delete(`http://127.0.0.1:8000/api/place/${id}`);
+      displayPlace(); // Rafraîchit la liste après suppression
+    } catch (error) {
+      console.error("Erreur lors de la suppression du lieu :", error);
+    }
   };
 
+  // Fonction pour rediriger vers la page de détail
+  const showPlace = (id) => {
+    navigate(`/place/show/${id}`); // Redirige vers la page avec les détails du lieu
+  };
+
+  // Filtrage des lieux selon le nom sélectionné
   const filteredPlaces = place.filter((place) => {
-    return (
-      !selectedName_place || place.name_place === selectedName_place
-    );
+    return !selectedName_place || place.name_place === selectedName_place;
   });
 
   return (
     <div>
       <Menu />
       <div className="container mt-5">
+        {/* Dropdown pour le filtrage */}
         <div className="d-flex justify-content-between mb-3">
           <FilterDropdown
             items={name_place}
@@ -45,6 +70,7 @@ const Place = () => {
             onChange={setSelectedName_place}
           />
         </div>
+        {/* Tableau des lieux */}
         <Table striped bordered hover> 
           <thead> 
             <tr> 
@@ -85,7 +111,10 @@ const Place = () => {
                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     />
-                    <Marker position={[place.latitude_place, place.longitude_place]}>
+                    <Marker
+                      position={[place.latitude_place, place.longitude_place]}
+                      icon={customIcon} // Use the custom icon here
+                    >
                       <Popup>{place.name_place}</Popup>
                     </Marker>
                   </MapContainer>
@@ -94,17 +123,25 @@ const Place = () => {
                 <td>{place.difficulty_place}</td> 
                 <td>{place.estimated_time_place}</td> 
                 <td>
+                  {/* Lien pour modifier */}
                   <Link to={`/place/edit/${place.id}`} className="btn btn-success me-2"> 
-                    Modifier 
+                    Modifier
                   </Link>
+                  {/* Bouton pour consulter les détails */}
+                  <Button 
+                    variant="warning" 
+                    onClick={() => showPlace(place.id)} 
+                    className="me-2"
+                  >
+                    Voir les détails
+                  </Button>
+                  {/* Bouton pour supprimer */}
                   <Button 
                     variant="danger" 
-                    onClick={() => { 
-                      deletePlace(place.id); 
-                    }} 
+                    onClick={() => deletePlace(place.id)}
                   > 
-                    Supprimer 
-                  </Button> 
+                    Supprimer
+                  </Button>
                 </td> 
               </tr> 
             ))} 
