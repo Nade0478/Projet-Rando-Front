@@ -7,6 +7,8 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/Footer";
 import Menu from "../../components/Menu";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+
 
 const EditPlace = () => {
   const { place } = useParams();
@@ -128,7 +130,10 @@ const EditPlace = () => {
                           <Form.Control
                             type="text"
                             value={longitude_place}
-                            onChange={(e) => setLongitude_place(e.target.value)}
+                            onChange={(place) => {
+                              setLongitude_place(place.target.value);
+                            }}
+                            required
                           />
                         </Form.Group>
                       </Col>
@@ -140,11 +145,45 @@ const EditPlace = () => {
                           <Form.Control
                             type="text"
                             value={latitude_place}
-                            onChange={(e) => setLatitude_place(e.target.value)}
+                            onChange={(place) => {
+                              setLatitude_place(place.target.value);
+                            }}
+                            required
                           />
                         </Form.Group>
                       </Col>
                     </Row>
+                    <Row className="my-3">
+                      <Col>
+                        <MapContainer
+                          style={{ height: "300px", width: "100%" }}
+                          center={[
+                            parseFloat(latitude_place) || 48.8566, // Valeur par défaut (Paris)
+                            parseFloat(longitude_place) || 2.3522, // Valeur par défaut (Paris)
+                          ]}
+                          zoom={13}
+                          scrollWheelZoom={false}
+                        >
+                          <TileLayer
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                          />
+                          {latitude_place && longitude_place && (
+                            <Marker
+                              position={[
+                                parseFloat(latitude_place),
+                                parseFloat(longitude_place),
+                              ]}
+                            >
+                              <Popup>
+                                Position : {latitude_place}, {longitude_place}
+                              </Popup>
+                            </Marker>
+                          )}
+                        </MapContainer>
+                      </Col>
+                    </Row>
+
                     <Row>
                       <Col>
                         <Form.Group controlId="description_place">

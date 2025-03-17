@@ -6,6 +6,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import FilterDropdown from "../../components/FilterDropdown";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 const Place = () => { 
   const [place, setPlace] = useState([]); 
@@ -18,7 +19,6 @@ const Place = () => {
 
   const displayPlace = async () => {
     await axios.get("http://127.0.0.1:8000/api/place").then((res) => {
-      setPlace(res.data); // Utilisation de "data" depuis la réponse de l'API
       setPlace(res.data); // Utilisation de "data" depuis la réponse de l'API
       setName_place(res.data.map(place => place.name_place));
     });
@@ -75,10 +75,21 @@ const Place = () => {
                 <td>{place.latitude_place}</td> 
                 <td>{place.description_place}</td> 
                 <td>
-                  <a href={place.map_place} target="_blank" rel="noopener noreferrer">
-                    Voir la carte
-                  </a>
-                </td> 
+                  <MapContainer
+                    style={{ height: "200px", width: "100%" }}
+                    center={[place.latitude_place, place.longitude_place]}
+                    zoom={13}
+                    scrollWheelZoom={false}
+                  >
+                    <TileLayer
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    />
+                    <Marker position={[place.latitude_place, place.longitude_place]}>
+                      <Popup>{place.name_place}</Popup>
+                    </Marker>
+                  </MapContainer>
+                </td>
                 <td>{place.distance_place}</td> 
                 <td>{place.difficulty_place}</td> 
                 <td>{place.estimated_time_place}</td> 

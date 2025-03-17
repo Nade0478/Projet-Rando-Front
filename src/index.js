@@ -7,7 +7,8 @@ import 'bootstrap';
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'bootstrap/dist/js/bootstrap.bundle.min'
+import 'leaflet/dist/leaflet.css';
 import 'react-bootstrap/Button';
 import 'react-bootstrap/Form';
 

@@ -62,8 +62,8 @@ const Opinion = () => {
                 <td>{opinion.title_opinion}</td>
                 <td>{opinion.content_opinion}</td>
                 <td>{opinion.note_opinion}</td>
-                <td>{opinion.place.name_place}</td>
                 <td>{opinion.user.name}</td>
+                <td>{opinion.place.name_place}</td>
                 <td>
                   <Link
                     to={`/opinion/edit/${opinion.id}`}
