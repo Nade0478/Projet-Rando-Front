@@ -6,15 +6,15 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom"; // Import du hook useNavigate
 import Footer from "../../components/Footer";
 import FilterDropdown from "../../components/FilterDropdown";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import L from "leaflet";
+// import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+// import L from "leaflet";
 
-const customIcon = new L.Icon({
-  iconUrl: "src/Images/Autre/icon-randonneur.png", // Remplacez par l'URL de votre icône
-  iconSize: [25, 25],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32],
-});
+// const customIcon = new L.Icon({
+//   iconUrl: "src/Images/Autre/icon-randonneur.png", // Remplacez par l'URL de votre icône
+//   iconSize: [25, 25],
+//   iconAnchor: [16, 32],
+//   popupAnchor: [0, -32],
+// });
 
 const Place = () => { 
   const [place, setPlace] = useState([]); // Liste des lieux
@@ -101,10 +101,10 @@ const Place = () => {
                 <td>{place.latitude_place}</td> 
                 <td>{place.description_place}</td> 
                 <td>
-                  <MapContainer
+                  {/* <MapContainer
                     style={{ height: "200px", width: "100%" }}
                     center={[place.latitude_place, place.longitude_place]}
-                    zoom={13}
+                    zoom={20}
                     scrollWheelZoom={false}
                   >
                     <TileLayer
@@ -113,11 +113,11 @@ const Place = () => {
                     />
                     <Marker
                       position={[place.latitude_place, place.longitude_place]}
-                      icon={customIcon} // Use the custom icon here
+                      // icon={customIcon} // Use the custom icon here
                     >
                       <Popup>{place.name_place}</Popup>
                     </Marker>
-                  </MapContainer>
+                  </MapContainer> */}
                 </td>
                 <td>{place.distance_place}</td> 
                 <td>{place.difficulty_place}</td> 

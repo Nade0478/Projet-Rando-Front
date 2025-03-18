@@ -50,6 +50,9 @@ const Menu = () => {
                 <NavDropdown.Item href="/login"> 
                   Se connecter 
                 </NavDropdown.Item> 
+                <NavDropdown.Item href="/logout"> 
+                  Déconnexion 
+                </NavDropdown.Item> 
               </NavDropdown>
               <NavDropdown title= "Register" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="/register"> 

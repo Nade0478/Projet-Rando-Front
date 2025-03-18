@@ -17,14 +17,17 @@ const Navbar = () => {
                 <NavLink to="/contact" className={(nav) => (nav.isActive? "nav-active" : "")} > 
                     <li>Contact</li> 
                 </NavLink>
-                <NavLink to="/place/place" className={(nav) => (nav.isActive? "nav-active" : "")} > 
+                <NavLink to="/place" className={(nav) => (nav.isActive? "nav-active" : "")} > 
                     <li>Les chemins de randonnées</li> 
                 </NavLink>
-                <NavLink to="/Login" className={(nav) => (nav.isActive? "nav-active" : "")} > 
+                <NavLink to="/login" className={(nav) => (nav.isActive? "nav-active" : "")} > 
                     <li>Connexion</li> 
                 </NavLink>
-                <NavLink to="/Register" className={(nav) => (nav.isActive? "nav-active" : "")} > 
+                <NavLink to="/register" className={(nav) => (nav.isActive? "nav-active" : "")} > 
                     <li>Inscription</li> 
+                </NavLink>
+                <NavLink to="/logout" className={(nav) => (nav.isActive? "nav-active" : "")} > 
+                    <li>Déconnexion</li> 
                 </NavLink>
             </ul> 
         </div> 

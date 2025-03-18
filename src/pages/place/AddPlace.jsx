@@ -7,7 +7,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import Menu from "../../components/Menu";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer } from 'https://cdn.esm.sh/react-leaflet/MapContainer'
+import { TileLayer } from 'https://cdn.esm.sh/react-leaflet/TileLayer'
+import { useMap } from 'https://cdn.esm.sh/react-leaflet/hooks'
 
 const AddPlace = () => {
   const [name_place, setName_place] = useState("");
@@ -133,11 +135,11 @@ const AddPlace = () => {
                     </Row>
                     <Row className="my-3">
                       <Col>
-                        <MapContainer
+                        {/* <MapContainer
                           style={{ height: "300px", width: "100%" }}
                           center={[
                             parseFloat(latitude_place) || 48.8566, // Valeur par défaut (Paris)
-                            parseFloat(longitude_place) || 2.3522, // Valeur par défaut (Paris)
+                            parseFloat(longitude_place) || -2.3522, // Valeur par défaut (Paris)
                           ]}
                           zoom={13}
                           scrollWheelZoom={false}
@@ -158,7 +160,7 @@ const AddPlace = () => {
                               </Popup>
                             </Marker>
                           )}
-                        </MapContainer>
+                        </MapContainer> */}
                       </Col>
                     </Row>
 
