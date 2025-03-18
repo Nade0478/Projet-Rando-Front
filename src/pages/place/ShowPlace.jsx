@@ -30,7 +30,7 @@ const ShowPlace = () => {
 
   useEffect(() => {
     fetchPlace();
-  }, []);
+  }, [id]);
 
   const fetchPlace = async () => {
     try {
@@ -62,7 +62,7 @@ const ShowPlace = () => {
           <div className="col-md-6">
             {place.image_place && (
               <ImageComponent
-                imageUrl={`http://127.0.0.1:8000/images/${place.image_place}`}
+                imageUrl={`http://127.0.0.1:8000/public/uploads/${place.image_place}`}
                 altText={place.name_place}
               />
             )}
