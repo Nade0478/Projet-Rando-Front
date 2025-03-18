@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Blog from "./pages/Blog"; 
 import Home from "./pages/Home"; 
 import Contact from "./pages/Contact";
-import User from "./pages/admin/User";
+import User from "./pages/admin/AdminProfil";
 // import AddUser from "./pages/Admin/AddUser";
 // import UserEdit from "./pages/Admin/UserEdit";
 
@@ -35,6 +35,8 @@ import ShowPlace from "./pages/place/ShowPlace";
 import UserProfil from "./pages/UserProfil";
 
 import Role from "./pages/Role";
+import UserPage from "./components/UserPage";
+import AdminProfil from "./pages/admin/AdminProfil";
 
 
 const App = () => { 
@@ -65,8 +67,9 @@ const App = () => {
           <Route path="/User" element={<UserProfil />} /> 
           <Route path="/user" element={<User />} /> 
 
-          {/* <Route path="/User/Add" element={<AddUser />} />  */}
-          {/* <Route path="/User/Edit/:user" element={<EditUser />} />  */}
+          <Route path="/" element={<Login />} />
+          <Route path="/UserPage" element={<UserPage />} />
+          <Route path="/AdminProfil" element={<AdminProfil />} />
           <Route path="/User" element={<User />} />
 
           <Route path="/role" element={<Role />} />

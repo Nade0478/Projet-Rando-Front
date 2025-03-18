@@ -1,12 +1,13 @@
 import React from 'react'; 
 import { NavLink } from "react-router-dom"; 
 import Logo from './Logo';
+
  
 const Navbar = () => { 
     return ( 
         <div className='navigation'> 
             <ul> 
-                <Logo /> 
+                <Logo />
                 <NavLink to="/" className={(nav) => (nav.isActive ? "nav-active" : "")} > 
                     <li>Accueil</li> 
                 </NavLink> 
