@@ -4,7 +4,7 @@
 // import { Navbar } from 'react-bootstrap';
 
 
-// const UserProfil = () => {
+const UserProfil = () => {
 //     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
 
 //     const handleLogin = () => {
@@ -24,6 +24,6 @@
 //             )}
 //         </div>
 //     );
-// };
+};
 
-// export default UserProfil;
+export default UserProfil;

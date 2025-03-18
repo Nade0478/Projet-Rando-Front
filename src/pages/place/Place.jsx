@@ -8,6 +8,7 @@ import Footer from "../../components/Footer";
 import FilterDropdown from "../../components/FilterDropdown";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
+import 'leaflet/dist/leaflet.css';
 
 const customIcon = new L.Icon({
   iconUrl: "src/Images/Autre/icon-randonneur.png", // Remplacez par l'URL de votre icône
@@ -16,7 +17,7 @@ const customIcon = new L.Icon({
   popupAnchor: [0, -32],
 });
 
-const Place = () => { 
+const Place = () => {
   const [place, setPlace] = useState([]); // Liste des lieux
   const [name_place, setName_place] = useState([]); // Liste des noms de lieux
   const [selectedName_place, setSelectedName_place] = useState(null); // Nom sélectionné pour le filtre
@@ -71,86 +72,82 @@ const Place = () => {
           />
         </div>
         {/* Tableau des lieux */}
-        <Table striped bordered hover> 
-          <thead> 
-            <tr> 
-              <th>Nom du lieu</th> 
-              <th>Image</th> 
-              <th>Longitude</th> 
-              <th>Latitude</th> 
-              <th>Description</th> 
-              <th>Carte</th> 
-              <th>Distance (km)</th> 
-              <th>Difficulté</th> 
-              <th>Temps estimé</th> 
-              <th>Actions</th> 
-            </tr> 
-          </thead> 
-          <tbody> 
-            {filteredPlaces.map((place) => ( 
-              <tr key={place.id}> 
-                <td>{place.name_place}</td> 
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Nom du lieu</th>
+              <th>Image</th>
+              <th>Longitude</th>
+              <th>Latitude</th>
+              <th>Description</th>
+              <th>Carte</th>
+              <th>Distance (km)</th>
+              <th>Difficulté</th>
+              <th>Temps estimé</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredPlaces.map((place) => (
+              <tr key={place.id}>
+                <td>{place.name_place}</td>
                 <td>
-                  <img 
-                    src={place.image_place} 
-                    alt={place.name_place} 
-                    width="75px" 
-                  /> 
-                </td> 
-                <td>{place.longitude_place}</td> 
-                <td>{place.latitude_place}</td> 
-                <td>{place.description_place}</td> 
-                <td>
-                  <MapContainer
-                    style={{ height: "200px", width: "100%" }}
-                    center={[place.latitude_place, place.longitude_place]}
-                    zoom={13}
-                    scrollWheelZoom={false}
-                  >
-                    <TileLayer
-                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    />
-                    <Marker
-                      position={[place.latitude_place, place.longitude_place]}
-                      icon={customIcon} // Use the custom icon here
-                    >
-                      <Popup>{place.name_place}</Popup>
-                    </Marker>
-                  </MapContainer>
+                  {/* <img
+                    src={place.image_place}
+                    alt={place.name_place}
+                    width="75px"
+                  /> */}
                 </td>
-                <td>{place.distance_place}</td> 
-                <td>{place.difficulty_place}</td> 
-                <td>{place.estimated_time_place}</td> 
+                <td>{place.longitude_place}</td>
+                <td>{place.latitude_place}</td>
+                <td>{place.description_place}</td>
                 <td>
-                  {/* Lien pour modifier */}
-                  <Link to={`/place/edit/${place.id}`} className="btn btn-success me-2"> 
+                 
+                </td>
+                <td>{place.distance_place}</td>
+                <td>{place.difficulty_place}</td>
+                <td>{place.estimated_time_place}</td>
+                <td>
+                  <Link
+                    to={`/place/edit/${place.id}`}
+                    className="btn btn-success me-2"
+                  >
                     Modifier
                   </Link>
-                  {/* Bouton pour consulter les détails */}
-                  <Button 
-                    variant="warning" 
-                    onClick={() => showPlace(place.id)} 
-                    className="me-2"
+
+                  <Link
+                    to={`/place/${place.id}`}
+                    className="btn btn-success me-2"
                   >
-                    Voir les détails
-                  </Button>
-                  {/* Bouton pour supprimer */}
-                  <Button 
-                    variant="danger" 
+                    Show
+                  </Link>
+
+                  <Button
+                    variant="danger"
                     onClick={() => deletePlace(place.id)}
-                  > 
+                  >
                     Supprimer
                   </Button>
-                </td> 
-              </tr> 
-            ))} 
-          </tbody> 
-        </Table> 
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+        {/* <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+  <TileLayer
+    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  />
+  <Marker position={[51.505, -0.09]}>
+    <Popup>
+      A pretty CSS3 popup. <br /> Easily customizable.
+    </Popup>
+  </Marker>
+</MapContainer> */}
         <Footer />
-      </div> 
-    </div> 
-  ); 
-}; 
+      </div>
+    </div>
+  );
+};
 
 export default Place;

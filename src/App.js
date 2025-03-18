@@ -35,42 +35,41 @@ import ShowPlace from "./pages/place/ShowPlace";
 import UserProfil from "./pages/UserProfil";
 
 import Role from "./pages/Role";
+
 import UserPage from "./components/UserPage";
 import AdminProfil from "./pages/admin/AdminProfil";
-
 
 const App = () => { 
   return ( 
     <BrowserRouter> 
         <Routes> 
           <Route path="/" element={<Home />} /> 
-          <Route path="/Blog" element={<Blog />} /> 
-          <Route path="/Contact" element={<Contact />} /> 
+          <Route path="/blog" element={<Blog />} /> 
+          <Route path="/contact" element={<Contact />} /> 
 
-          <Route path="/Article" element={<Article />} /> 
-          <Route path="/Article/Add" element={<AddArticle />} /> 
-          <Route path="/Article/Edit/:article" element={<EditArticle />} /> 
+          <Route path="/article" element={<Article />} /> 
+          <Route path="/article/add" element={<AddArticle />} /> 
+          <Route path="/article/edit/:article" element={<EditArticle />} /> 
 
-          <Route path="/Category" element={<Category />} /> 
-          <Route path="/Category/Add" element={<AddCategory />} /> 
-          <Route path="/Category/Edit/:category" element={<EditCategory />} /> 
+          <Route path="/category" element={<Category />} /> 
+          <Route path="/category/add" element={<AddCategory />} /> 
+          <Route path="/category/edit/:category" element={<EditCategory />} /> 
 
-          <Route path="/Place" element={<Place />} /> 
-          <Route path="/Place/Add" element={<AddPlace />} /> 
-          <Route path="/Place/Edit/:place" element={<EditPlace />} /> 
+          <Route path="/place" element={<Place />} /> 
+          <Route path="/place/add" element={<AddPlace />} /> 
+          <Route path="/place/edit/:place" element={<EditPlace />} /> 
           <Route path="/place/show/:id" element={<ShowPlace />} /> {/* Route vers ShowPlace */}
-          <Route path="/Opinion" element={<Opinion />} /> 
-          <Route path="/Opinion/Add" element={<AddOpinion />} /> 
-          <Route path="/Opinion/Edit/:opinion" element={<EditOpinion />} /> 
+          <Route path="/opinion" element={<Opinion />} /> 
+          <Route path="/opinion/add" element={<AddOpinion />} /> 
+          <Route path="/opinion/edit/:opinion" element={<EditOpinion />} /> 
 
-          <Route path="/Dashboard" element={<DashboardPage />} /> 
-          <Route path="/User" element={<UserProfil />} /> 
+          <Route path="/dashboard" element={<DashboardPage />} /> 
+          <Route path="/userprofil" element={<UserProfil />} /> 
           <Route path="/user" element={<User />} /> 
 
           <Route path="/" element={<Login />} />
-          <Route path="/UserPage" element={<UserPage />} />
-          <Route path="/AdminProfil" element={<AdminProfil />} />
-          <Route path="/User" element={<User />} />
+          <Route path="/userpage" element={<UserPage />} />
+          <Route path="/adminprofil" element={<AdminProfil />} />
 
           <Route path="/role" element={<Role />} />
 
@@ -78,10 +77,10 @@ const App = () => {
           {/* <Route path="/Auth/Register" element={<Register />} /> 
           <Route path="/Auth/Login" element={<Login />} />  */}
 
-          <Route path="/Terms-and-conditions" element={<TermsAndConditions />} />
-          <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
-          <Route path="/Register" element={<Register />} /> 
-          <Route path="/Login" element={<Login />} /> 
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+          <Route path="/register" element={<Register />} /> 
+          <Route path="/login" element={<Login />} /> 
           <Route path="*" element={<Home />} /> 
         </Routes> 
     </BrowserRouter> 
