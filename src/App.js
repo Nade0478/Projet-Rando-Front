@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Blog from "./pages/Blog"; 
 import Home from "./pages/Home"; 
 import Contact from "./pages/Contact";
-import User from "./pages/admin/AdminProfil";
+import AdminProfil from "./pages/admin/AdminProfil";
 // import AddUser from "./pages/Admin/AddUser";
 // import UserEdit from "./pages/Admin/UserEdit";
 
@@ -35,7 +35,6 @@ import ShowPlace from "./pages/place/ShowPlace";
 import Profil from "./pages/Profil";
 
 import Role from "./pages/Role";
-import AdminProfil from "./pages/admin/AdminProfil";
 
 
 const App = () => { 

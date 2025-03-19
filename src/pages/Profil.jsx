@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Row, Col } from "react-bootstrap"; // Pour les composants Bootstrap
+import { Form, Row, Col, Button } from "react-bootstrap"; // Ajout du bouton si oublié
 import Menu from "../components/Menu";
 import Footer from "../components/Footer";
 
@@ -36,18 +36,30 @@ function Profil() {
   // Soumission du formulaire pour la mise à jour utilisateur
   const updateUser = async (e) => {
     e.preventDefault();
+
+    // Validation côté client
+    if (!name_user || !email_user) {
+      setValidationError({ general: "Les champs Nom et Email sont obligatoires." });
+      return;
+    }
+
     try {
+      // Construire le corps de la requête sans inclure les champs vides
+      const body = {
+        name: name_user,
+        email: email_user,
+      };
+      if (password_user) {
+        body.password = password_user;
+      }
+
       const res = await fetch("http://127.0.0.1:8000/api/user/update", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-        body: JSON.stringify({
-          name: name_user,
-          email: email_user,
-          password: password_user || undefined, // Si le champ mot de passe est vide, ne pas l'envoyer
-        }),
+        body: JSON.stringify(body),
       });
 
       const data = await res.json();
@@ -123,13 +135,15 @@ function Profil() {
                       </Form.Group>
                     </Col>
                   </Row>
-                  <Row>
-                    <Col>
-                      <button type="submit" className="btn btn-success w-100">
-                        Modifier
-                      </button>
-                    </Col>
-                  </Row>
+                  <Button
+                    variant="warning"
+                    className="mt-2"
+                    size="lg"
+                    block="block"
+                    type="submit"
+                  >
+                    Mettre à jour
+                  </Button>
                 </Form>
               </div>
             </div>
