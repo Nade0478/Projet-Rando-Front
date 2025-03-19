@@ -8,7 +8,7 @@ import AdminProfil from "./pages/admin/AdminProfil";
 // import AddUser from "./pages/Admin/AddUser";
 // import UserEdit from "./pages/Admin/UserEdit";
 
-import DashboardPage from "./pages/admin/DashboardPage";
+import DashboardPage from "./pages/admin/Dashboard";
 
 import TermsAndConditions from "./pages/TermsAndConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
