@@ -6,14 +6,9 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom"; // Import du hook useNavigate
 import Footer from "../../components/Footer";
 import FilterDropdown from "../../components/FilterDropdown";
-<<<<<<< HEAD
 // import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 // import L from "leaflet";
-=======
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import L from "leaflet";
-import 'leaflet/dist/leaflet.css';
->>>>>>> f1d148f92a9ae0c48af90e799686647a0729d4af
+// import 'leaflet/dist/leaflet.css';
 
 // const customIcon = new L.Icon({
 //   iconUrl: "src/Images/Autre/icon-randonneur.png", // Remplacez par l'URL de votre icône
@@ -97,41 +92,11 @@ const Place = () => {
               <tr key={place.id}>
                 <td>{place.name_place}</td>
                 <td>
-<<<<<<< HEAD
-                  <img 
-                    src={place.image_place} 
-                    alt={place.name_place} 
-                    width="75px" 
-                  /> 
-                </td> 
-                <td>{place.longitude_place}</td> 
-                <td>{place.latitude_place}</td> 
-                <td>{place.description_place}</td> 
-                <td>
-                  {/* <MapContainer
-                    style={{ height: "200px", width: "100%" }}
-                    center={[place.latitude_place, place.longitude_place]}
-                    zoom={20}
-                    scrollWheelZoom={false}
-                  >
-                    <TileLayer
-                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    />
-                    <Marker
-                      position={[place.latitude_place, place.longitude_place]}
-                      // icon={customIcon} // Use the custom icon here
-                    >
-                      <Popup>{place.name_place}</Popup>
-                    </Marker>
-                  </MapContainer> */}
-=======
                   {/* <img
                     src={place.image_place}
                     alt={place.name_place}
                     width="75px"
                   /> */}
->>>>>>> f1d148f92a9ae0c48af90e799686647a0729d4af
                 </td>
                 <td>{place.longitude_place}</td>
                 <td>{place.latitude_place}</td>
