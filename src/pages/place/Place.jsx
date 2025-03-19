@@ -102,8 +102,25 @@ const Place = () => {
                 <td>{place.latitude_place}</td>
                 <td>{place.description_place}</td>
                 <td>
-                 
-                </td>
+                   <MapContainer
+                     style={{ height: "200px", width: "100%" }}
+                     center={[place.latitude_place, place.longitude_place]}
+                     zoom={13}
+                     scrollWheelZoom={false}
+                   >
+                     <TileLayer
+                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                     />
+                     {/* <Marker position={[place.latitude_place, place.longitude_place]}> */}
+                     <Marker
+                       position={[place.latitude_place, place.longitude_place]}
+                       icon={customIcon} // Use the custom icon here
+                     >
+                       <Popup>{place.name_place}</Popup>
+                     </Marker>
+                   </MapContainer>
+                 </td>
                 <td>{place.distance_place}</td>
                 <td>{place.difficulty_place}</td>
                 <td>{place.estimated_time_place}</td>
@@ -133,17 +150,7 @@ const Place = () => {
             ))}
           </tbody>
         </Table>
-        {/* <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
-  <TileLayer
-    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-  />
-  <Marker position={[51.505, -0.09]}>
-    <Popup>
-      A pretty CSS3 popup. <br /> Easily customizable.
-    </Popup>
-  </Marker>
-</MapContainer> */}
+       
         <Footer />
       </div>
     </div>
