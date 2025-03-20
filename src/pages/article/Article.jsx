@@ -17,15 +17,23 @@ const Article = () => {
   }, []);
 
   const displayArticle = async () => {
-    await axios.get("http://127.0.0.1:8000/api/article").then((res) => {
-      setArticle(res.data); // Utilisation de "data" depuis la réponse de l'API
-      setArticle(res.data.data); // Utilisation de "data" depuis la réponse de l'API
-      setTitle_article(res.data.data.map(article => article.title_article));
-    });
+    try {
+      const res = await axios.get("http://127.0.0.1:8000/api/article");
+      const articles = res.data.data || []; // Assure que les données existent
+      setArticle(articles);
+      setTitle_article(articles.map((article) => article.title_article));
+    } catch (error) {
+      console.error("Erreur lors de la récupération des articles :", error);
+    }
   };
 
-  const deleteArticle = (id) => {
-    axios.delete(`http://127.0.0.1:8000/api/article/${id}`).then(displayArticle);
+  const deleteArticle = async (id) => {
+    try {
+      await axios.delete(`http://127.0.0.1:8000/api/article/${id}`);
+      displayArticle();
+    } catch (error) {
+      console.error("Erreur lors de la suppression :", error);
+    }
   };
 
   const filteredArticles = article.filter((article) => {
@@ -62,16 +70,20 @@ const Article = () => {
               <tr key={article.id}>
                 <td>{article.title_article}</td>
                 <td>
-                  <img
-                    src={article.image_article}
-                    alt={article.title_article}
-                    width="75px"
-                  />
+                  {article.image_article ? (
+                    <img
+                      src={`http://127.0.0.1:8000/storage/uploads/${article.image_article}`}
+                      alt={article.title_article}
+                      width="75px"
+                    />
+                  ) : (
+                    <p>Aucune image</p>
+                  )}
                 </td>
                 <td>{new Date(article.date_article).toLocaleDateString()}</td>
                 <td>{article.content_article}</td>
-                <td>{article.category.name_category}</td>
-                <td>{article.user.name}</td>
+                <td>{article.category?.name_category || "N/A"}</td>
+                <td>{article.user?.name || "N/A"}</td>
                 <td>
                   <Link
                     to={`/article/edit/${article.id}`}
@@ -99,5 +111,6 @@ const Article = () => {
 };
 
 export default Article;
+
 
 
