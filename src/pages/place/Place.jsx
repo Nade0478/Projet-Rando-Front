@@ -12,7 +12,7 @@ import "leaflet/dist/leaflet.css";
 
 // Déclaration correcte de l'icône personnalisée
 const customIcon = new L.Icon({
-  iconUrl: "http://127.0.0.1:8000/storage/uploads/icon-randonneur.png",
+  iconUrl: "http://127.0.0.1:8000/storage/public/uploads/icon-randonneur.png",
   alt: "Icons",
   iconSize: [25, 25],
   iconAnchor: [16, 32],

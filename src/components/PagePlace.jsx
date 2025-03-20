@@ -41,7 +41,7 @@ const Pageplace = () => {
       <p><strong>Temps estimé :</strong> {place.estimated_time_place}</p>
       {place.image_place && (
         <img 
-          src={`http://127.0.0.1:8000/public/uploads/${place.image_place}`} 
+          src={place.image_place}
           alt={place.name_place} 
           width="300px" 
         />
