@@ -12,7 +12,7 @@ import "leaflet/dist/leaflet.css";
 
 // Déclaration correcte de l'icône personnalisée
 const customIcon = new L.Icon({
-  iconUrl: "http://127.0.0.1:8000/storage/icon-randonneur.png",
+  iconUrl: "http://127.0.0.1:8000/storage/uploads/icon-randonneur.png",
   alt: "Icons",
   iconSize: [25, 25],
   iconAnchor: [16, 32],
@@ -94,7 +94,7 @@ const Place = () => {
                 <td>{place.name_place}</td>
                 <td>
                   <img
-                    src={`http://127.0.0.1:8000/storage/${place.image_place}`}// Utilisation de l'URL complète depuis le backend
+                    src={place.image_place}// Utilisation de l'URL complète depuis le backend
                     alt={place.name_place}
                     width="75px"
                   />
