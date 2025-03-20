@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TermsAndConditions = () => {
+const Terms = () => {
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <h1>Conditions Générales d'Utilisation</h1>
@@ -43,7 +43,7 @@ const TermsAndConditions = () => {
       <h2>4. Protection des données</h2>
       <p>
         Nous collectons et utilisons vos données conformément à notre 
-        <a href="/PrivacyPolicy" target="_blank" rel="noopener noreferrer">Politique de Confidentialité</a>.
+        <a href="/Privacy" target="_blank" rel="noopener noreferrer">Politique de Confidentialité</a>.
       </p>
 
       <h2>5. Modification des conditions</h2>
@@ -65,4 +65,4 @@ const TermsAndConditions = () => {
   );
 };
 
-export default TermsAndConditions;
+export default Terms;

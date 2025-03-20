@@ -1,6 +1,6 @@
 import React from 'react'; 
  
-const Card = ({map}) => { 
+const Article = ({map}) => { 
      
  
     return ( 
@@ -8,7 +8,7 @@ const Card = ({map}) => {
             <div className='contentMap'> 
                 {map.sprites.front_default ? 
                 <img src={map.sprites.front_default} alt={"image de "+ map.name} />: 
-                <img src="/public/Assets" alt={"image de "+ map.name} />} 
+                <img src="inconnu.png" alt={"image de "+ map.name} />} 
                  
                 <h3>{map.name.toUpperCase()}</h3> 
             </div>   
@@ -16,4 +16,4 @@ const Card = ({map}) => {
     ); 
 }; 
  
-export default Card; 
+export default Article; 

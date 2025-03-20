@@ -6,17 +6,18 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom"; // Import du hook useNavigate
 import Footer from "../../components/Footer";
 import FilterDropdown from "../../components/FilterDropdown";
-// import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-// import L from "leaflet";
-// import 'leaflet/dist/leaflet.css';
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
-// const customIcon = new L.Icon({
-//   iconUrl: "src/Images/Autre/icon-randonneur.png", // Remplacez par l'URL de votre icône
-//   iconSize: [25, 25],
-//   iconAnchor: [16, 32],
-//   popupAnchor: [0, -32],
-// });
-
+// Déclaration correcte de l'icône personnalisée
+const customIcon = new L.Icon({
+  iconUrl: "http://127.0.0.1:8000/storage/icon-randonneur.png",
+  alt: "Icons",
+  iconSize: [25, 25],
+  iconAnchor: [16, 32],
+  popupAnchor: [0, -32],
+});
 const Place = () => {
   const [place, setPlace] = useState([]); // Liste des lieux
   const [name_place, setName_place] = useState([]); // Liste des noms de lieux
@@ -92,35 +93,34 @@ const Place = () => {
               <tr key={place.id}>
                 <td>{place.name_place}</td>
                 <td>
-                  {/* <img
-                    src={place.image_place}
+                  <img
+                    src={`http://127.0.0.1:8000/storage/${place.image_place}`}// Utilisation de l'URL complète depuis le backend
                     alt={place.name_place}
                     width="75px"
-                  /> */}
+                  />
                 </td>
                 <td>{place.longitude_place}</td>
                 <td>{place.latitude_place}</td>
                 <td>{place.description_place}</td>
                 <td>
-                   <MapContainer
-                     style={{ height: "200px", width: "100%" }}
-                     center={[place.latitude_place, place.longitude_place]}
-                     zoom={13}
-                     scrollWheelZoom={false}
-                   >
-                     <TileLayer
-                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                     />
-                     {/* <Marker position={[place.latitude_place, place.longitude_place]}> */}
-                     <Marker
-                       position={[place.latitude_place, place.longitude_place]}
-                       icon={customIcon} // Use the custom icon here
-                     >
-                       <Popup>{place.name_place}</Popup>
-                     </Marker>
-                   </MapContainer>
-                 </td>
+                  <MapContainer
+                    style={{ height: "200px", width: "100%" }}
+                    center={[place.latitude_place, place.longitude_place]}
+                    zoom={13}
+                    scrollWheelZoom={false}
+                  >
+                    <TileLayer
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    />
+                    <Marker
+                      position={[place.latitude_place, place.longitude_place]}
+                      icon={customIcon}
+                    >
+                      <Popup>{place.name_place}</Popup>
+                    </Marker>
+                  </MapContainer>
+                </td>
                 <td>{place.distance_place}</td>
                 <td>{place.difficulty_place}</td>
                 <td>{place.estimated_time_place}</td>
@@ -131,14 +131,12 @@ const Place = () => {
                   >
                     Modifier
                   </Link>
-
                   <Link
-                    to={`/place/${place.id}`}
+                    to={`/place/show/${place.id}`}
                     className="btn btn-success me-2"
                   >
-                    Show
+                    Détails
                   </Link>
-
                   <Button
                     variant="danger"
                     onClick={() => deletePlace(place.id)}
@@ -150,7 +148,6 @@ const Place = () => {
             ))}
           </tbody>
         </Table>
-       
         <Footer />
       </div>
     </div>

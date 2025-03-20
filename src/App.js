@@ -10,8 +10,8 @@ import AdminProfil from "./pages/admin/AdminProfil";
 
 import DashboardPage from "./pages/admin/Dashboard";
 
-import TermsAndConditions from "./pages/TermsAndConditions";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 
@@ -73,8 +73,8 @@ const App = () => {
           {/* <Route path="/Auth/Register" element={<Register />} /> 
           <Route path="/Auth/Login" element={<Login />} />  */}
 
-          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-          <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/register" element={<Register />} /> 
           <Route path="/login" element={<Login />} /> 
           <Route path="*" element={<Home />} /> 

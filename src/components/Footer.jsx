@@ -37,8 +37,8 @@ const Footer = () => {
 
       <div style={{ marginTop: '20px' }}>
         <p>
-          <a href="/TermsAndConditions" target="_blank" rel="noopener noreferrer">Conditions Générales d'Utilisation</a> | 
-          <a href="/PrivacyPolicy" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '10px' }}>Politique de Confidentialité</a>
+          <a href="/terms" target="_blank" rel="noopener noreferrer">Conditions Générales d'Utilisation</a> | 
+          <a href="/privacy" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '10px' }}>Politique de Confidentialité</a>
         </p>
       </div>
 

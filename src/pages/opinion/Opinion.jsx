@@ -11,29 +11,40 @@ const Opinion = () => {
   const [opinion, setOpinion] = useState([]);
   const [title_opinion, setTitle_opinion] = useState([]);
   const [selectedTitle_opinion, setSelectedTitle_opinion] = useState(null);
-  
-    useEffect(() => {
-      displayOpinion();
-    }, []);
-  
-    const displayOpinion = async () => {
-      await axios.get("http://127.0.0.1:8000/api/opinion").then((res) => {
-        setOpinion(res.data); // Utilisation de "data" depuis la réponse de l'API
-        setOpinion(res.data.data); // Utilisation de "data" depuis la réponse de l'API
-        setTitle_opinion(res.data.data.map(opinion => opinion.title_opinion));
-      });
-    };
-  
-    const deleteOpinion = (id) => {
-      axios.delete(`http://127.0.0.1:8000/api/opinion/${id}`).then(displayOpinion);
-    };
-  
-    const filteredOpinions = opinion.filter((opinion) => {
-      return (
-        !selectedTitle_opinion || opinion.title_opinion === selectedTitle_opinion
-      );
-    });
-  
+
+  useEffect(() => {
+    displayOpinion();
+  }, []);
+
+  const displayOpinion = async () => {
+    try {
+      const res = await axios.get("http://127.0.0.1:8000/api/opinion");
+      if (res.data && res.data.data) {
+        setOpinion(res.data.data);
+        setTitle_opinion(
+          res.data.data.map((opinion) => opinion.title_opinion || "Titre inconnu")
+        );
+      }
+    } catch (error) {
+      console.error("Erreur lors de la récupération des opinions :", error);
+    }
+  };
+
+  const deleteOpinion = async (id) => {
+    try {
+      await axios.delete(`http://127.0.0.1:8000/api/opinion/${id}`);
+      displayOpinion(); // Rafraîchir la liste après suppression
+    } catch (error) {
+      console.error("Erreur lors de la suppression de l'opinion :", error);
+    }
+  };
+
+  const filteredOpinions = opinion.filter((opinion) => {
+    return (
+      !selectedTitle_opinion || opinion.title_opinion === selectedTitle_opinion
+    );
+  });
+
   return (
     <div>
       <Menu />
@@ -59,11 +70,11 @@ const Opinion = () => {
           <tbody>
             {filteredOpinions.map((opinion) => (
               <tr key={opinion.id}>
-                <td>{opinion.title_opinion}</td>
-                <td>{opinion.content_opinion}</td>
-                <td>{opinion.note_opinion}</td>
-                <td>{opinion.user.name}</td>
-                <td>{opinion.place.name_place}</td>
+                <td>{opinion.title_opinion || "Titre non disponible"}</td>
+                <td>{opinion.content_opinion || "Contenu non disponible"}</td>
+                <td>{opinion.note_opinion || "Note non disponible"}</td>
+                <td>{(opinion.user && opinion.user.name) || "Auteur inconnu"}</td>
+                <td>{(opinion.place && opinion.place.name_place) || "Lieu inconnu"}</td>
                 <td>
                   <Link
                     to={`/opinion/edit/${opinion.id}`}
@@ -73,9 +84,7 @@ const Opinion = () => {
                   </Link>
                   <Button
                     variant="danger"
-                    onClick={() => {
-                      deleteOpinion(opinion.id);
-                    }}
+                    onClick={() => deleteOpinion(opinion.id)}
                   >
                     Supprimer
                   </Button>
@@ -91,4 +100,3 @@ const Opinion = () => {
 };
 
 export default Opinion;
-

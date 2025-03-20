@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PrivacyPolicy = () => {
+const Privacy = () => {
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <h1>Politique de Confidentialité</h1>
@@ -76,4 +76,4 @@ const PrivacyPolicy = () => {
   );
 };
 
-export default PrivacyPolicy;
+export default Privacy;
