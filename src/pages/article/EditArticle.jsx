@@ -24,20 +24,18 @@ const EditArticle = () => {
 
   // Fetch the article details
   const getArticle = useCallback(async () => {
-    await axios
-      .get(`http://127.0.0.1:8000/api/article/${article}`)
-      .then((res) => {
-        setTitle_article(res.data.title_article);
-        setDate_article(res.data.date_article);
-        setContent_article(res.data.content_article);
-        setCategoryId(res.data.category_id); // Updated the category_id field
-        setUserId(res.data.user_id); // Updated the user_id field
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await axios.get(`http://127.0.0.1:8000/api/article/${article}`);
+      setTitle_article(res.data.title_article || ""); // Assurez que ces champs ne sont jamais undefined
+      setDate_article(res.data.date_article || "");
+      setContent_article(res.data.content_article || "");
+      setCategoryId(res.data.category_id || "");
+      setUserId(res.data.user_id || "");
+    } catch (error) {
+      console.error("Erreur lors de la récupération de l'article :", error);
+    }
   }, [article]);
-
+  
   // Fetch the users and categories
   const fetchUsers = async () => {
     try {
@@ -70,7 +68,18 @@ const EditArticle = () => {
 
   const updateArticle = async (e) => {
     e.preventDefault();
-
+  
+    if (!title_article || !date_article || !content_article || !userId || !categoryId) {
+      setValidationError({
+        title_article: !title_article ? "Le titre est requis." : "",
+        date_article: !date_article ? "La date est requise." : "",
+        content_article: !content_article ? "Le contenu est requis." : "",
+        user_id: !userId ? "L'auteur est requis." : "",
+        category_id: !categoryId ? "La catégorie est requise." : "",
+      });
+      return;
+    }
+  
     const formData = new FormData();
     formData.append("_method", "PATCH");
     formData.append("title_article", title_article);
@@ -81,15 +90,17 @@ const EditArticle = () => {
     if (image_article) {
       formData.append("image_article", image_article);
     }
-
-    await axios
-      .post(`http://127.0.0.1:8000/api/article/${article}`, formData)
-      .then(() => navigate("/article"))
-      .catch(({ response }) => {
-        if (response.status === 422) {
-          setValidationError(response.data.errors);
-        }
-      });
+  
+    try {
+      await axios.post(`http://127.0.0.1:8000/api/article/${article}`, formData);
+      navigate("/article");
+    } catch (error) {
+      if (error.response && error.response.status === 422) {
+        setValidationError(error.response.data.errors);
+      } else {
+        console.error("Erreur inattendue :", error);
+      }
+    }
   };
 
   return (
