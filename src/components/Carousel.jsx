@@ -1,8 +1,5 @@
-import { useState } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
-import CarouselItem from 'react-bootstrap/CarouselItem';
-import CarouselCaption from 'react-bootstrap/CarouselCaption';
-import CarouselImage from './CarouselImage';
+import { useState } from "react";
+import Carousel from "react-bootstrap/Carousel";
 
 function ControlledCarousel() {
   const [index, setIndex] = useState(0);
@@ -12,36 +9,55 @@ function ControlledCarousel() {
   };
 
   const images = [
-    '/public/Assets/Images/Home/nature1.jpg',
-    '/public/Assets/Images/Home/nature2.jpg',
-    '/public/Assets/Images/Home/nature3.jpg',
+    {
+      src: "/public/Assets/Images/Home/nature1.jpg",
+      caption: {
+        title: "Sentier Forêt",
+        description: "Nulla vitae elit libero, a pharetra augue mollis interdum.",
+        imgSrc: "http://127.0.0.1:8000/storage/public/uploads/forest3_1742476627.png",
+        imgAlt: "sentier forêt",
+      },
+    },
+    {
+      src: "/public/Assets/Images/Home/nature2.jpg",
+      caption: {
+        title: "Sentier et randonneurs",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        imgSrc: "http://127.0.0.1:8000/storage/public/uploads/carte-sarthe_1742480733.jpg",
+        imgAlt: "sentier et randonneurs",
+      },
+    },
+    {
+      src: "/public/Assets/Images/Home/nature3.jpg",
+      caption: {
+        title: "Sentier",
+        description: "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
+        imgSrc: "http://127.0.0.1:8000/storage/public/uploads/forest4_1742469995.png",
+        imgAlt: "sentier",
+      },
+    },
   ];
 
   return (
     <Carousel activeIndex={index} onSelect={handleSelect}>
-      <CarouselItem>
-        <CarouselImage images={images} />
-        <CarouselCaption>
-          <h3>Sentier Forêt</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </CarouselCaption>
-      </CarouselItem>
-      <CarouselItem>
-        <CarouselImage images={images} />
-        <CarouselCaption>
-          <h3>Sentier et randonneurs</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </CarouselCaption>
-      </CarouselItem>
-      <CarouselItem>
-        <CarouselImage images={images} />
-        <CarouselCaption>
-          <h3>Sentier</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </CarouselCaption>
-      </CarouselItem>
+      {images.map((image, idx) => (
+        <Carousel.Item key={idx}>
+          <img
+            className="d-block w-100"
+            src={image.src}
+            alt={`Slide ${idx}`}
+          />
+          <Carousel.Caption>
+            <h3>{image.caption.title}</h3>
+            <img
+              src={image.caption.imgSrc}
+              alt={image.caption.imgAlt}
+              width="75px"
+            />
+            <p>{image.caption.description}</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      ))}
     </Carousel>
   );
 }
