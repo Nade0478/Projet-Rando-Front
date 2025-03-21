@@ -9,7 +9,8 @@ import Footer from "../../components/Footer";
 import Menu from "../../components/Menu";
 import { MapContainer } from 'https://cdn.esm.sh/react-leaflet/MapContainer'
 import { TileLayer } from 'https://cdn.esm.sh/react-leaflet/TileLayer'
-import { useMap } from 'https://cdn.esm.sh/react-leaflet/hooks'
+// import { useMap } from 'https://cdn.esm.sh/react-leaflet/hooks'
+import { Marker, Popup } from "react-leaflet";
 
 const AddPlace = () => {
   const [name_place, setName_place] = useState("");
@@ -44,7 +45,7 @@ const AddPlace = () => {
     }
 
     await axios
-      .post(`http://127.0.0.1:8000/api/place`, formData)
+      .post(`http://127.0.0.1:8000/api/place/`, formData)
       .then(() => navigate("/place"))
       .catch(({ response }) => {
         if (response.status === 422) {
@@ -135,7 +136,7 @@ const AddPlace = () => {
                     </Row>
                     <Row className="my-3">
                       <Col>
-                        {/* <MapContainer
+                        <MapContainer
                           style={{ height: "300px", width: "100%" }}
                           center={[
                             parseFloat(latitude_place) || 48.8566, // Valeur par défaut (Paris)
@@ -160,7 +161,7 @@ const AddPlace = () => {
                               </Popup>
                             </Marker>
                           )}
-                        </MapContainer> */}
+                        </MapContainer>
                       </Col>
                     </Row>
 
