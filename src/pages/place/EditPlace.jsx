@@ -7,7 +7,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/Footer";
 import Menu from "../../components/Menu";
-// import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 
 const EditPlace = () => {
@@ -155,7 +155,7 @@ const EditPlace = () => {
                     </Row>
                     <Row className="my-3">
                       <Col>
-                        {/* <MapContainer
+                        <MapContainer
                           style={{ height: "300px", width: "100%" }}
                           center={[
                             parseFloat(latitude_place) || 48.8566, // Valeur par défaut (Paris)
@@ -180,7 +180,7 @@ const EditPlace = () => {
                               </Popup>
                             </Marker>
                           )}
-                        </MapContainer> */}
+                        </MapContainer>
                       </Col>
                     </Row>
 
@@ -237,7 +237,10 @@ const EditPlace = () => {
                       <Col>
                         <Form.Group controlId="image_place" className="mb-3">
                           <Form.Label>Photo</Form.Label>
-                          <Form.Control type="file" onChange={changeImageHandler} />
+                          <Form.Control
+                          type="file"
+                          onChange={changeImageHandler} 
+                          />
                         </Form.Group>
                       </Col>
                     </Row>
