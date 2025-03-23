@@ -3,7 +3,7 @@ import emailjs from 'emailjs-com';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import Dashboard from '../../components/admin/Dashboard';
+import Dashboard from '../components/admin/Dashboard';
 
 const DashboardPage = () => {
   const sendEmail = () => {

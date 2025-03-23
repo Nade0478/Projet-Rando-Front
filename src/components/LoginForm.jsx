@@ -1,83 +1,106 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { AiOutlineEye, AiTwotoneEyeInvisible } from "react-icons/ai";
+import Footer from "./Footer";
 
-function FormLogin() {
+function LoginForm() {
   document.title = "Connexion au site";
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const { register, handleSubmit, watch, formState: { errors } } = useForm({ defaultValues: { email: "", password: "" } });
-
-  const email = watch("email", "");
-  const password = watch("password", "");
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm({ mode: "onChange" });
+  const [serverError, setServerError] = useState(""); // Gestion des erreurs serveur
 
-  const login = async () => {
+  const onSubmit = async (data) => {
     try {
-      const res = await axios.post("http://127.0.0.1:8000/api/login/", { email, password });
+      // Appel à l'API pour la connexion
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/login/",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+          },
+        }
+      );
 
-      if (res.status === 200) {
-        // Stocker le token et rediriger vers Profil
-        localStorage.setItem("access_token", res.data.token);
-        navigate("/profil", { replace: true });
-      } else {
-        setErrorMessage("Une erreur est survenue lors de la connexion.");
+      if (response.status === 200) {
+        // Récupération du token et du rôle utilisateur depuis la réponse
+        const { token } = response.data.data.access_token;
+        const role_id = parseInt(response.data.data.user.role_id, 10); // Assurez-vous que role_id est un entier
+        localStorage.setItem("access_token", token);
+
+        // Redirection en fonction du rôle
+        if (role_id === 1) {
+          navigate("/dashboard", { replace: true }); // Admin
+        } else if (role_id === 2) {
+          navigate("/profil", { replace: true }); // Utilisateur standard
+        } else {
+          navigate("/home", { replace: true }); // Autre rôle par défaut
+        }
       }
-    } catch (err) {
-      setErrorMessage("Email ou mot de passe incorrect.");
-      console.error("Erreur serveur :", err);
+    } catch (error) {
+      // Gestion des erreurs serveur
+      if (error.response && error.response.status === 401) {
+        setServerError("Identifiants incorrects. Veuillez réessayer.");
+      } else if (error.response && error.response.data.message) {
+        setServerError(error.response.data.message);
+      } else {
+        setServerError("Une erreur inattendue est survenue. Veuillez réessayer.");
+      }
+      console.error("Erreur serveur :", error);
     }
   };
 
-  const handleClickShowPassword = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
-  };
-
   return (
-    <Form onSubmit={handleSubmit(login)}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <h3 className="Auth-form-title">Connexion</h3>
-      {errorMessage && <p className="text-danger">{errorMessage}</p>}
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email</Form.Label>
+      {serverError && <div className="alert alert-danger">{serverError}</div>}
+
+      <Form.Group controlId="formBasicEmail" className="mb-3">
+        <Form.Label>Adresse mail</Form.Label>
         <Form.Control
           type="email"
           placeholder="johndoe@unknown.fr"
-          {...register("email", { required: "L'email est obligatoire" })}
+          {...register("email", {
+            required: "Adresse mail obligatoire",
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "Format d'adresse mail invalide",
+            },
+          })}
         />
         {errors.email && <Form.Text className="text-danger">{errors.email.message}</Form.Text>}
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Group controlId="formBasicPassword" className="mb-3">
         <Form.Label>Mot de passe</Form.Label>
-        <InputGroup>
-          <InputGroup.Text>
-            <i onClick={handleClickShowPassword} style={{ cursor: "pointer" }}>
-              {showPassword ? <AiOutlineEye /> : <AiTwotoneEyeInvisible />}
-            </i>
-          </InputGroup.Text>
-          <Form.Control
-            type={showPassword ? "text" : "password"}
-            placeholder="Mot de passe"
-            {...register("password", { required: "Le mot de passe est obligatoire" })}
-          />
-        </InputGroup>
+        <Form.Control
+          type="password"
+          placeholder="Votre mot de passe"
+          {...register("password", {
+            required: "Mot de passe obligatoire",
+          })}
+        />
         {errors.password && <Form.Text className="text-danger">{errors.password.message}</Form.Text>}
       </Form.Group>
 
-      <Button variant="primary" type="submit" className="w-100">Se connecter</Button>
-      <p className="forgot-password text-right mt-2">
-        <button type="button" className="btn btn-link p-0">Mot de passe oublié ?</button>
-      </p>
+      <Button type="submit" variant="primary">
+        Se connecter
+      </Button>
     </Form>
   );
 }
+<Footer/>
 
-export default FormLogin;
 
+export default LoginForm;

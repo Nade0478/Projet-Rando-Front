@@ -8,8 +8,6 @@ import AdminProfil from "./pages/admin/AdminProfil";
 // import AddUser from "./pages/Admin/AddUser";
 // import UserEdit from "./pages/Admin/UserEdit";
 
-import DashboardPage from "./pages/admin/Dashboard";
-
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Register from "./pages/auth/Register";
@@ -35,6 +33,7 @@ import ShowPlace from "./pages/place/ShowPlace";
 import Profil from "./pages/Profil";
 
 import Role from "./pages/Role";
+import Dashboard from "./components/admin/Dashboard";
 
 
 const App = () => { 
@@ -61,10 +60,9 @@ const App = () => {
           <Route path="/opinion/Add" element={<AddOpinion />} /> 
           <Route path="/opinion/Edit/:opinion" element={<EditOpinion />} /> 
 
-          <Route path="/dashboard" element={<DashboardPage />} /> 
+          <Route path="/dashboard" element={<Dashboard />} /> 
 
           <Route path="/" element={<Login />} />
-          <Route path="/adminProfil" element={<AdminProfil />} />
           <Route path="/profil" element={<Profil />} />
 
           <Route path="/role" element={<Role />} />

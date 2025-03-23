@@ -39,14 +39,14 @@ function RegisterForm() {
       if (response.status === 200) {
         // Récupération du token et du rôle utilisateur depuis la réponse
         const { token } = response.data.data.access_token;
-        const role_id = response.data.data.user.role_id; // Récupération du rôle depuis "user"
+        const role_id = parseInt(response.data.data.user.role_id, 10); // Transformation en nombre
         localStorage.setItem("access_token", token);
 
         // Redirection en fonction du rôle
-        if (role_id === "2" || role_id === 2) {
+        if (role_id === 2) {
           navigate("/profil", { replace: true });
-        } else if (role_id === "1" || role_id === 1) {
-          navigate("/admin/dashboard", { replace: true });
+        } else if (role_id === 1) {
+          navigate("/dashboard", { replace: true });
         } else {
           navigate("/home", { replace: true });
         }
