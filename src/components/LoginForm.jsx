@@ -14,8 +14,7 @@ function LoginForm() {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
-  } = useForm({ mode: "onChange" });
+  } = useForm({ mode: "onChange" }); // Suppression de setError
   const [serverError, setServerError] = useState(""); // Gestion des erreurs serveur
 
   const onSubmit = async (data) => {
@@ -33,22 +32,19 @@ function LoginForm() {
       );
 
       if (response.status === 200) {
-        // Récupération du token et du rôle utilisateur depuis la réponse
         const { token } = response.data.data.access_token;
-        const role_id = parseInt(response.data.data.user.role_id, 10); // Assurez-vous que role_id est un entier
+        const role_id = parseInt(response.data.data.user.role_id, 10); // Conversion de role_id en entier
         localStorage.setItem("access_token", token);
 
-        // Redirection en fonction du rôle
         if (role_id === 1) {
-          navigate("/dashboard", { replace: true }); // Admin
+          navigate("/dashboard", { replace: true });
         } else if (role_id === 2) {
-          navigate("/profil", { replace: true }); // Utilisateur standard
+          navigate("/profil", { replace: true });
         } else {
-          navigate("/home", { replace: true }); // Autre rôle par défaut
+          navigate("/home", { replace: true });
         }
       }
     } catch (error) {
-      // Gestion des erreurs serveur
       if (error.response && error.response.status === 401) {
         setServerError("Identifiants incorrects. Veuillez réessayer.");
       } else if (error.response && error.response.data.message) {
@@ -61,46 +57,47 @@ function LoginForm() {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <h3 className="Auth-form-title">Connexion</h3>
+    <>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <h3 className="Auth-form-title">Connexion</h3>
 
-      {serverError && <div className="alert alert-danger">{serverError}</div>}
+        {serverError && <div className="alert alert-danger">{serverError}</div>}
 
-      <Form.Group controlId="formBasicEmail" className="mb-3">
-        <Form.Label>Adresse mail</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="johndoe@unknown.fr"
-          {...register("email", {
-            required: "Adresse mail obligatoire",
-            pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: "Format d'adresse mail invalide",
-            },
-          })}
-        />
-        {errors.email && <Form.Text className="text-danger">{errors.email.message}</Form.Text>}
-      </Form.Group>
+        <Form.Group controlId="formBasicEmail" className="mb-3">
+          <Form.Label>Adresse mail</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="johndoe@unknown.fr"
+            {...register("email", {
+              required: "Adresse mail obligatoire",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Format d'adresse mail invalide",
+              },
+            })}
+          />
+          {errors.email && <Form.Text className="text-danger">{errors.email.message}</Form.Text>}
+        </Form.Group>
 
-      <Form.Group controlId="formBasicPassword" className="mb-3">
-        <Form.Label>Mot de passe</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Votre mot de passe"
-          {...register("password", {
-            required: "Mot de passe obligatoire",
-          })}
-        />
-        {errors.password && <Form.Text className="text-danger">{errors.password.message}</Form.Text>}
-      </Form.Group>
+        <Form.Group controlId="formBasicPassword" className="mb-3">
+          <Form.Label>Mot de passe</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Votre mot de passe"
+            {...register("password", {
+              required: "Mot de passe obligatoire",
+            })}
+          />
+          {errors.password && <Form.Text className="text-danger">{errors.password.message}</Form.Text>}
+        </Form.Group>
 
-      <Button type="submit" variant="primary">
-        Se connecter
-      </Button>
-    </Form>
+        <Button type="submit" variant="primary">
+          Se connecter
+        </Button>
+      </Form>
+      <Footer />
+    </>
   );
 }
-<Footer/>
-
 
 export default LoginForm;
