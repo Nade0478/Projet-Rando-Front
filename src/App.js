@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Blog from "./pages/Blog"; 
 import Home from "./pages/Home"; 
 import Contact from "./pages/Contact";
-import AdminProfil from "./pages/admin/AdminProfil";
+import AdminProfil from "./pages/admin/AddUser";
 // import AddUser from "./pages/Admin/AddUser";
 // import UserEdit from "./pages/Admin/UserEdit";
 
@@ -33,7 +33,11 @@ import ShowPlace from "./pages/place/ShowPlace";
 import Profil from "./pages/Profil";
 
 import Role from "./pages/Role";
-import Dashboard from "./components/admin/Dashboard";
+import Dashboard from "./pages/Dashboard";
+
+import User from "./pages/admin/AddUser";
+import UserEdit from "./pages/admin/EditUser";
+import AddUser from "./pages/admin/User";
 
 
 const App = () => { 
@@ -66,6 +70,9 @@ const App = () => {
           <Route path="/profil" element={<Profil />} />
 
           <Route path="/role" element={<Role />} />
+          <Route path="/user/Add" element={<User />} />
+          <Route path="/user/Edit/:user" element={<UserEdit />} />
+          <Route path="/user" element={<AddUser />} />
 
           {/* Auth routes */}
           {/* <Route path="/Auth/Register" element={<Register />} /> 

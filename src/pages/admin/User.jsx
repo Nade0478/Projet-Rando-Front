@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const EditUser = () => {
+const User = () => {
   const navigate = useNavigate();
   const [nameUser, setNameUser] = useState(""); 
   const [emailUser, setEmailUser] = useState("");
@@ -88,4 +88,4 @@ const EditUser = () => {
   );
 };
 
-export default EditUser;
+export default User;
