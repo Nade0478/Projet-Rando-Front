@@ -3,6 +3,10 @@ import { useTable } from 'react-table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
+// Import des composants CustomNavbar et Footer
+import CustomNavbar from './../CustomNavbar';
+import Footer from './../Footer';
+
 const Dashboard = () => {
   const [emails, setEmails] = useState([]);
 
@@ -30,31 +34,37 @@ const Dashboard = () => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
 
   return (
-    <div className="container">
-      <h1>Dashboard Admin</h1>
-      <table className="table table-striped" {...getTableProps()}>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map(row => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+    <div className="container-fluid">
+      {/* Ajout du CustomNavbar */}
+      <CustomNavbar />
+      <div className="container mt-4">
+        <h1>Dashboard Admin</h1>
+        <table className="table table-striped" {...getTableProps()}>
+          <thead>
+            {headerGroups.map(headerGroup => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map(column => (
+                  <th {...column.getHeaderProps()}>{column.render('Header')}</th>
                 ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map(row => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map(cell => (
+                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      {/* Ajout du Footer */}
+      <Footer />
     </div>
   );
 };
