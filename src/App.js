@@ -4,9 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Blog from "./pages/Blog"; 
 import Home from "./pages/Home"; 
 import Contact from "./pages/Contact";
-import AdminProfil from "./pages/admin/AddUser";
-// import AddUser from "./pages/Admin/AddUser";
-// import UserEdit from "./pages/Admin/UserEdit";
 
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
@@ -35,10 +32,12 @@ import Profil from "./pages/Profil";
 import Role from "./pages/Role";
 import Dashboard from "./pages/Dashboard";
 
-import User from "./pages/admin/AddUser";
-import UserEdit from "./pages/admin/EditUser";
-import AddUser from "./pages/admin/User";
+import AddHome from "./pages/home/AddHome";
+import EditHome from "./pages/home/EditHome";
 
+import AddBlog from "./pages/blog/AddBlog";
+import EditBlog from "./pages/blog/EditBlog";
+import User from "./pages/User";
 
 const App = () => { 
   return ( 
@@ -46,6 +45,11 @@ const App = () => {
         <Routes> 
           <Route path="/" element={<Home />} /> 
           <Route path="/blog" element={<Blog />} /> 
+          <Route path="/blog/add" element={<AddBlog />} /> 
+          <Route path="/blog/edit/:blog" element={<EditBlog />} />
+          <Route path="/home/Add" element={<AddHome />} />
+          <Route path="/home/Edit/:home" element={<EditHome />} />
+
           <Route path="/contact" element={<Contact />} /> 
 
           <Route path="/article" element={<Article />} /> 
@@ -59,6 +63,7 @@ const App = () => {
           <Route path="/Place" element={<Place />} /> 
           <Route path="/Place/Add" element={<AddPlace />} /> 
           <Route path="/place/Edit/:place" element={<EditPlace />} /> 
+
           <Route path="/place/show/:id" element={<ShowPlace />} /> {/* Route vers ShowPlace */}
           <Route path="/opinion" element={<Opinion />} /> 
           <Route path="/opinion/Add" element={<AddOpinion />} /> 
@@ -70,9 +75,6 @@ const App = () => {
           <Route path="/profil" element={<Profil />} />
 
           <Route path="/role" element={<Role />} />
-          <Route path="/user/Add" element={<User />} />
-          <Route path="/user/Edit/:user" element={<UserEdit />} />
-          <Route path="/user" element={<AddUser />} />
 
           {/* Auth routes */}
           {/* <Route path="/Auth/Register" element={<Register />} /> 
@@ -83,6 +85,13 @@ const App = () => {
           <Route path="/register" element={<Register />} /> 
           <Route path="/login" element={<Login />} /> 
           <Route path="*" element={<Home />} /> 
+          <Route path="/home" element={<Home />} />
+          <Route path="/home/add" element={<AddHome />} /> 
+          <Route path="/home/edit" element={<EditHome />} /> 
+
+          {/* Admin routes */}
+          <Route path="/user" element={<User />} />
+
         </Routes> 
     </BrowserRouter> 
   ); 

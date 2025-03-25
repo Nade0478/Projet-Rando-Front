@@ -33,12 +33,11 @@ const CustomNavbar = () => {
               </NavDropdown>
               <NavDropdown title="Home" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="/home">Consulte la page d'accueil</NavDropdown.Item>
+                <NavDropdown.Item href="/home/add">Ajoute la page d'accueil</NavDropdown.Item>
                 <NavDropdown.Item href="/home/edit">Modifie la page d'accueil</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="User" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="/user">Consulte les users</NavDropdown.Item>
-                <NavDropdown.Item href="/user/add">Ajoute des users</NavDropdown.Item>
-                <NavDropdown.Item href="/user/edit">Modifie des users</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Login" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="/login">Se connecter</NavDropdown.Item>

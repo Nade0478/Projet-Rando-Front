@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import Menu from "../../components/Menu";
+import Menu from "../components/Menu";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import Footer from "../../components/Footer";
-import FilterDropdown from "../../components/FilterDropdown";
+import Footer from "../components/Footer";
+import FilterDropdown from "../components/FilterDropdown";
 
-const AddUser = () => {
-  const [users, setUsers] = useState([]); // Correction du nom pour plus de clarté
-  const [names, setNames] = useState([]);
-  const [selectedName, setSelectedName] = useState(null);
+const User = () => {
+  const [users, setUsers] = useState([]); // Liste des utilisateurs
+  const [names, setNames] = useState([]); // Liste des noms pour le filtre
+  const [selectedName, setSelectedName] = useState(null); // Nom sélectionné pour le filtre
   const navigate = useNavigate(); // Hook pour la navigation
 
   useEffect(() => {
@@ -20,30 +20,29 @@ const AddUser = () => {
   const displayUsers = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/api/user");
-      const fetchedUsers = response.data.data || []; // Vérification de la structure des données
-      setUsers(fetchedUsers);
-      setNames(fetchedUsers.map((user) => user.name_user));
+      const fetchedUsers = response.data || []; // Assure que la structure des données est correcte
+      const filteredUsers = fetchedUsers.filter((user) => user.role_id === 2); // Filtre les utilisateurs avec role_id === 2
+      setUsers(filteredUsers);
+      setNames(filteredUsers.map((user) => user.name)); // Utilise les noms uniquement des utilisateurs filtrés
     } catch (error) {
-      console.error("Erreur lors de la récupération des users :", error);
-      alert("Une erreur est survenue lors du chargement des users.");
+      console.error("Erreur lors de la récupération des utilisateurs :", error);
+      alert("Une erreur est survenue lors du chargement des utilisateurs.");
     }
   };
 
   const deleteUser = async (id) => {
     try {
       await axios.delete(`http://127.0.0.1:8000/api/user/${id}`);
-      alert("User supprimé avec succès !");
+      alert("Utilisateur supprimé avec succès !");
       displayUsers(); // Actualise la liste après suppression
     } catch (error) {
       console.error("Erreur lors de la suppression :", error);
-      alert("Erreur lors de la suppression de l'user.");
+      alert("Erreur lors de la suppression de l'utilisateur.");
     }
   };
 
   const filteredUsers = users.filter((user) => {
-    return (
-      !selectedName || (user.name_user && user.name_user === selectedName)
-    );
+    return !selectedName || (user.name && user.name === selectedName); // Filtre basé sur "name"
   });
 
   return (
@@ -66,25 +65,19 @@ const AddUser = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Nom de l'utilisateur</th>
+              <th>Nom</th>
               <th>E-mail</th>
-              <th>Password</th>
+              <th>Rôle</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {filteredUsers.map((user) => (
               <tr key={user.id}>
-                <td>{user.name_user}</td>
-                <td>{user.mail_user}</td>
-                <td>{user.password_user}</td>
+                <td>{user.name}</td> {/* Utilise la clé correcte */}
+                <td>{user.email}</td> {/* Utilise la clé correcte */}
+                <td>{user.role_id}</td> {/* Rôle de l'utilisateur */}
                 <td>
-                  <Link
-                    to={`/user/edit/${user.id}`}
-                    className="btn btn-success me-2"
-                  >
-                    Modifier
-                  </Link>
                   <Button
                     variant="danger"
                     onClick={() => deleteUser(user.id)}
@@ -102,4 +95,4 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default User;
