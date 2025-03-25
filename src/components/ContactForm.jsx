@@ -75,8 +75,8 @@ const ContactForm = () => {
           I agree to the <a href="/terms" target="_blank" rel="noopener noreferrer">terms and conditions</a>.
         </label>
       </div>
-      <button type="submit">Submit</button>
-    
+      <button type="submit">Send
+      </button>
       <p>
         <small>
           This form is a placeholder and will not actually send any data.
