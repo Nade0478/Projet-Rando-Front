@@ -1,0 +1,17 @@
+.nouveautes {
+    padding: 50px 20px;
+  }
+  .items {
+    display: flex;
+    justify-content: space-around;
+  }
+  .item {
+    text-align: center;
+    width: 30%;
+  }
+  .item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
