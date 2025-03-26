@@ -14,4 +14,14 @@
     height: auto;
     border-radius: 10px;
   }
+
+.nouveautes h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
   
+  .title h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }

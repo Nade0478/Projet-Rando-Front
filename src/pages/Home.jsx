@@ -1,17 +1,19 @@
 import React from 'react'; 
 import Menu from '../components/Menu';
 import Footer from '../components/Footer';
-import Carousel from '../components/Carousel';
- 
+import HomeHead from '../components/home/HomeHead';
+import HomeNew from '../components/home/HomeNew';
+
 const Home = () => { 
     return ( 
         <div> 
             <Menu />
-            <h1>Bienvenu sur la page d'accueil</h1> 
-            <Carousel />
+            <HomeHead />
+            <hr /> {/* Corrected the horizontal rule */}
+            <HomeNew />
             <Footer />
         </div> 
     );
 }; 
- 
-export default Home; 
+
+export default Home;

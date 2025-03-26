@@ -1,22 +1,42 @@
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import './HomeNew.css';
 
-const Nouveautes = () => {
+const HomeNew = () => {
   const items = [
     {
-      title: "Esprit locale",
+      title: "Expertise locale",
       description: "Nos itinéraires sont conçus pour vous faire découvrir les trésors cachés.",
-      image: "local-spirit.jpg"
+      image: "http://127.0.0.1:8000/public/uploads/carte-france.jpg",
     },
     {
       title: "Descriptions des parcours",
       description: "Chaque itinéraire est accompagné de descriptions détaillées.",
-      image: "path-description.jpg"
+      image: "http://127.0.0.1:8000/storage/public/uploads/"
+    },
+    {
+      title: "Cartes intéractives",
+      description: "Accéder à des cartes détaillées et interactives pour plannfier vos randonnées avec.",
+      image: "http://127.0.0.1:8000/storage/public/uploads"
+    },
+    
+    {
+      title: "Cartes interactives",
+      image: "http://127.0.0.1:8000/storage/public/uploads",
+
     },
     {
       title: "Cartes interactives",
-      description: "Accédez à des cartes interactives pour vous guider avec précision.",
-      image: "interactive-map.jpg"
+      image: "http://127.0.0.1:8000/storage/public/uploads",
+      alt: "Cartes interactives"
+    },
+    {
+      title: "Cartes interactives",
+      image: "http://127.0.0.1:8000/storage/public/uploads",
+      alt: "Cartes interactives"
     }
+
   ];
 
   return (
@@ -36,4 +56,4 @@ const Nouveautes = () => {
   );
 };
 
-export default Nouveautes;
+export default HomeNew;
