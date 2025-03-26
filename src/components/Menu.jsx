@@ -5,12 +5,14 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown"; 
 import Logo from "./Logo";
  
+import "./Menu.css";
+ 
 const Menu = () => { 
   return ( 
     <div> 
     <Logo />
-      <Navbar bg="light" expand="lg"> 
-        <Container fluid> 
+    <Navbar className="navbar-custom navbar-dark" expand="lg">
+    <Container fluid> 
           <Navbar.Toggle aria-controls="navbarScroll" /> 
           <Navbar.Collapse id="navbarScroll"> 
             <Nav 

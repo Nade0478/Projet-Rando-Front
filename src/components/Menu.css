@@ -1,0 +1,44 @@
+.navbar-dark {
+    background-color: black;
+  }
+  
+  .navbar-dark .nav-link {
+    color: white !important;
+  }
+  
+  .navbar-dark .dropdown-item {
+    color: rgb(2, 2, 2) !important;
+    font-weight: 200;
+  }
+  
+  .navbar-dark .navbar-brand {
+    color: white !important;
+  }
+  
+  .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .font-style {
+    font-size: 5rem; /* Taille du texte */
+    font-weight: 500; /* Épaisseur du texte */
+    letter-spacing: 0.2px; /* Espacement entre les mots */
+  }
+
+  .navbar-custom {
+    height: 80px; /* Ajustez la hauteur selon vos besoins */
+    line-height: 80px; /* Aligne verticalement les éléments */
+  }
+  
+  .nav-link {
+    line-height: 80px; /* Alignement vertical */
+  }
+
+  .navbar-custom {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  

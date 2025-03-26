@@ -21,7 +21,6 @@
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    color: chartreuse;
   }
   .search-bar {
     margin-top: 10px;
@@ -37,7 +36,9 @@
     align-items: center;
     color: #fff;
     text-align: center;
+    font-family: 'Inknut Antiqua', sans-serif;
   }
+
   .presentation .content {
     background: rgba(0, 0, 0, 0.5);
     padding: 20px;

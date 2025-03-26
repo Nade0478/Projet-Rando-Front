@@ -21,9 +21,10 @@ const DashboardPage = () => {
   return (
     <div className="container">
       <Navbar />
-      <h1>Bienvenue sur ma page de </h1>
+      {/* <h1>Bienvenue sur ma page de l'administrateur</h1> */}
       <hr />
       <Dashboard />
+      <h2>Messagerie</h2>
       <button onClick={sendEmail}>Envoyer un email</button>
     </div>
   );
