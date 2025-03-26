@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import Menu from "../components/Menu";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
+import CustomNavbar from "../components/admin/CustomNavbar";
 
 const Role = () => {
   const [role, setRole] = useState([]);
@@ -30,7 +30,7 @@ const Role = () => {
 
   return (
     <div>
-      <Menu />
+      <CustomNavbar />
       <div className="container mt-5">
         <Table striped bordered hover>
           <thead>

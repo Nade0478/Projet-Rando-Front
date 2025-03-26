@@ -9,3 +9,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 /*# sourceMappingURL=style.css.map */
+
+.image-component {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+  height: 100vh; /* Prend toute la hauteur de la fenêtre */
+  margin: 0; /* Supprime les marges externes */
+}
+
+.image-component img {
+  border-radius: 8px; /* Arrondit les coins */
+  object-fit: contain; /* Ajuste l'image dans le conteneur */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajoute une ombre légère */
+  max-width: 100%; /* Limite la largeur de l'image à celle du conteneur */
+  height: auto; /* Maintient le ratio de l'image */
+}

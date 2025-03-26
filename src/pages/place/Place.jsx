@@ -64,6 +64,12 @@ const Place = () => {
     <div>
       <Menu />
       <div className="container mt-5">
+      <Link
+                    to={`/place/add`}
+                    className="btn btn-dark me-2"
+                  >
+                    Ajouter un lieux de randonnée
+                  </Link>
         {/* Dropdown pour le filtrage */}
         <div className="d-flex justify-content-between mb-3">
           <FilterDropdown

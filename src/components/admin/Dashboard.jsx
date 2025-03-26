@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 // Import des composants CustomNavbar et Footer
-import CustomNavbar from './../CustomNavbar';
+import CustomNavbar from './CustomNavbar';
 import Footer from './../Footer';
 
 const Dashboard = () => {

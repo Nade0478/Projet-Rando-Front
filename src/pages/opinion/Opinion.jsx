@@ -78,12 +78,12 @@ const Opinion = () => {
                 <td>
                   <Link
                     to={`/opinion/edit/${opinion.id}`}
-                    className="btn btn-success me-2"
+                    className="btn btn-light me-2"
                   >
                     Editer
                   </Link>
                   <Button
-                    variant="danger"
+                    variant="dark"
                     onClick={() => deleteOpinion(opinion.id)}
                   >
                     Supprimer

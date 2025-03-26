@@ -42,7 +42,8 @@ const Article = () => {
 
   const filteredArticles = articles.filter((article) => {
     return (
-      !selectedTitle || (article.title_article && article.title_article === selectedTitle)
+      !selectedTitle ||
+      (article.title_article && article.title_article === selectedTitle)
     );
   });
 
@@ -50,6 +51,10 @@ const Article = () => {
     <div>
       <Menu />
       <div className="container mt-5">
+        <Link to={`/article/add/`} className="btn btn-dark me-2">
+          Créer nouveau article
+        </Link>
+
         <div className="d-flex justify-content-between mb-3">
           <FilterDropdown
             items={titles}
@@ -97,9 +102,15 @@ const Article = () => {
                 <td>
                   <Link
                     to={`/article/edit/${article.id}`}
-                    className="btn btn-success me-2"
+                    className="btn btn-light me-2"
                   >
                     Modifier
+                  </Link>
+                  <Link
+                    to={`/article/show/${article.id}`}
+                    className="btn btn-light me-2"
+                  >
+                    Montrer
                   </Link>
                   <Button
                     variant="danger"

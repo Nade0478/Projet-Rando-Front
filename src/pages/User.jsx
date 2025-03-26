@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import Menu from "../components/Menu";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import FilterDropdown from "../components/FilterDropdown";
+import CustomNavbar from "../components/admin/CustomNavbar";
 
 const User = () => {
   const [users, setUsers] = useState([]); // Liste des utilisateurs
@@ -47,7 +47,7 @@ const User = () => {
 
   return (
     <div>
-      <Menu />
+      <CustomNavbar />
       <div className="container mt-5">
         <div className="d-flex justify-content-between mb-3">
           <FilterDropdown

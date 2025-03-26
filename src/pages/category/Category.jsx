@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import Menu from "../../components/Menu";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
+import CustomNavbar from "../../components/admin/CustomNavbar";
 
 const Category = () => {
   const [category, setCategory] = useState([]);
@@ -16,7 +16,7 @@ const Category = () => {
   const displayCategory = async () => {
     try {
       const res = await axios.get("http://127.0.0.1:8000/api/category");
-      if (res.data ) {
+      if (res.data) {
         setCategory(res.data);
       }
     } catch (error) {
@@ -25,12 +25,17 @@ const Category = () => {
   };
 
   const deleteCategory = (id) => {
-    axios.delete(`http://127.0.0.1:8000/api/category/${id}`).then(displayCategory);
+    axios
+      .delete(`http://127.0.0.1:8000/api/category/${id}`)
+      .then(displayCategory);
   };
 
   return (
     <div>
-      <Menu />
+      <CustomNavbar />
+      <Link to={`/category/add`} className="btn btn-dark me-2">
+        Ajouter un catégorie
+      </Link>
       <div className="container mt-5">
         <Table striped bordered hover>
           <thead>
@@ -70,6 +75,3 @@ const Category = () => {
 };
 
 export default Category;
-
-
-

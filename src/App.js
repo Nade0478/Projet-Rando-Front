@@ -38,6 +38,7 @@ import EditHome from "./pages/home/EditHome";
 import AddBlog from "./pages/blog/AddBlog";
 import EditBlog from "./pages/blog/EditBlog";
 import User from "./pages/User";
+import ShowArticle from "./pages/article/ShowArticle";
 
 const App = () => { 
   return ( 
@@ -53,8 +54,9 @@ const App = () => {
           <Route path="/contact" element={<Contact />} /> 
 
           <Route path="/article" element={<Article />} /> 
-          <Route path="/article/Add" element={<AddArticle />} /> 
-          <Route path="/article/Edit/:article" element={<EditArticle />} /> 
+          <Route path="/article/add" element={<AddArticle />} /> 
+          <Route path="/article/edit/:article" element={<EditArticle />} /> 
+          <Route path="/article/show/:id" element={<ShowArticle />} /> 
 
           <Route path="/category" element={<Category />} /> 
           <Route path="/category/Add" element={<AddCategory />} /> 
@@ -64,7 +66,7 @@ const App = () => {
           <Route path="/Place/Add" element={<AddPlace />} /> 
           <Route path="/place/Edit/:place" element={<EditPlace />} /> 
 
-          <Route path="/place/show/:id" element={<ShowPlace />} /> {/* Route vers ShowPlace */}
+          <Route path="/place/show/:id" element={<ShowPlace />} />
           <Route path="/opinion" element={<Opinion />} /> 
           <Route path="/opinion/Add" element={<AddOpinion />} /> 
           <Route path="/opinion/Edit/:opinion" element={<EditOpinion />} /> 

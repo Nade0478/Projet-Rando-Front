@@ -5,6 +5,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import CustomNavbar from "../../components/admin/CustomNavbar";
+import Footer from "../../components/Footer";
 
 const AddCategory = () => {
   const navigate = useNavigate();
@@ -28,6 +30,7 @@ const AddCategory = () => {
 
   return (
     <div className="container mt-5">
+      <CustomNavbar />
       <h4>Créer une nouvelle catégorie</h4>
       <Form onSubmit={addCategory}>
         <Row>
@@ -56,6 +59,7 @@ const AddCategory = () => {
           </ul>
         </div>
       )}
+      <Footer />
     </div>
   );
 };
