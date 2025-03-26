@@ -3,23 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './HomeNew.css';
 
-const HomeNew = () => {
+const HomeNewPlace = () => {
   const items = [
-    {
-      title: "Expertise locale",
-      description: "Nos itinéraires sont conçus pour vous faire découvrir les trésors cachés.",
-      image: "http://127.0.0.1:8000/public/uploads/carte-france.jpg",
-    },
-    {
-      title: "Descriptions des parcours",
-      description: "Chaque itinéraire est accompagné de descriptions détaillées.",
-      image: "http://127.0.0.1:8000/storage/public/uploads/"
-    },
-    {
-      title: "Cartes intéractives",
-      description: "Accéder à des cartes détaillées et interactives pour plannfier vos randonnées avec.",
-      image: "http://127.0.0.1:8000/storage/public/uploads"
-    },
     
     {
       title: "Cartes interactives",
@@ -41,7 +26,7 @@ const HomeNew = () => {
 
   return (
     <section className="nouveautes">
-      <h2>Nouveautés</h2>
+      <h3>SITE DE RANDONNES</h3>
       <div className="items">
         {items.map((item, index) => (
           <div key={index} className="item">
@@ -56,4 +41,4 @@ const HomeNew = () => {
   );
 };
 
-export default HomeNew;
+export default HomeNewPlace;

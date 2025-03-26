@@ -2,7 +2,10 @@ import React from 'react';
 import Menu from '../components/Menu';
 import Footer from '../components/Footer';
 import HomeHead from '../components/home/HomeHead';
-import HomeNew from '../components/home/HomeNew';
+import HomeNewArticle from '../components/home/HomeNewArticle';
+import HomeNewPlace from '../components/home/HomeNewPlace';
+import '../styles/style-home.css';
+
 
 const Home = () => { 
     return ( 
@@ -10,7 +13,9 @@ const Home = () => {
             <Menu />
             <HomeHead />
             <hr /> {/* Corrected the horizontal rule */}
-            <HomeNew />
+            <h2>Nouveautés</h2>
+            <HomeNewArticle />
+            <HomeNewPlace />
             <Footer />
         </div> 
     );

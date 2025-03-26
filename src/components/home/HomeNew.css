@@ -21,7 +21,13 @@
     margin-bottom: 30px;
   }
   
-  .title h2 {
+  .title h2, h3 {
     font-size: 1.8rem;
     margin-bottom: 20px;
+    font-weight: 700;
+    color: #025a31;
+    text-align: center;
+  }
+  button {
+    color: #025a31;
   }
