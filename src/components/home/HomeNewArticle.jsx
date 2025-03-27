@@ -8,17 +8,17 @@ const HomeNewArticle = () => {
     {
       title: "Expertise locale",
       description: "Nos itinéraires sont conçus pour vous faire découvrir les trésors cachés.",
-      image: "http://127.0.0.1:8000/public/uploads/carte-france.jpg",
+      image: "http://127.0.0.1:8000/storage/public/uploads/CheminForet_1742477581.png",
     },
     {
       title: "Descriptions des parcours",
       description: "Chaque itinéraire est accompagné de descriptions détaillées.",
-      image: "http://127.0.0.1:8000/storage/public/uploads/"
+      image: "http://127.0.0.1:8000/storage/public/uploads/Foret-becon49_1742478307.jpg"
     },
     {
       title: "Cartes intéractives",
       description: "Accéder à des cartes détaillées et interactives pour plannfier vos randonnées avec.",
-      image: "http://127.0.0.1:8000/storage/public/uploads"
+      image: "http://127.0.0.1:8000/storage/public/uploads/cité-plantagenet72_1743030321.jpg"
     },
 
   ];

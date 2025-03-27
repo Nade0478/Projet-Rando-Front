@@ -26,6 +26,7 @@ import Place from "./pages/place/Place";
 import AddPlace from "./pages/place/AddPlace";
 import EditPlace from "./pages/place/EditPlace";
 import ShowPlace from "./pages/place/ShowPlace";
+import Page from "./pages/place/Page";
 
 import Profil from "./pages/Profil";
 
@@ -65,6 +66,7 @@ const App = () => {
           <Route path="/Place" element={<Place />} /> 
           <Route path="/Place/Add" element={<AddPlace />} /> 
           <Route path="/place/Edit/:place" element={<EditPlace />} /> 
+          <Route path="/place/page" element={<Page />} />  {/* Route vers Page */}
 
           <Route path="/place/show/:id" element={<ShowPlace />} />
           <Route path="/opinion" element={<Opinion />} /> 

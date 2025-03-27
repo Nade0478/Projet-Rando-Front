@@ -68,7 +68,7 @@ const Place = () => {
                     to={`/place/add`}
                     className="btn btn-dark me-2"
                   >
-                    Ajouter un lieux de randonnée
+                    Ajouter un lieu de randonnée
                   </Link>
         {/* Dropdown pour le filtrage */}
         <div className="d-flex justify-content-between mb-3">
@@ -133,13 +133,13 @@ const Place = () => {
                 <td>
                   <Link
                     to={`/place/edit/${place.id}`}
-                    className="btn btn-success me-2"
+                    className="btn btn-light me-2"
                   >
                     Modifier
                   </Link>
                   <Link
                     to={`/place/show/${place.id}`}
-                    className="btn btn-success me-2"
+                    className="btn btn-light me-2"
                   >
                     Détails
                   </Link>

@@ -7,7 +7,7 @@ const HomeHead = () => {
   return (
     <section
       className="presentation"
-      style={{ backgroundImage: `url('../images/CheminForet.png')` }}
+      style={{ backgroundImage: `url('http://127.0.0.1:8000/storage/public/uploads/alpes-mancelle72_1742481051.jpg')` }}
     >
       <div className="container">
         <h1>Bienvenue sur la page d'accueil de Rando-Ouest</h1>
