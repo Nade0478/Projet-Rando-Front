@@ -22,8 +22,8 @@ const Menu = () => {
             > 
               <Nav.Link href="/">Home</Nav.Link> 
               <NavDropdown title="Randonnées pédestre" id="navbarScrollingDropdown"> 
-                <NavDropdown.Item href="/place"> 
-                Liste des randonnées pédestre
+                <NavDropdown.Item href="/place/page"> 
+                Page randonnées pédestre
                 </NavDropdown.Item> 
                 <NavDropdown.Item href="/opinion"> 
                   Liste des opinions 

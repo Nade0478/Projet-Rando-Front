@@ -1,5 +1,5 @@
 import React from "react";
-// import PlaceList from "../../components/Place/PlaceList";
+import PlaceList from "../../components/Place/PlaceList";
 import PlaceForm from "../../components/Place/PlaceForm";
 import Menu from "../../components/Menu";
 import Footer from "../../components/Footer";
@@ -9,7 +9,7 @@ const App = () => {
         <div>
         <Menu />
             <PlaceForm />
-            {/* <PlaceList /> */}
+            <PlaceList />
         <Footer />
         </div>
     );
