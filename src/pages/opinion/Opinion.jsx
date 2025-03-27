@@ -22,7 +22,9 @@ const Opinion = () => {
       if (res.data && res.data.data) {
         setOpinion(res.data.data);
         setTitle_opinion(
-          res.data.data.map((opinion) => opinion.title_opinion || "Titre inconnu")
+          res.data.data.map(
+            (opinion) => opinion.title_opinion || "Titre inconnu"
+          )
         );
       }
     } catch (error) {
@@ -50,6 +52,9 @@ const Opinion = () => {
       <Menu />
       <div className="container mt-5">
         <div className="d-flex justify-content-between mb-3">
+        <Link to={`/opinion/add`} className="btn btn-dark me-2">
+          Créer un nouvel opinion
+        </Link>
           <FilterDropdown
             items={title_opinion}
             selectedItem={selectedTitle_opinion}
@@ -73,8 +78,13 @@ const Opinion = () => {
                 <td>{opinion.title_opinion || "Titre non disponible"}</td>
                 <td>{opinion.content_opinion || "Contenu non disponible"}</td>
                 <td>{opinion.note_opinion || "Note non disponible"}</td>
-                <td>{(opinion.user && opinion.user.name) || "Auteur inconnu"}</td>
-                <td>{(opinion.place && opinion.place.name_place) || "Lieu inconnu"}</td>
+                <td>
+                  {(opinion.user && opinion.user.name) || "Auteur inconnu"}
+                </td>
+                <td>
+                  {(opinion.place && opinion.place.name_place) ||
+                    "Lieu inconnu"}
+                </td>
                 <td>
                   <Link
                     to={`/opinion/edit/${opinion.id}`}

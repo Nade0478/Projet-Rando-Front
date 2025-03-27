@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom"; // Suppression de `useNavigate`
 import FilterDropdown from "../FilterDropdown";
-import { Table, Button } from "react-bootstrap";
-import Footer from "../Footer";
+import { Table } from "react-bootstrap";
 
 const PlaceList = () => {
   const [place, setPlace] = useState([]); // Liste des lieux
   const [name_place, setName_place] = useState([]); // Liste des noms de lieux
   const [selectedName_place, setSelectedName_place] = useState(null); // Nom sélectionné pour le filtre
-  const navigate = useNavigate(); // Hook pour gérer les redirections
 
   // Charger les lieux au montage du composant
   useEffect(() => {
@@ -26,22 +24,6 @@ const PlaceList = () => {
       console.error("Erreur lors de la récupération des lieux :", error);
       alert("Une erreur est survenue lors de la récupération des lieux.");
     }
-  };
-
-  // Fonction pour supprimer un lieu
-  const deletePlace = async (id) => {
-    try {
-      await axios.delete(`http://127.0.0.1:8000/api/place/${id}`);
-      displayPlace(); // Rafraîchit la liste après suppression
-    } catch (error) {
-      console.error("Erreur lors de la suppression du lieu :", error);
-      alert("Une erreur est survenue lors de la suppression du lieu.");
-    }
-  };
-
-  // Fonction pour rediriger vers la page de détail
-  const showPlace = (id) => {
-    navigate(`/place/show/${id}`);
   };
 
   // Filtrage des lieux selon le nom sélectionné
@@ -91,7 +73,6 @@ const PlaceList = () => {
             ))}
           </tbody>
         </Table>
-        <Footer />
       </div>
     </div>
   );

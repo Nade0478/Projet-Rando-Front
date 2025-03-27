@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/Footer";
-import Menu from "../../components/Menu";
+import CustomNavbar from "../../components/admin/CustomNavbar";
 // import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 
@@ -88,7 +88,7 @@ const EditPlace = () => {
 
   return (
     <div>
-      <Menu />
+      <CustomNavbar />
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-12 col-sm-12 col-md-6">

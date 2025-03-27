@@ -25,7 +25,7 @@ const Menu = () => {
                 <NavDropdown.Item href="/place/page"> 
                 Page randonnées pédestre
                 </NavDropdown.Item> 
-                <NavDropdown.Item href="/opinion"> 
+                <NavDropdown.Item href="/place/page"> 
                   Liste des opinions 
                 </NavDropdown.Item> 
                 <NavDropdown.Item href="/opinion/add"> 

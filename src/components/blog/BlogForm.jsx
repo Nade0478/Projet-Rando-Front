@@ -1,14 +1,10 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
-import Menu from './Menu';
-import Footer from './Footer';
-
-import ArticleForm from './ArticleForm';
+import ArticleForm from '../../components/blog/ArticleForm';
 
 const BlogForm = () => {
   return (
     <div>
-      <Menu />
       <Card style={{ padding: '20px', margin: '20px' }}>
         <ArticleForm />
         <h2>Créer un Nouvel Article</h2>
@@ -31,7 +27,6 @@ const BlogForm = () => {
           </button>
         </form>
       </Card>
-      <Footer />
     </div>
   );
 };

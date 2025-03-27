@@ -40,6 +40,7 @@ import AddBlog from "./pages/blog/AddBlog";
 import EditBlog from "./pages/blog/EditBlog";
 import User from "./pages/User";
 import ShowArticle from "./pages/article/ShowArticle";
+import ShowOpinion from "./pages/opinion/ShowOpinion";
 
 const App = () => { 
   return ( 
@@ -72,6 +73,8 @@ const App = () => {
           <Route path="/opinion" element={<Opinion />} /> 
           <Route path="/opinion/Add" element={<AddOpinion />} /> 
           <Route path="/opinion/Edit/:opinion" element={<EditOpinion />} /> 
+          <Route path="/opinion/show/:id" element={<ShowOpinion />} />
+
 
           <Route path="/dashboard" element={<Dashboard />} /> 
 
