@@ -28,7 +28,7 @@ const ArticleForm = () => {
 
   return (
     <div className="container mt-4">
-      <h3 className="pb-2 border-bottom">Liste des Articles</h3>
+      <h3 className="pb-2 border-bottom">VOICI LA LISTE DE NOS ARTICLES</h3>
       <ArticleCards articles={articles} /> {/* Composant enfant qui affiche les cartes */}
     </div>
   );

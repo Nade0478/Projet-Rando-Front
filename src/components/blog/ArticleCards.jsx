@@ -7,10 +7,10 @@ import Button from "react-bootstrap/Button";
 const ArticleCards = ({ articles }) => {
   return (
     <div className="container mt-4">
-      {/* Menu de filtre
-      <FilterDropdown /> */}
-      
-      <h3 className="pb-2 border-bottom">Articles dans des Cards</h3>
+    <Link to={`/article/add/`}>
+      <Button variant="dark">Créer ton article</Button>
+    </Link>      
+      <h3 className="pb-2 border-bottom">Les Articles</h3>
       <div className="row text-center">
         {articles.map((article) => (
           <div key={article.id} className="col-md-12 mb-2">

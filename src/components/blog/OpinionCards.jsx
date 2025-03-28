@@ -6,7 +6,11 @@ import Button from "react-bootstrap/Button";
 const OpinionCards = ({ opinions }) => {
   return (
     <div className="container mt-4">
-      <h3 className="pb-2 border-bottom">Articles dans des Cards</h3>
+      <h3 className="pb-2 border-bottom">LES AVIS</h3>
+      <Link to={`/opinion/add/`}>
+      <Button variant="dark">Créer ton avis</Button>
+    </Link>      
+
       <div className="row text-center">
         {opinions.map((opinion) => (
           <div key={opinion.id} className="col-md-4 mb-4">
@@ -21,7 +25,7 @@ const OpinionCards = ({ opinions }) => {
                     "Lieu inconnu"}
                 </Card.Text>
                 <Card.Text>
-                  <strong> <justify>Contenu : </justify></strong>
+                  <strong> <justifyL>Contenu : </justifyL></strong>
                   {opinion.content_opinion || "Contenu non disponible"}
                 </Card.Text>
                 <Link to={`/opinion/show/${opinion.id}`}>
