@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import Menu from "../../components/Menu";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import FilterDropdown from "../../components/FilterDropdown";
+import CustomNavbar from "../../components/admin/CustomNavbar";
 
 const Article = () => {
   const [articles, setArticles] = useState([]); // Correction du nom pour plus de clarté
@@ -49,7 +49,7 @@ const Article = () => {
 
   return (
     <div>
-      <Menu />
+      <CustomNavbar />
       <div className="container mt-5">
         <Link to={`/article/add/`} className="btn btn-dark me-2">
           Créer nouveau article

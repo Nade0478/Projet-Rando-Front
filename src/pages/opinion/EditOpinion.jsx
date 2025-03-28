@@ -7,6 +7,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom"; 
 import Menu from "../../components/Menu"; 
 import Footer from "../../components/Footer";
+import CustomNavbar from "../../components/admin/CustomNavbar";
 
 const EditOpinion = () => { 
   const { opinion } = useParams(); 
@@ -79,7 +80,7 @@ const EditOpinion = () => {
 
   return (
     <div>
-      <Menu />
+      <CustomNavbar />
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-12 col-sm-12 col-md-6">

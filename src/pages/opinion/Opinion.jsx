@@ -6,6 +6,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import FilterDropdown from "../../components/FilterDropdown";
+import CustomNavbar from "../../components/admin/CustomNavbar";
 
 const Opinion = () => {
   const [opinion, setOpinion] = useState([]);
@@ -49,7 +50,7 @@ const Opinion = () => {
 
   return (
     <div>
-      <Menu />
+      <CustomNavbar />
       <div className="container mt-5">
         <div className="d-flex justify-content-between mb-3">
         <Link to={`/opinion/add`} className="btn btn-dark me-2">

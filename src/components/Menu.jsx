@@ -39,9 +39,6 @@ const Menu = () => {
                 <NavDropdown.Item href="/article/add"> 
                   Créer un nouvel article 
                 </NavDropdown.Item> 
-                <NavDropdown.Item href="/article"> 
-                  Liste des articles 
-                </NavDropdown.Item> 
               </NavDropdown>
               <NavDropdown title="Contact" id="navbarScrollingDropdown"> 
                 <NavDropdown.Item href="/contact"> 
