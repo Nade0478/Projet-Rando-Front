@@ -5,7 +5,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col"; 
 import axios from "axios"; 
 import { useNavigate, useParams } from "react-router-dom"; 
-import Menu from "../../components/Menu"; 
 import Footer from "../../components/Footer";
 import CustomNavbar from "../../components/admin/CustomNavbar";
 
