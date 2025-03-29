@@ -5,8 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import Menu from "../../components/Menu";
-import Footer from "../../components/Footer";
+import Sidebar from "../../components/admin/Sidebar";
 
 const EditArticle = () => {
   const { article } = useParams();
@@ -105,7 +104,7 @@ const EditArticle = () => {
 
   return (
     <div>
-      <Menu />
+      <Sidebar />
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-12 col-sm-12 col-md-6">
@@ -227,7 +226,7 @@ const EditArticle = () => {
           </div>
         </div>
       </div>
-      <Footer />
+
     </div>
   );
 };

@@ -3,12 +3,11 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom"; // Import du hook useNavigate
-import Footer from "../../components/Footer";
 import FilterDropdown from "../../components/FilterDropdown";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import CustomNavbar from "../../components/admin/CustomNavbar";
+import Sidebar from "../../components/admin/Sidebar";
 
 // Déclaration correcte de l'icône personnalisée
 const customIcon = new L.Icon({
@@ -62,7 +61,7 @@ const Place = () => {
 
   return (
     <div>
-      <CustomNavbar />
+      <Sidebar />
       <div className="container mt-5">
       <Link
                     to={`/place/add`}
@@ -154,7 +153,6 @@ const Place = () => {
             ))}
           </tbody>
         </Table>
-        <Footer />
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ const CustomNavbar = () => {
                 <NavDropdown.Item href="/place">Gestion des sites de randonnées</NavDropdown.Item>
                 <NavDropdown.Item href="/opinion">Gestions des opinions</NavDropdown.Item>
                 <NavDropdown.Item href="/category">Gestion des catégories</NavDropdown.Item>
-                <NavDropdown.Item href="/home">Gestion du cotenu de la page d'accueil</NavDropdown.Item>
+                <NavDropdown.Item href="/home">Gestion du contenu de la page d'accueil</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Login" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="/login">Se connecter</NavDropdown.Item>

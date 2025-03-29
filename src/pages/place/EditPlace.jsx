@@ -5,8 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import Footer from "../../components/Footer";
-import CustomNavbar from "../../components/admin/CustomNavbar";
+import Sidebar from "../../components/admin/Sidebar";
 // import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 
@@ -88,7 +87,7 @@ const EditPlace = () => {
 
   return (
     <div>
-      <CustomNavbar />
+      <Sidebar />
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-12 col-sm-12 col-md-6">
@@ -253,7 +252,7 @@ const EditPlace = () => {
                       </Col>
                     </Row>
                     <Button
-                      variant="success"
+                      variant="dark"
                       className="mt-2"
                       size="lg"
                       block="block"
@@ -268,7 +267,6 @@ const EditPlace = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

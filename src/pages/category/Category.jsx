@@ -3,8 +3,7 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Footer from "../../components/Footer";
-import CustomNavbar from "../../components/admin/CustomNavbar";
+import Sidebar from "../../components/admin/Sidebar";
 
 const Category = () => {
   const [category, setCategory] = useState([]);
@@ -32,7 +31,7 @@ const Category = () => {
 
   return (
     <div>
-      <CustomNavbar />
+      <Sidebar />
       <Link to={`/category/add`} className="btn btn-dark me-2">
         Ajouter un catégorie
       </Link>
@@ -68,7 +67,6 @@ const Category = () => {
             ))}
           </tbody>
         </Table>
-        <Footer />
       </div>
     </div>
   );

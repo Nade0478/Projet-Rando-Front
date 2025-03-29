@@ -3,9 +3,8 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Footer from "../../components/Footer";
 import FilterDropdown from "../../components/FilterDropdown";
-import CustomNavbar from "../../components/admin/CustomNavbar";
+import Sidebar from "../../components/admin/Sidebar";
 
 const Article = () => {
   const [articles, setArticles] = useState([]); // Correction du nom pour plus de clarté
@@ -49,7 +48,7 @@ const Article = () => {
 
   return (
     <div>
-      <CustomNavbar />
+      <Sidebar />
       <div className="container mt-5">
         <Link to={`/article/add/`} className="btn btn-dark me-2">
           Créer nouveau article
@@ -123,7 +122,6 @@ const Article = () => {
             ))}
           </tbody>
         </Table>
-        <Footer />
       </div>
     </div>
   );

@@ -5,12 +5,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Footer from "../../components/Footer";
-import Menu from "../../components/Menu";
 import { MapContainer } from 'https://cdn.esm.sh/react-leaflet/MapContainer'
 import { TileLayer } from 'https://cdn.esm.sh/react-leaflet/TileLayer'
 // import { useMap } from 'https://cdn.esm.sh/react-leaflet/hooks'
 import { Marker, Popup } from "react-leaflet";
+import Sidebar from "../../components/admin/Sidebar";
 
 const AddPlace = () => {
   const [name_place, setName_place] = useState("");
@@ -64,7 +63,7 @@ const AddPlace = () => {
 
   return (
     <div>
-      <Menu />
+      <Sidebar />
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-12 col-sm-12 col-md-6">
@@ -265,7 +264,6 @@ const AddPlace = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

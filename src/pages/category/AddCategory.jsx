@@ -5,8 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import CustomNavbar from "../../components/admin/CustomNavbar";
-import Footer from "../../components/Footer";
+import Sidebar from "../../components/admin/Sidebar";
 
 const AddCategory = () => {
   const navigate = useNavigate();
@@ -30,7 +29,7 @@ const AddCategory = () => {
 
   return (
     <div className="container mt-5">
-      <CustomNavbar />
+      <Sidebar />
       <h4>Créer une nouvelle catégorie</h4>
       <Form onSubmit={addCategory}>
         <Row>
@@ -45,7 +44,7 @@ const AddCategory = () => {
             </Form.Group>
           </Col>
         </Row>
-        <Button variant="primary" type="submit" className="mt-3">
+        <Button variant="dark" type="submit" className="mt-3">
           Créer une catégorie
         </Button>
       </Form>
@@ -59,7 +58,6 @@ const AddCategory = () => {
           </ul>
         </div>
       )}
-      <Footer />
     </div>
   );
 };

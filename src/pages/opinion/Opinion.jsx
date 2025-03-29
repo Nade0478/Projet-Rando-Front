@@ -3,9 +3,8 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Footer from "../../components/Footer";
 import FilterDropdown from "../../components/FilterDropdown";
-import CustomNavbar from "../../components/admin/CustomNavbar";
+import Sidebar from "../../components/admin/Sidebar";
 
 const Opinion = () => {
   const [opinion, setOpinion] = useState([]);
@@ -49,7 +48,7 @@ const Opinion = () => {
 
   return (
     <div>
-      <CustomNavbar />
+      <Sidebar />
       <div className="container mt-5">
         <div className="d-flex justify-content-between mb-3">
         <Link to={`/opinion/add`} className="btn btn-dark me-2">
@@ -103,7 +102,6 @@ const Opinion = () => {
             ))}
           </tbody>
         </Table>
-        <Footer />
       </div>
     </div>
   );

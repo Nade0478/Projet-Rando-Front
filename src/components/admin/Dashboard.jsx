@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 // Import des composants CustomNavbar et Footer
-import CustomNavbar from './CustomNavbar';
 import Footer from './../Footer';
+import Sidebar from './Sidebar';
 
 const Dashboard = () => {
   const [emails, setEmails] = useState([]);
@@ -36,7 +36,7 @@ const Dashboard = () => {
   return (
     <div className="container-fluid">
       {/* Ajout du CustomNavbar */}
-      <CustomNavbar />
+      <Sidebar />
       <div className="container mt-4">
         <h1>Dashboard Admin</h1>
         <table className="table table-striped" {...getTableProps()}>
