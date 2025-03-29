@@ -76,8 +76,10 @@ const ContactForm = () => {
           I agree to the <a href="/terms" target="_blank" rel="noopener noreferrer">terms and conditions</a>.
         </label>
       </div>
-      <button type="submit">Send
-        
+      <button type="submit">
+      <Link to={`/dashboard`} className="btn btn-dark me-2">
+      ENVOIE
+      </Link>
 
       </button>
       <p>

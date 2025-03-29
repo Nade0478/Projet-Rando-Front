@@ -17,12 +17,16 @@ const UserProfil = () => {
         <div>
             <Navbar />
             <h1>Bienvenue sur votre profil utilisateur</h1>
+
             {isLoggedIn? (
                 <UserPage handleLogout={handleLogout} />
             ) : (
                 <Login handleLogin={handleLogin} />
             )}
+            <p>Vous aller pouvoir envoyer une demande de contact via ce lien</p>
+
         </div>
+        
     );
 };
 

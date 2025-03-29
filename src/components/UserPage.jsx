@@ -49,7 +49,6 @@ const UserPage = ({ handleLogout, user, setUser }) => {
       <div className="container mt-5">
         {/* Titre accueillant */}
         <h2>Bienvenue sur votre page profil utilisateur, {user.name} !</h2>
-
         {/* Formulaire de modification */}
         <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
           {/* Champ du nom */}

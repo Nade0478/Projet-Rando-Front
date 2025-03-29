@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Form, Row, Col, Button } from "react-bootstrap"; // Ajout du bouton si oublié
+import { Form, Row, Col, Button } from "react-bootstrap";
 import Menu from "../components/Menu";
 import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 
 function Profil() {
-  const [name_user, setName_user] = useState(""); // Champ pour "nom"
-  const [email_user, setEmail_user] = useState(""); // Champ pour "email"
-  const [password_user, setPassword_user] = useState(""); // Champ pour "mot de passe"
-  const [validationError, setValidationError] = useState({}); // Gestion des erreurs de validation
-  const [message, setMessage] = useState(""); // Message de confirmation
+  const [name_user, setName_user] = useState(""); 
+  const [email_user, setEmail_user] = useState(""); 
+  const [password_user, setPassword_user] = useState(""); 
+  const [validationError, setValidationError] = useState({}); 
+  const [message, setMessage] = useState(""); 
 
   // Récupération des informations utilisateur
   useEffect(() => {
@@ -17,34 +18,45 @@ function Profil() {
         const res = await fetch("http://127.0.0.1:8000/api/user", {
           headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` },
         });
-        const data = await res.json();
 
-        if (res.ok) {
-          setName_user(data.name); // Initialiser le formulaire avec les données utilisateur
-          setEmail_user(data.email);
-        } else {
-          console.error("Erreur lors de la récupération des données utilisateur :", data.message);
-        }
+        if (!res.ok) throw new Error(`Erreur HTTP : ${res.status}`);
+
+        const data = await res.json();
+        setName_user(data.name);
+        setEmail_user(data.email);
       } catch (err) {
-        console.error("Erreur réseau :", err);
+        console.error("Erreur lors de la récupération des données utilisateur :", err);
       }
     };
 
     fetchUserData();
   }, []);
 
+  // Validation des champs
+  const validateFields = () => {
+    const errors = {};
+
+    if (!name_user) errors.name = "Le champ Nom est obligatoire.";
+    if (!email_user) {
+      errors.email = "Le champ Email est obligatoire.";
+    } else if (!/\S+@\S+\.\S+/.test(email_user)) {
+      errors.email = "L'adresse email n'est pas valide.";
+    }
+    if (password_user && password_user.length < 6) {
+      errors.password = "Le mot de passe doit comporter au moins 6 caractères.";
+    }
+
+    setValidationError(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   // Soumission du formulaire pour la mise à jour utilisateur
   const updateUser = async (e) => {
     e.preventDefault();
 
-    // Validation côté client
-    if (!name_user || !email_user) {
-      setValidationError({ general: "Les champs Nom et Email sont obligatoires." });
-      return;
-    }
+    if (!validateFields()) return;
 
     try {
-      // Construire le corps de la requête sans inclure les champs vides
       const body = {
         name: name_user,
         email: email_user,
@@ -62,17 +74,14 @@ function Profil() {
         body: JSON.stringify(body),
       });
 
-      const data = await res.json();
+      if (!res.ok) throw new Error(`Erreur HTTP : ${res.status}`);
 
-      if (res.ok) {
-        setMessage("Profil mis à jour avec succès !");
-        setValidationError({});
-      } else {
-        console.error("Erreur lors de la mise à jour :", data.errors || {});
-        setValidationError(data.errors || {});
-      }
+      const data = await res.json();
+      setMessage("Profil mis à jour avec succès !");
+      setValidationError({});
     } catch (err) {
-      console.error("Erreur réseau :", err);
+      console.error("Erreur lors de la mise à jour :", err);
+      setValidationError({ general: "Une erreur est survenue lors de la mise à jour du profil." });
     }
   };
 
@@ -84,6 +93,7 @@ function Profil() {
         <div className="row justify-content-center">
           <div className="col-12 col-sm-12 col-md-6">
             <div className="card">
+              <h2>TU PEUX MODIFIER TON PROFIL</h2>
               <div className="card-body">
                 <h4 className="card-title">Modifier les informations</h4>
                 <hr />
@@ -136,15 +146,28 @@ function Profil() {
                     </Col>
                   </Row>
                   <Button
-                    variant="warning"
-                    className="mt-2"
+                    variant="success"
+                    className="mt-2 mx-auto d-block" // Bouton centré
                     size="lg"
-                    block="block"
                     type="submit"
                   >
                     Mettre à jour
                   </Button>
                 </Form>
+              </div>
+            </div>
+            <hr />
+            <div className="card">
+              <h2>DEMANDE DE CONTACT</h2>
+              <div className="card-body">
+                <h4 className="card-title">Vous allez pouvoir envoyer une demande de contact via ce lien !</h4>
+                <hr />
+                <Link
+                  to="/contact"
+                  className="btn btn-success btn-lg mx-auto d-block" // Bouton centré
+                >
+                  Demande de contact
+                </Link>
               </div>
             </div>
           </div>
