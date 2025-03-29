@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import {useNavigate } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 import FilterDropdown from "../components/FilterDropdown";
 import Sidebar from "../components/admin/Sidebar";
 
@@ -77,6 +77,19 @@ const User = () => {
                 <td>{user.email}</td> {/* Utilise la clé correcte */}
                 <td>{user.role_id}</td> {/* Rôle de l'utilisateur */}
                 <td>
+                  <Link
+                    to={`/user/edit/${user.id}`}
+                    className="btn btn-light me-2"
+                  >
+                    Éditer
+                  </Link>
+                  <Link
+                    to={`/user/add`}
+                    className="btn btn-light me-2"
+                  >
+                    Ajouter un utilisateur
+                  </Link>
+
                   <Button
                     variant="danger"
                     onClick={() => deleteUser(user.id)}
