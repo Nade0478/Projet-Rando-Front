@@ -5,19 +5,18 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { MapContainer } from 'https://cdn.esm.sh/react-leaflet/MapContainer'
-import { TileLayer } from 'https://cdn.esm.sh/react-leaflet/TileLayer'
-// import { useMap } from 'https://cdn.esm.sh/react-leaflet/hooks'
-import { Marker, Popup } from "react-leaflet";
+import Map from "../../components/Map";
+import "leaflet/dist/leaflet.css";
+
 import Sidebar from "../../components/admin/Sidebar";
 
 const AddPlace = () => {
   const [name_place, setName_place] = useState("");
-  const [image_place, setImage_place] = useState(null);
+  const [image_place, setImage_place] = useState("");
   const [longitude_place, setLongitude_place] = useState("");
   const [latitude_place, setLatitude_place] = useState("");
   const [description_place, setDescription_place] = useState("");
-  const [map_place, setMap_place] = useState(null);
+  const [map_place, setMap_place] = useState("");
   const [distance_place, setDistance_place] = useState("");
   const [difficulty_place, setDifficulty_place] = useState("");
   const [estimated_time_place, setEstimated_time_place] = useState("");
@@ -59,6 +58,14 @@ const AddPlace = () => {
 
   const changeMapHandler = (e) => {
     setMap_place(e.target.files[0]);
+  };
+
+  const handleLatitudeChange = (e) => {
+    setLatitude_place(e.target.value);
+  };
+
+  const handleLongitudeChange = (e) => {
+    setLongitude_place(e.target.value);
   };
 
   return (
@@ -110,9 +117,7 @@ const AddPlace = () => {
                           <Form.Control
                             type="text"
                             value={longitude_place}
-                            onChange={(place) => {
-                              setLongitude_place(place.target.value);
-                            }}
+                            onChange={handleLongitudeChange}
                             required
                           />
                         </Form.Group>
@@ -125,45 +130,19 @@ const AddPlace = () => {
                           <Form.Control
                             type="text"
                             value={latitude_place}
-                            onChange={(place) => {
-                              setLatitude_place(place.target.value);
-                            }}
+                            onChange={handleLatitudeChange}
                             required
                           />
                         </Form.Group>
                       </Col>
                     </Row>
-                    <Row className="my-3">
-                      <Col>
-                        <MapContainer
-                          style={{ height: "300px", width: "100%" }}
-                          center={[
-                            parseFloat(latitude_place) || 48.8566, // Valeur par défaut (Paris)
-                            parseFloat(longitude_place) || -2.3522, // Valeur par défaut (Paris)
-                          ]}
-                          zoom={13}
-                          scrollWheelZoom={false}
-                        >
-                          <TileLayer
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                          />
-                          {latitude_place && longitude_place && (
-                            <Marker
-                              position={[
-                                parseFloat(latitude_place),
-                                parseFloat(longitude_place),
-                              ]}
-                            >
-                              <Popup>
-                                Position : {latitude_place}, {longitude_place}
-                              </Popup>
-                            </Marker>
-                          )}
-                        </MapContainer>
-                      </Col>
-                    </Row>
-
+                    {latitude_place && longitude_place && (
+                      <Row className="my-3">
+                        <Col>
+                          <Map latitude={latitude_place} longitude={longitude_place} />
+                        </Col>
+                      </Row>
+                    )}
                     <Row>
                       <Col>
                         <Form.Group controlId="description_place">
