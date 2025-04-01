@@ -1,11 +1,8 @@
 import React from 'react';
 import emailjs from 'emailjs-com';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Dashboard from '../components/admin/Dashboard';
-import { Navbar } from 'react-bootstrap';
-import Footer from '../components/Footer';
 
 const DashboardPage = () => {
   const sendEmail = () => {
@@ -20,7 +17,6 @@ const DashboardPage = () => {
 
   return (
     <div className="container">
-      <Navbar />
       {/* <h1>Bienvenue sur ma page de l'administrateur</h1> */}
       <hr />
       <Dashboard />
@@ -29,7 +25,7 @@ const DashboardPage = () => {
     </div>
   );
 };
-<Footer />
+
 
 export default DashboardPage;
 

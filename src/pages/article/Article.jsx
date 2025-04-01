@@ -112,7 +112,7 @@ const Article = () => {
                     Montrer
                   </Link>
                   <Button
-                    variant="danger"
+                    variant="dark"
                     onClick={() => deleteArticle(article.id)}
                   >
                     Supprimer

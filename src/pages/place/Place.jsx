@@ -143,7 +143,7 @@ const Place = () => {
                     Détails
                   </Link>
                   <Button
-                    variant="danger"
+                    variant="dark"
                     onClick={() => deletePlace(place.id)}
                   >
                     Supprimer

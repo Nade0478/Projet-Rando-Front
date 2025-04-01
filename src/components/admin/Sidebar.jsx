@@ -9,6 +9,8 @@ const Sidebar = () => {
     <Logo />
       <ul>
         <li><Link to="/">Accueil</Link></li>
+        <li><Link to="/dashboard">Dashboard</Link></li>
+
         <hr />
        <strong><em>GESTION DU SITE</em></strong>
         <li><Link to="/place">Lieux de randonnée</Link></li>

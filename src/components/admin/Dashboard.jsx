@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 // Import des composants CustomNavbar et Footer
-import Footer from './../Footer';
 import Sidebar from './Sidebar';
+import CardDashboard from './CardDashboard';
 
 const Dashboard = () => {
   const [emails, setEmails] = useState([]);
@@ -62,9 +62,9 @@ const Dashboard = () => {
             })}
           </tbody>
         </table>
+        <CardDashboard />
       </div>
       {/* Ajout du Footer */}
-      <Footer />
     </div>
   );
 };

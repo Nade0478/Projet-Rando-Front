@@ -32,10 +32,10 @@ const Category = () => {
   return (
     <div>
       <Sidebar />
+      <div className="container mt-5">
       <Link to={`/category/add`} className="btn btn-dark me-2">
         Ajouter un catégorie
       </Link>
-      <div className="container mt-5">
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -50,12 +50,12 @@ const Category = () => {
                 <td>
                   <Link
                     to={`/category/edit/${category.id}`}
-                    className="btn btn-success me-2"
+                    className="btn btn-light me-2"
                   >
                     Éditer
                   </Link>
                   <Button
-                    variant="danger"
+                    variant="dark"
                     onClick={() => {
                       deleteCategory(category.id);
                     }}

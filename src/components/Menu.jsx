@@ -21,6 +21,11 @@ const Menu = () => {
               navbarScroll 
             > 
               <Nav.Link href="/">Home</Nav.Link> 
+              <NavDropdown title="About" id="navbarScrollingDropdown"> 
+                <NavDropdown.Item href="/about"> 
+                  A propos de nous
+                </NavDropdown.Item> 
+              </NavDropdown> 
               <NavDropdown title="Randonnées pédestre" id="navbarScrollingDropdown"> 
                 <NavDropdown.Item href="/place/page"> 
                 Page randonnées pédestre

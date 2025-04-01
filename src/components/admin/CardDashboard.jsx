@@ -1,7 +1,7 @@
 import React from 'react'; 
 import '../../styles/style-card.css'
  
-const CardPlace = ({map}) => { 
+const CardDashboard = ({map}) => { 
      
             return (
                 <div className="card">
@@ -18,4 +18,4 @@ const CardPlace = ({map}) => {
               );
             };  
  
-export default CardPlace; 
+export default CardDashboard; 

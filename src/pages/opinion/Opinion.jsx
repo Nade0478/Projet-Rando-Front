@@ -91,6 +91,13 @@ const Opinion = () => {
                   >
                     Editer
                   </Link>
+                  <Link
+                    to={`/opinion/show/${opinion.id}`}
+                    className="btn btn-light me-2"
+                  >
+                    Montrer
+                  </Link>
+
                   <Button
                     variant="dark"
                     onClick={() => deleteOpinion(opinion.id)}
