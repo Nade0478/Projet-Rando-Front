@@ -12,7 +12,9 @@ const CardDashboard = ({map}) => {
                     <p>Content</p>
                   </div>
                   <div className="card-footer">
-                    <button>Read More</button>
+                    <button>Read More
+                      
+                    </button>
                   </div>
                 </div>
               );

@@ -1,9 +1,11 @@
-
 import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
 import '../styles/style-contact.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { Link } from 'react-router-dom';
+import './ContactForm.css';
+import '../styles/style-footer.css';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -23,49 +25,68 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.agree) {
-      // Logic to handle form submission
-      console.log('Form submitted:', formData);
-    } else {
-      alert('Please agree to the terms and conditions.');
+
+    if (!formData.agree) {
+      alert('Veuillez accepter les conditions générales.');
+      return;
     }
+
+    emailjs.send(
+      "service_9yyn298",
+      "template_xonrprq",
+      {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+      },
+      "VbFTJBjMjf2w-GqC8"
+    ).then(() => {
+      alert('Votre message a été envoyé avec succès !');
+      setFormData({ name: '', email: '', message: '', agree: false });
+    }).catch((error) => {
+      console.error('Erreur lors de l\'envoi:', error);
+      alert('Une erreur s\'est produite. Veuillez réessayer plus tard.');
+    });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Nom:</label>
+      <div className="mb-3">
+        <label htmlFor="name" className="form-label">Nom :</label>
         <input
           type="text"
           id="name"
           name="name"
           value={formData.name}
           onChange={handleChange}
+          className="form-control"
           required
         />
       </div>
-      <div>
-        <label htmlFor="email">Email:</label>
+      <div className="mb-3">
+        <label htmlFor="email" className="form-label">Email :</label>
         <input
           type="email"
           id="email"
           name="email"
           value={formData.email}
           onChange={handleChange}
+          className="form-control"
           required
         />
       </div>
-      <div>
-        <label htmlFor="message">Message:</label>
+      <div className="mb-3">
+        <label htmlFor="message" className="form-label">Message :</label>
         <textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
+          className="form-control"
           required
         />
       </div>
-      <div>
+      <div className="mb-3">
         <label>
           <input
             type="checkbox"
@@ -73,20 +94,12 @@ const ContactForm = () => {
             checked={formData.agree}
             onChange={handleChange}
           />
-          I agree to the <a href="/terms" target="_blank" rel="noopener noreferrer">terms and conditions</a>.
+          J'accepte les <a href="/terms" target="_blank" rel="noopener noreferrer">conditions générales</a>.
         </label>
       </div>
-      <button type="submit">
-      <Link to={`/dashboard`} className="btn btn-dark me-2">
-      ENVOIE
-      </Link>
-
+      <button type="submit" className="btn btn-primary">
+        Envoyer
       </button>
-      <p>
-        <small>
-          This form is a placeholder and will not actually send any data.
-        </small>
-      </p>
     </form>
   );
 };
