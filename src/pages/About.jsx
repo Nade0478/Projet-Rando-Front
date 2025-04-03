@@ -1,7 +1,7 @@
 import React from 'react'; 
 import Menu from '../components/Menu';
 import Footer from '../components/Footer';
-import '../styles/style-about.scss';
+import '../components/About.css';
 import AboutForm1 from '../components/AboutForm1';
 import AboutForm2 from '../components/AboutForm2';
 import AboutForm3 from '../components/AboutForm3';

@@ -1,5 +1,5 @@
 import React from "react";
-import '../../src/styles/style-about.scss';
+import './About.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 

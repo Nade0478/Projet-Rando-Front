@@ -1,7 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import '../../src/styles/style-about.scss';
+import './About.css';
 
 
 const AboutForm1 = () => {
