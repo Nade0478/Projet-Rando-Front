@@ -4,42 +4,38 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar"; 
 import NavDropdown from "react-bootstrap/NavDropdown"; 
 import Logo from "./Logo";
- 
 import "./Menu.css";
- 
+
 const Menu = () => { 
   return ( 
     <div> 
-    <Logo />
-    <Navbar className="navbar-custom navbar-dark" expand="lg">
-    <Container fluid> 
+      <Navbar className="navbar-custom navbar-dark" expand="xl">
+        <Logo />
+        <Container fluid> 
           <Navbar.Toggle aria-controls="navbarScroll" /> 
           <Navbar.Collapse id="navbarScroll"> 
-            <Nav 
-              className="me-auto my-2 my-lg-0" 
-              style={{ maxHeight: "100px" }} 
-              navbarScroll 
-            > 
+            {/* Menu à GAUCHE */}
+            <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll> 
               <Nav.Link href="/">Home</Nav.Link> 
               <NavDropdown title="About" id="navbarScrollingDropdown"> 
                 <NavDropdown.Item href="/about"> 
-                  A propos de nous
+                  À propos de nous
                 </NavDropdown.Item> 
               </NavDropdown> 
               <NavDropdown title="Randonnées pédestre" id="navbarScrollingDropdown"> 
                 <NavDropdown.Item href="/place/page"> 
-                Page randonnées pédestre
+                  Page randonnées pédestre
                 </NavDropdown.Item> 
                 <NavDropdown.Item href="/place/page"> 
                   Liste des opinions 
                 </NavDropdown.Item> 
                 <NavDropdown.Item href="/opinion/add"> 
-                Données votre opinion
+                  Donnez votre opinion
                 </NavDropdown.Item> 
               </NavDropdown> 
               <NavDropdown title="Blog" id="navbarScrollingDropdown"> 
                 <NavDropdown.Item href="/blog"> 
-                Mon Blog
+                  Mon Blog
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/article/add"> 
                   Créer un nouvel article 
@@ -50,7 +46,11 @@ const Menu = () => {
                   Page contact 
                 </NavDropdown.Item> 
               </NavDropdown> 
-              <NavDropdown title= "Login" id="navbarScrollingDropdown"> 
+            </Nav> 
+            <hr />
+            {/* Menu à DROITE */}
+            <Nav className="ms-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
+              <NavDropdown title="Login" id="navbarScrollingDropdown"> 
                 <NavDropdown.Item href="/login"> 
                   Se connecter 
                 </NavDropdown.Item> 
@@ -58,17 +58,17 @@ const Menu = () => {
                   Déconnexion 
                 </NavDropdown.Item> 
               </NavDropdown>
-              <NavDropdown title= "Register" id="navbarScrollingDropdown">
+              <NavDropdown title="Register" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="/register"> 
                   S'inscrire
-                  </NavDropdown.Item>
-                </NavDropdown>
+                </NavDropdown.Item>
+              </NavDropdown>
             </Nav> 
           </Navbar.Collapse> 
         </Container> 
       </Navbar> 
     </div> 
   ); 
-}; 
- 
+};
+
 export default Menu; 

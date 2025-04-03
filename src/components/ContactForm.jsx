@@ -3,7 +3,6 @@ import emailjs from 'emailjs-com';
 import '../styles/style-contact.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import { Link } from 'react-router-dom';
 import './ContactForm.css';
 import '../styles/style-footer.css';
 
@@ -97,7 +96,7 @@ const ContactForm = () => {
           J'accepte les <a href="/terms" target="_blank" rel="noopener noreferrer">conditions générales</a>.
         </label>
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn btn-dark">
         Envoyer
       </button>
     </form>

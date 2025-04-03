@@ -1,5 +1,5 @@
 body {
-    background-image: url(http://127.0.0.1:8000/storage/public/uploads/forest1_1743029297.png);
+    background-image: url(http://127.0.0.1:8000/storage/public/uploads/fond-ecran1.jpg);
     background-size: cover;
     height: 100vh;
     background-position: center;
@@ -15,6 +15,7 @@ form {
 
     h1 {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 50px;
         font-style: bold;
         color: #0c4205;
         margin-bottom: 20px;
@@ -55,3 +56,10 @@ p{
         background-color: #000000; /* Ajout d'un effet au survol */
     }
     
+    label.form.label{
+        display: flex;
+        align-items: right;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: medium;
+    }
