@@ -2,37 +2,46 @@ import React, { useState, useEffect } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import Menu from "../components/Menu";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Utilisation de `useNavigate`
 
 function Profil() {
-  const [name_user, setName_user] = useState(""); 
-  const [email_user, setEmail_user] = useState(""); 
-  const [password_user, setPassword_user] = useState(""); 
-  const [validationError, setValidationError] = useState({}); 
-  const [message, setMessage] = useState(""); 
+  const [name_user, setName_user] = useState("");
+  const [email_user, setEmail_user] = useState("");
+  const [password_user, setPassword_user] = useState("");
+  const [validationError, setValidationError] = useState({});
+  const [message, setMessage] = useState("");
+
+  const navigate = useNavigate(); // Permet de rediriger après mise à jour
 
   // Récupération des informations utilisateur
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const res = await fetch("http://127.0.0.1:8000/api/user", {
-          headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
         });
 
         if (!res.ok) throw new Error(`Erreur HTTP : ${res.status}`);
 
         const data = await res.json();
-        setName_user(data.name);
-        setEmail_user(data.email);
+        if (data && data.name) {
+          setName_user(data.name);
+          setEmail_user(data.email);
+        }
       } catch (err) {
-        console.error("Erreur lors de la récupération des données utilisateur :", err);
+        console.error(
+          "Erreur lors de la récupération des données utilisateur :",
+          err
+        );
       }
     };
 
     fetchUserData();
   }, []);
 
-  // Validation des champs
+  // Validation des champs avant soumission
   const validateFields = () => {
     const errors = {};
 
@@ -76,12 +85,14 @@ function Profil() {
 
       if (!res.ok) throw new Error(`Erreur HTTP : ${res.status}`);
 
-      const data = await res.json();
       setMessage("Profil mis à jour avec succès !");
       setValidationError({});
+      navigate("/profile"); // Redirection après mise à jour
     } catch (err) {
       console.error("Erreur lors de la mise à jour :", err);
-      setValidationError({ general: "Une erreur est survenue lors de la mise à jour du profil." });
+      setValidationError({
+        general: "Une erreur est survenue lors de la mise à jour du profil.",
+      });
     }
   };
 
@@ -93,11 +104,13 @@ function Profil() {
         <div className="row justify-content-center">
           <div className="col-12 col-sm-12 col-md-6">
             <div className="card">
-              <h2>TU PEUX MODIFIER TON PROFIL</h2>
+              <h2>Modifier votre profil</h2>
               <div className="card-body">
                 <h4 className="card-title">Modifier les informations</h4>
                 <hr />
-                {message && <div className="alert alert-success">{message}</div>}
+                {message && (
+                  <div className="alert alert-success">{message}</div>
+                )}
                 {Object.keys(validationError).length > 0 && (
                   <div className="alert alert-danger">
                     <ul className="mb-0">
@@ -145,12 +158,7 @@ function Profil() {
                       </Form.Group>
                     </Col>
                   </Row>
-                  <Button
-                    variant="success"
-                    className="mt-2 mx-auto d-block" // Bouton centré
-                    size="lg"
-                    type="submit"
-                  >
+                  <Button type="submit" className="btn btn-success">
                     Mettre à jour
                   </Button>
                 </Form>
@@ -158,13 +166,15 @@ function Profil() {
             </div>
             <hr />
             <div className="card">
-              <h2>DEMANDE DE CONTACT</h2>
+              <h2>Demande de contact</h2>
               <div className="card-body">
-                <h4 className="card-title">Vous allez pouvoir envoyer une demande de contact via ce lien !</h4>
+                <h4 className="card-title">
+                  Envoyez une demande via ce lien :
+                </h4>
                 <hr />
                 <Link
                   to="/contact"
-                  className="btn btn-success btn-lg mx-auto d-block" // Bouton centré
+                  className="btn btn-success btn-lg mx-auto d-block"
                 >
                   Demande de contact
                 </Link>

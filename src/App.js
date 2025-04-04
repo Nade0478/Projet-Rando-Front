@@ -40,6 +40,10 @@ import EditHome from "./pages/home/EditHome";
 import AddBlog from "./pages/blog/AddBlog";
 import EditBlog from "./pages/blog/EditBlog";
 import User from "./pages/User";
+import AddUser from "./pages/user/AddUser";
+import EditUser from "./pages/user/EditUser";
+import ShowUser from "./pages/user/ShowUser";
+
 import ShowArticle from "./pages/article/ShowArticle";
 import ShowOpinion from "./pages/opinion/ShowOpinion";
 
@@ -100,6 +104,10 @@ const App = () => {
 
           {/* Admin routes */}
           <Route path="/user" element={<User />} />
+          <Route path="/user/add" element={<AddUser />} /> 
+          <Route path="/user/edit/:article" element={<EditUser />} /> 
+          <Route path="/user/show/:id" element={<ShowUser />} /> 
+
 
         </Routes> 
     </BrowserRouter> 
