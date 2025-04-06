@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import {Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom"; // Supprimé useNavigate si non utilisé
 import FilterDropdown from "../components/FilterDropdown";
 import Sidebar from "../components/admin/Sidebar";
 
@@ -10,7 +10,6 @@ const User = () => {
   const [users, setUsers] = useState([]); // Liste des utilisateurs
   const [names, setNames] = useState([]); // Liste des noms pour le filtre
   const [selectedName, setSelectedName] = useState(null); // Nom sélectionné pour le filtre
-  const navigate = useNavigate(); // Hook pour la navigation
 
   useEffect(() => {
     displayUsers();
@@ -19,10 +18,10 @@ const User = () => {
   const displayUsers = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/api/user");
-      const fetchedUsers = response.data || []; // Assure que la structure des données est correcte
-      const filteredUsers = fetchedUsers.filter((user) => user.role_id === 2); // Filtre les utilisateurs avec role_id === 2
+      const fetchedUsers = response.data || [];
+      const filteredUsers = fetchedUsers.filter((user) => user.role_id === 2);
       setUsers(filteredUsers);
-      setNames(filteredUsers.map((user) => user.name)); // Utilise les noms uniquement des utilisateurs filtrés
+      setNames(filteredUsers.map((user) => user.name));
     } catch (error) {
       console.error("Erreur lors de la récupération des utilisateurs :", error);
       alert("Une erreur est survenue lors du chargement des utilisateurs.");
@@ -41,7 +40,7 @@ const User = () => {
   };
 
   const filteredUsers = users.filter((user) => {
-    return !selectedName || (user.name && user.name === selectedName); // Filtre basé sur "name"
+    return !selectedName || (user.name && user.name === selectedName);
   });
 
   return (
@@ -54,10 +53,7 @@ const User = () => {
             selectedItem={selectedName}
             onChange={setSelectedName}
           />
-          <button
-            className="btn btn-secondary"
-            onClick={() => setSelectedName(null)}
-          >
+          <button className="btn btn-secondary" onClick={() => setSelectedName(null)}>
             Réinitialiser le filtre
           </button>
         </div>
@@ -73,27 +69,17 @@ const User = () => {
           <tbody>
             {filteredUsers.map((user) => (
               <tr key={user.id}>
-                <td>{user.name}</td> {/* Utilise la clé correcte */}
-                <td>{user.email}</td> {/* Utilise la clé correcte */}
-                <td>{user.role_id}</td> {/* Rôle de l'utilisateur */}
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.role_id}</td>
                 <td>
-                  <Link
-                    to={`/user/edit/${user.id}`}
-                    className="btn btn-light me-2"
-                  >
+                  <Link to={`/user/edit/${user.id}`} className="btn btn-light me-2">
                     Éditer
                   </Link>
-                  <Link
-                    to={`/user/add`}
-                    className="btn btn-light me-2"
-                  >
-                    Ajouter un utilisateur
+                  <Link to={`/user/show/${user.id}`} className="btn btn-light me-2">
+                    Voir
                   </Link>
-
-                  <Button
-                    variant="danger"
-                    onClick={() => deleteUser(user.id)}
-                  >
+                  <Button variant="danger" onClick={() => deleteUser(user.id)}>
                     Supprimer
                   </Button>
                 </td>

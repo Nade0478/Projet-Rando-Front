@@ -34,8 +34,8 @@ import Profil from "./pages/Profil";
 import Role from "./pages/Role";
 import Dashboard from "./pages/Dashboard";
 
-import AddHome from "./pages/home/AddHome";
-import EditHome from "./pages/home/EditHome";
+// import AddHome from "./pages/home/AddHome";
+// import EditHome from "./pages/home/EditHome";
 
 import AddBlog from "./pages/blog/AddBlog";
 import EditBlog from "./pages/blog/EditBlog";
@@ -54,10 +54,10 @@ const App = () => {
           <Route path="/" element={<Home />} /> 
           <Route path="/about" element={<About />} /> 
           <Route path="/blog" element={<Blog />} /> 
-          <Route path="/blog/add" element={<AddBlog />} /> 
-          <Route path="/blog/edit/:blog" element={<EditBlog />} />
-          <Route path="/home/Add" element={<AddHome />} />
-          <Route path="/home/Edit/:home" element={<EditHome />} />
+          {/* <Route path="/blog/add" element={<AddBlog />} />  */}
+          {/* <Route path="/blog/edit/:blog" element={<EditBlog />} /> */}
+          {/* <Route path="/home/Add" element={<AddHome />} /> */}
+          {/* <Route path="/home/Edit/:home" element={<EditHome />} /> */}
 
           <Route path="/contact" element={<Contact />} /> 
 
@@ -99,12 +99,12 @@ const App = () => {
           <Route path="/login" element={<Login />} /> 
           <Route path="*" element={<Home />} /> 
           <Route path="/home" element={<Home />} />
-          <Route path="/home/add" element={<AddHome />} /> 
-          <Route path="/home/edit" element={<EditHome />} /> 
+          {/* <Route path="/home/add" element={<AddHome />} />  */}
+          {/* <Route path="/home/edit" element={<EditHome />} />  */}
 
           {/* Admin routes */}
           <Route path="/user" element={<User />} />
-          <Route path="/user/add" element={<AddUser />} /> 
+          {/* <Route path="/user/add" element={<AddUser />} />  */}
           <Route path="/user/edit/:article" element={<EditUser />} /> 
           <Route path="/user/show/:id" element={<ShowUser />} /> 
 
