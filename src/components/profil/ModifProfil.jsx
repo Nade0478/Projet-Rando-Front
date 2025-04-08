@@ -64,8 +64,8 @@ const ModifProfil = ({ setUserId, setName_user }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-        body: JSON.stringify(body),
-      });
+        body: JSON.stringify({ name: name_user, email: email_user, password: password_user }),
+      });      
 
       if (!res.ok) throw new Error(`Erreur HTTP : ${res.status}`);
 
