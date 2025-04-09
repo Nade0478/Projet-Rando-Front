@@ -1,0 +1,25 @@
+.CardDashboard {
+    border-radius: 20%;
+    text-align: center;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+    padding-left: 250px;
+  }
+  
+.card {
+    box-sizing:initial;
+    color: rgb(0, 37, 17);
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    border-width: 20px;
+    padding-top: 80px;
+    padding-left: 50px;
+    padding-right: 50px;
+    width: 45%; 
+    margin-bottom: 20px;
+
+}

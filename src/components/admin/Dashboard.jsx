@@ -6,13 +6,14 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 // Import des composants CustomNavbar et Footer
 import Sidebar from './Sidebar';
 import CardDashboard from './CardDashboard';
+import TitleDashboard from './TitleDashboard';
 
 const Dashboard = () => {
 
   return (
     <div className="container-fluid">
       <Sidebar />
-     
+        <TitleDashboard />
         <CardDashboard />
       </div>
   );
