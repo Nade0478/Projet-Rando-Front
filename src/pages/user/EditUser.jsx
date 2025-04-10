@@ -14,7 +14,7 @@ const EditUser = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [roleId, setRoleId] = useState("");
+  const [role_id, setRoleId] = useState("");
   const [roles, setRoles] = useState([]);
   const [validationError, setValidationError] = useState({});
 
@@ -30,7 +30,7 @@ const EditUser = () => {
         setEmail(res.data.email || res.data.email_user);
         setRoleId(res.data.role_id);
       } catch (error) {
-        console.error("Erreur lors de la récupération de l'utilisateur :", error);
+        // console.error("Erreur lors de la récupération de l'utilisateur :", error);
       }
     };
 
@@ -53,7 +53,7 @@ const EditUser = () => {
     const formData = {
       name,
       email,
-      role_id: parseInt(roleId, 10),
+      role_id: parseInt(role_id, 10),
     };
     if (password) {
       formData.password = password;
@@ -66,7 +66,7 @@ const EditUser = () => {
       console.log("Réponse serveur :", res.data); // Debugging
       navigate("/user");
     } catch (error) {
-      console.error("Erreur lors de la mise à jour :", error);
+      // console.error("Erreur lors de la mise à jour :", error);
 
       if (error.response && error.response.status === 422) {
         setValidationError(error.response.data.errors);
@@ -122,7 +122,7 @@ const EditUser = () => {
                     <Col>
                       <Form.Group controlId="role_id">
                         <Form.Label>Rôle</Form.Label>
-                        <Form.Control as="select" value={roleId} onChange={(e) => setRoleId(e.target.value)}>
+                        <Form.Control as="select" value={role_id} onChange={(e) => setRoleId(e.target.value)}>
                           <option value="">Sélectionnez un rôle</option>
                           {roles.map((role) => (
                             <option key={role.id} value={role.id}>{role.role}</option>

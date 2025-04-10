@@ -37,8 +37,8 @@ import Dashboard from "./pages/Dashboard";
 // import AddHome from "./pages/home/AddHome";
 // import EditHome from "./pages/home/EditHome";
 
-import AddBlog from "./pages/blog/AddBlog";
-import EditBlog from "./pages/blog/EditBlog";
+// import AddBlog from "./pages/blog/AddBlog";
+// import EditBlog from "./pages/blog/EditBlog";
 import User from "./pages/User";
 import AddUser from "./pages/user/AddUser";
 import EditUser from "./pages/user/EditUser";
@@ -104,9 +104,15 @@ const App = () => {
 
           {/* Admin routes */}
           <Route path="/user" element={<User />} />
+          <Route path="/user/edit/:id" element={<EditUser />} />
+          <Route path="/user/show/:id" element={<ShowUser />} />
+          <Route path="/user/add" element={<AddUser />} />
+
+
+
           {/* <Route path="/user/add" element={<AddUser />} />  */}
-          <Route path="/user/edit/:article" element={<EditUser />} /> 
-          <Route path="/user/show/:id" element={<ShowUser />} /> 
+          {/* <Route path="/user/edit/:article" element={<EditUser />} /> 
+          <Route path="/user/show/:id" element={<ShowUser />} />  */}
 
 
         </Routes> 
