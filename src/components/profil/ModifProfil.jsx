@@ -3,7 +3,7 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const ModifProfil = ({ setUserId, setName_user }) => {
-  const [userId, setLocalUserId] = useState(null); // Correction ici
+  const [id, setLocalUserId] = useState(null);
   const [name_user, setLocalNameUser] = useState("");
   const [email_user, setEmail_user] = useState("");
   const [password_user, setPassword_user] = useState("");
@@ -12,7 +12,6 @@ const ModifProfil = ({ setUserId, setName_user }) => {
 
   const navigate = useNavigate();
 
-  // Optimisation avec useCallback pour éviter des recréations inutiles
   const fetchUserData = useCallback(async () => {
     try {
       const res = await fetch("http://127.0.0.1:8000/api/user", {
@@ -28,50 +27,41 @@ const ModifProfil = ({ setUserId, setName_user }) => {
 
       if (data && data.id) {
         setLocalUserId(data.id);
-        setUserId(data.id); // Met à jour l’ID dans le parent `Profil.js`
+        setUserId(data.id); // Met à jour l'ID dans le parent `Profil.jsx`
         setLocalNameUser(data.name);
-        setName_user(data.name); // Met à jour le parent `Profil.js`
+        setName_user(data.name); // Met à jour le parent `Profil.jsx`
         setEmail_user(data.email);
       }
     } catch (err) {
-      console.error(
-        "Erreur lors de la récupération des données utilisateur :",
-        err
-      );
+      console.error("Erreur lors de la récupération des données utilisateur :", err);
     }
-  }, [setUserId, setName_user]); // Correction ici
+  }, [setUserId, setName_user]);
 
   useEffect(() => {
     fetchUserData();
-  }, [fetchUserData]); // Correction ici
+  }, [fetchUserData]);
 
   const updateUser = async (e) => {
     e.preventDefault();
-    if (!userId) {
-      setValidationError({ general: "ID utilisateur introuvable." });
-      return;
-    }
 
     try {
       const body = { name: name_user, email: email_user };
-      if (password_user) {
-        body.password = password_user;
-      }
+      if (password_user) body.password = password_user;
 
-      const res = await fetch(`http://127.0.0.1:8000/api/user/${userId}`, {
+      const res = await fetch(`http://127.0.0.1:8000/api/user/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-        body: JSON.stringify({ name: name_user, email: email_user, password: password_user }),
-      });      
+        body: JSON.stringify(body),
+      });
 
       if (!res.ok) throw new Error(`Erreur HTTP : ${res.status}`);
 
       setMessage("Profil mis à jour avec succès !");
       setValidationError({});
-      navigate("/profile");
+      navigate("/profil");
     } catch (err) {
       console.error("Erreur lors de la mise à jour :", err);
       setValidationError({
@@ -104,7 +94,10 @@ const ModifProfil = ({ setUserId, setName_user }) => {
                     <Form.Control
                       type="text"
                       value={name_user}
-                      onChange={(e) => setName_user(e.target.value)}
+                      onChange={(e) => {
+                        setLocalNameUser(e.target.value); // État local
+                        setName_user(e.target.value); // Met à jour le parent
+                      }}
                     />
                   </Form.Group>
                 </Col>
