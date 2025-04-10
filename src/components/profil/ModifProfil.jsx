@@ -1,72 +1,51 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const ModifProfil = ({ setUserId, setName_user }) => {
-  const [id, setLocalUserId] = useState(null);
-  const [name_user, setLocalNameUser] = useState("");
-  const [email_user, setEmail_user] = useState("");
-  const [password_user, setPassword_user] = useState("");
+const ModifProfil = ({ id_user, name_user, email_user }) => {
+  const [name, setName] = useState(name_user);
+  const [email, setEmail] = useState(email_user);
+  const [password, setPassword] = useState("");
   const [validationError, setValidationError] = useState({});
-  const [message, setMessage] = useState("");
+  const [message] = useState("");
 
   const navigate = useNavigate();
 
-  const fetchUserData = useCallback(async () => {
-    try {
-      const res = await fetch("http://127.0.0.1:8000/api/user", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      });
-
-      if (!res.ok) throw new Error(`Erreur HTTP : ${res.status}`);
-
-      const data = await res.json();
-      console.log("Données utilisateur :", data);
-
-      if (data && data.id) {
-        setLocalUserId(data.id);
-        setUserId(data.id); // Met à jour l'ID dans le parent `Profil.jsx`
-        setLocalNameUser(data.name);
-        setName_user(data.name); // Met à jour le parent `Profil.jsx`
-        setEmail_user(data.email);
-      }
-    } catch (err) {
-      console.error("Erreur lors de la récupération des données utilisateur :", err);
-    }
-  }, [setUserId, setName_user]);
-
   useEffect(() => {
-    fetchUserData();
-  }, [fetchUserData]);
+    setName(name_user);
+    setEmail(email_user);
+  }, [name_user, email_user]);
 
   const updateUser = async (e) => {
     e.preventDefault();
 
+    console.log("Name:", name);
+    console.log("Email:", email);
+    console.log("Password:", password);
+
+    const formData = new FormData();
+    formData.append("_method", "PATCH");
+    formData.append("name", name);
+    formData.append("email", email);
+    if (password) {
+      formData.append("password", password);
+    }
+
+    // Vérifiez le contenu de formData
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ": " + pair[1]);
+    }
+
     try {
-      const body = { name: name_user, email: email_user };
-      if (password_user) body.password = password_user;
-
-      const res = await fetch(`http://127.0.0.1:8000/api/user/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-        body: JSON.stringify(body),
-      });
-
-      if (!res.ok) throw new Error(`Erreur HTTP : ${res.status}`);
-
-      setMessage("Profil mis à jour avec succès !");
-      setValidationError({});
+      await axios.post(`http://127.0.0.1:8000/api/user/${id_user}`, formData);
       navigate("/profil");
-    } catch (err) {
-      console.error("Erreur lors de la mise à jour :", err);
-      setValidationError({
-        general: "Une erreur est survenue lors de la mise à jour du profil.",
-      });
+    } catch (error) {
+      if (error.response && error.response.status === 422) {
+        setValidationError(error.response.data.errors);
+      } else {
+        console.error("Erreur inattendue :", error);
+      }
     }
   };
 
@@ -93,11 +72,8 @@ const ModifProfil = ({ setUserId, setName_user }) => {
                     <Form.Label>Nom</Form.Label>
                     <Form.Control
                       type="text"
-                      value={name_user}
-                      onChange={(e) => {
-                        setLocalNameUser(e.target.value); // État local
-                        setName_user(e.target.value); // Met à jour le parent
-                      }}
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -108,8 +84,8 @@ const ModifProfil = ({ setUserId, setName_user }) => {
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                       type="email"
-                      value={email_user}
-                      onChange={(e) => setEmail_user(e.target.value)}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -121,8 +97,8 @@ const ModifProfil = ({ setUserId, setName_user }) => {
                     <Form.Control
                       type="password"
                       placeholder="Nouveau mot de passe"
-                      value={password_user}
-                      onChange={(e) => setPassword_user(e.target.value)}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -139,3 +115,4 @@ const ModifProfil = ({ setUserId, setName_user }) => {
 };
 
 export default ModifProfil;
+
