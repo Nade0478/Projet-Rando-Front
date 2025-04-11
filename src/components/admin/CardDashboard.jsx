@@ -1,83 +1,38 @@
+import React from 'react';
+import NbrUserForm from './NbrUserFrom';
+import NbrArticleForm from './NbrArticleForm';
+import NbrLieuxForm from './NbrLieuxForm';
+import NbrAvisForm from './NbrAvisForm';
+
 const CardDashboard = () => {
+  // Données pour chaque carte
+  const cards = [
+    { title: "Nombre de lieux de randonnées", content: <NbrLieuxForm /> },
+    { title: "Nombre d'avis", content: <NbrAvisForm /> },
+    { title: "Nombre d'articles", content: <NbrArticleForm /> },
+    { title: "Nombre d'utilisateurs", content: <NbrUserForm /> },
+  ];
+
   return (
     <div className="dashboard-container">
-      {" "}
       <div className="row">
-        {" "}
-        <div className="col-lg-6">
-          {" "}
-          <div className="card">
-            {" "}
-            <div className="card-header">
-              {" "}
-              <h2>Nombre de lieux de randonnées</h2>{" "}
-            </div>{" "}
-            <div className="card-body">
-              {" "}
-              <p>Content</p>{" "}
-            </div>{" "}
-            <div className="card-footer">
-              {" "}
-              <button>Read More</button>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-        <div className="col-lg-6">
-          {" "}
-          <div className="card">
-            {" "}
-            <div className="card-header">
-              {" "}
-              <h2>Nombre d'avis</h2>{" "}
-            </div>{" "}
-            <div className="card-body">
-              {" "}
-              <p>Content</p>{" "}
-            </div>{" "}
-            <div className="card-footer">
-              {" "}
-              <button>Read More</button>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-        <div className="col-lg-6">
-          {" "}
-          <div className="card">
-            {" "}
-            <div className="card-header">
-              {" "}
-              <h2>Nombre d'articles</h2>{" "}
-            </div>{" "}
-            <div className="card-body">
-              {" "}
-              <p>Content</p>{" "}
-            </div>{" "}
-            <div className="card-footer">
-              {" "}
-              <button>Read More</button>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-        <div className="col-lg-6">
-          {" "}
-          <div className="card">
-            {" "}
-            <div className="card-header">
-              {" "}
-              <h2>Nombre d'utilisateurs</h2>{" "}
-            </div>{" "}
-            <div className="card-body">
-              {" "}
-              <p>Content</p>{" "}
-            </div>{" "}
-            <div className="card-footer">
-              {" "}
-              <button>Read More</button>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </div>{" "}
+        {cards.map((card, index) => (
+          <div key={index} className="col-lg-6">
+            <div className="card">
+              <div className="card-header">
+                <h2>{card.title}</h2>
+              </div>
+              <div className="card-body">
+                <p>{card.content}</p>
+              </div>
+              <div className="card-footer">
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
+
 export default CardDashboard;

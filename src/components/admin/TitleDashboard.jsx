@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import './CardDashboard.css';
 
 const TitleDashboard = () => {
   const [title, setTitle] = useState('Bienvenue sur ton Dashboard');
@@ -10,7 +11,7 @@ const TitleDashboard = () => {
   };
 
   return (
-    <div className="container-fluid bg-dark text-white">
+    <div className="container-fluid text-white">
       <h1>{title}</h1>
       <button className="btn btn-light mt-3" onClick={handleChangeTitle}>
         Mettre à jour le titre

@@ -11,8 +11,10 @@
   }
   .item img {
     width: 100%;
-    height: auto;
-    border-radius: 10px;
+    height: 80%;
+    border-radius: 20px;
+    object-fit: cover; 
+
   }
 
 .nouveautes h2 {
@@ -29,6 +31,7 @@
     text-align: center;
   }
   button {
-    color: #000000;
+    color: #ffffff;
     background-color: #025a31;
+    text-decoration: double;
   }

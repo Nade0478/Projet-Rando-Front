@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './CardDashboard.css';
 import './Sidebar.css'; // Assurez-vous de créer un fichier CSS pour styliser votre sidebar
 import Logo from '../Logo';
+
 
 const Sidebar = () => {
   return (
