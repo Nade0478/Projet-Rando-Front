@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'; // Import correct de useEffect
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './CardDashboard.css';
 
 const NbrAvisForm = () => {
   const [opinions, setOpinions] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Récupération des avis depuis une API
     fetch('http://127.0.0.1:8000/api/opinion/')
       .then(response => {
         if (!response.ok) {
@@ -15,17 +15,28 @@ const NbrAvisForm = () => {
         }
         return response.json();
       })
-      .then(data => setOpinions(data))
-      .catch(error => console.error('Erreur lors de la récupération des avis :', error));
-  }, []); // Tableau de dépendances vide pour exécuter l'effet uniquement au montage
+      .then(data => {
+        setOpinions(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Erreur lors de la récupération des avis :', error);
+        setLoading(false);
+      });
 
-  const getOpinionCount = () => {
-    return opinions.length;
-  };
+    return () => {
+      // Nettoyage si nécessaire
+      console.log('Composant démonté');
+    };
+  }, []);
 
   return (
     <div>
-      <h1>Nombre de lieux de randonnées : {getOpinionCount()}</h1>
+      {loading ? (
+        <h1>Chargement des données...</h1>
+      ) : (
+        <h1>Nombre de lieux de randonnées : {opinions.length}</h1>
+      )}
     </div>
   );
 };
