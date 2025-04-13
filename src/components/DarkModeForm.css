@@ -1,0 +1,45 @@
+/* Appliquer les styles à tout le corps de la page */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Variables CSS pour mode clair */
+.light {
+    --background-color: #f9f9f9;
+    --text-color: #333;
+}
+
+/* Variables CSS pour mode sombre */
+.dark {
+    --background-color: #1e1e1e;
+    --text-color: #f9f9f9;
+}
+
+/* Bouton de changement de mode */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #530000;
+    color: white;
+    transition: background-color 0.3s ease;
+    margin: 10px; /* Espacement */
+    position: right;
+}
+
+button:hover {
+    background-color: #b34800;
+}
+
+/* Styles pour images et texte */
+img, p {
+    max-width: 100%;
+    margin: 10px 0;
+}

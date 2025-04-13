@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Import correct de useEffect
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './CardDashboard.css';
@@ -6,22 +6,29 @@ import './CardDashboard.css';
 const NbrUserForm = () => {
   const [users, setUsers] = useState([]);
 
-//   const addUser = () => {
-//     const newUser = `User ${users.length + 1}`;
-//     setUsers([...users, newUser]);
-//   };
+  useEffect(() => {
+    // Récupération des utilisateurs depuis une API
+    fetch('http://127.0.0.1:8000/api/user/')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erreur réseau : ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => setUsers(data))
+      .catch(error => console.error('Erreur lors de la récupération des utilisateurs :', error));
+  }, []);
+
+  const getUserCount = () => {
+    return users.length;
+  };
 
   return (
     <div>
-      <h2>Utilisateurs: {users.length}</h2>
-      {/* <button onClick={addUser}>Ajouter un utilisateur</button> */}
-      <ul>
-        {users.map((user, index) => (
-          <li key={index}>{user}</li>
-        ))}
-      </ul>
+      <h1>Nombre d'utilisateurs inscrits : {getUserCount()}</h1>
     </div>
   );
 };
 
 export default NbrUserForm;
+

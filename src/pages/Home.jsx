@@ -5,11 +5,13 @@ import HomeHead from '../components/home/HomeHead';
 import HomeNewArticle from '../components/home/HomeNewArticle';
 import HomeNewPlace from '../components/home/HomeNewPlace';
 import '../styles/style-home.css';
+import DarkModeForm from '../components/DarkModeForm';
 
 
 const Home = () => { 
     return ( 
         <div> 
+            <DarkModeForm />
             <Menu />
             <HomeHead />
             <hr /> {/* Corrected the horizontal rule */}
