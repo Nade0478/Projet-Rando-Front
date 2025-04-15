@@ -3,9 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './CardDashboard.css';
 
-const NbrAvisForm = () => {
+function NbrAvisForm() {
   const [opinions, setOpinions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch('http://127.0.0.1:8000/api/opinion/')
@@ -21,24 +22,32 @@ const NbrAvisForm = () => {
       })
       .catch(error => {
         console.error('Erreur lors de la récupération des avis :', error);
+        setError(error.message);
         setLoading(false);
       });
+    }, []);
 
-    return () => {
-      // Nettoyage si nécessaire
-      console.log('Composant démonté');
-    };
-  }, []);
+    const getOpinionCount = () => {
+      return opinions.length;
+  };
+
+  //   return () => {
+  //     // Nettoyage si nécessaire
+  //     console.log('Composant démonté');
+  //   };
+  // }, []);
 
   return (
-    <div>
+    <div className="nbr-avis-container">
       {loading ? (
         <h1>Chargement des données...</h1>
+      ) : error ? (
+        <h1 className="text-danger">Erreur : {error}</h1>
       ) : (
-        <h1>Nombre de lieux de randonnées : {opinions.length}</h1>
+        <h1>Nombre d'avis : {getOpinionCount()}</h1>
       )}
     </div>
   );
-};
+}
 
 export default NbrAvisForm;
