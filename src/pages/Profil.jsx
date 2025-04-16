@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import ModifProfil from "../components/profil/ModifProfil";
 import ContactProfil from "../components/profil/ContactProfil";
 import axios from "axios";
+import ProfileCard from "../components/profil/ProfileCard";
 
 function Profil() {
   const [id_user, setId_user] = useState("");
@@ -13,6 +14,10 @@ function Profil() {
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
+if (storedUserId) {
+  setId_user(storedUserId); // Utilisation de la variable
+}
+
       getCurrentUser(); 
   }, []);
 
@@ -36,13 +41,22 @@ function Profil() {
   return (
     <div>
       <Menu />
-      <h1>Bienvenue sur votre profil, {name_user}</h1>
-      <ModifProfil id_user={id_user} name_user={name_user} email_user={email_user} />
-      <ContactProfil />
+      {user ? (
+        <>
+          <h1>Bienvenue sur votre profil, {name_user}</h1>
+          <ProfileCard />
+          <ModifProfil id_user={id_user} name_user={name_user} email_user={email_user} />
+          <ContactProfil />
+        </>
+      ) : (
+        <div className="alert alert-danger text-center mt-5">
+          <h2>Utilisateur introuvable</h2>
+          <p>Il semble que votre profil ne soit pas disponible. Veuillez vérifier votre connexion ou réessayer plus tard.</p>
+        </div>
+      )}
       <Footer />
     </div>
   );
 }
 
 export default Profil;
-

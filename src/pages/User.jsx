@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
+import { Card, Button } from "react-bootstrap";
 import axios from "axios";
 import { Link } from "react-router-dom"; 
 import FilterDropdown from "../components/FilterDropdown";
 import Sidebar from "../components/admin/Sidebar";
 
 const User = () => {
-  const [users, setUsers] = useState([]); // Liste des utilisateurs
-  const [names, setNames] = useState([]); // Liste des noms pour le filtre
-  const [selectedName, setSelectedName] = useState(null); // Nom sélectionné pour le filtre
+  const [users, setUsers] = useState([]);
+  const [names, setNames] = useState([]);
+  const [selectedName, setSelectedName] = useState(null);
 
   useEffect(() => {
     displayUsers();
@@ -32,7 +31,7 @@ const User = () => {
     try {
       await axios.delete(`http://127.0.0.1:8000/api/user/${id}`);
       alert("Utilisateur supprimé avec succès !");
-      displayUsers(); // Actualise la liste après suppression
+      displayUsers();
     } catch (error) {
       console.error("Erreur lors de la suppression :", error);
       alert("Erreur lors de la suppression de l'utilisateur.");
@@ -57,36 +56,32 @@ const User = () => {
             Réinitialiser le filtre
           </button>
         </div>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Nom</th>
-              <th>E-mail</th>
-              <th>Rôle</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredUsers.map((user) => (
-              <tr key={user.id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.role_id}</td>
-                <td>
-                  <Link to={`/user/edit/${user.id}`} className="btn btn-light me-2">
-                    Éditer
-                  </Link>
-                  <Link to={`/user/show/${user.id}`} className="btn btn-light me-2">
-                    Voir
-                  </Link>
-                  <Button variant="danger" onClick={() => deleteUser(user.id)}>
-                    Supprimer
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+        <div className="row">
+          {filteredUsers.map((user) => (
+            <div className="col-md-4 mb-3" key={user.id}>
+              <Card className="shadow">
+                <Card.Body>
+                  <Card.Title>{user.name}</Card.Title>
+                  <Card.Text>
+                    <strong>Email :</strong> {user.email} <br />
+                    <strong>Rôle ID :</strong> {user.role_id}
+                  </Card.Text>
+                  <div className="d-flex justify-content-between">
+                    <Link to={`/user/edit/${user.id}`} className="btn btn-light">
+                      Éditer
+                    </Link>
+                    <Link to={`/user/show/${user.id}`} className="btn btn-info">
+                      Voir
+                    </Link>
+                    <Button variant="danger" onClick={() => deleteUser(user.id)}>
+                      Supprimer
+                    </Button>
+                  </div>
+                </Card.Body>
+              </Card>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

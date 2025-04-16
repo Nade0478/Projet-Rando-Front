@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
-import CustomNavbar from "../components/admin/CustomNavbar";
+import Sidebar from "../components/admin/Sidebar";
 
 const Role = () => {
   const [role, setRole] = useState([]);
@@ -30,7 +30,7 @@ const Role = () => {
 
   return (
     <div>
-      <CustomNavbar />
+      <Sidebar />
       <div className="container mt-5">
         <Table striped bordered hover>
           <thead>
@@ -46,7 +46,7 @@ const Role = () => {
                 <td>
                   <Link
                     to={`/role/edit/${role.id}`}
-                    className="btn btn-success me-2"
+                    className="btn btn-dark me-2"
                   >
                     Éditer
                   </Link>
