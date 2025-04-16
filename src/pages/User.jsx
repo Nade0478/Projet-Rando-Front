@@ -67,10 +67,10 @@ const User = () => {
                     <strong>Rôle ID :</strong> {user.role_id}
                   </Card.Text>
                   <div className="d-flex justify-content-between">
-                    <Link to={`/user/edit/${user.id}`} className="btn btn-light">
+                    <Link to={`/user/edit/${user.id}`} className="btn btn">
                       Éditer
                     </Link>
-                    <Link to={`/user/show/${user.id}`} className="btn btn-info">
+                    <Link to={`/user/show/${user.id}`} className="btn btn">
                       Voir
                     </Link>
                     <Button variant="danger" onClick={() => deleteUser(user.id)}>
