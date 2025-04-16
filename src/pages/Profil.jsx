@@ -26,10 +26,10 @@ if (storedUserId) {
       const response = await axios.get("http://127.0.0.1:8000/api/currentuser",
         { headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` } }
       );
-      setUser(response.data.user);
-      setId_user(response.data.user.id);
-      setName_user(response.data.user.name);
-      setEmail_user(response.data.user.email);
+      setUser(response.data.data);
+      setId_user(response.data.data.id);
+      setName_user(response.data.data.name);
+      setEmail_user(response.data.data.email);
      
     } catch (error) {
       console.error("Erreur lors de la récupération des rôles :", error);
@@ -44,7 +44,7 @@ if (storedUserId) {
       {user ? (
         <>
           <h1>Bienvenue sur votre profil, {name_user}</h1>
-          <ProfileCard />
+          <ProfileCard id_user={id_user}/>
           <ModifProfil id_user={id_user} name_user={name_user} email_user={email_user} />
           <ContactProfil />
         </>
