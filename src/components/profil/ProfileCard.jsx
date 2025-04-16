@@ -5,16 +5,16 @@ import axios from "axios";
 import Menu from "../../components/Menu";
 import Footer from "../../components/Footer";
 
-const ProfileCard = () => {
+const ProfileCard = ({ id_user }) => {
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+console.log(id_user);
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/user/${id}`);
+        const response = await axios.get(`http://127.0.0.1:8000/api/user/${id_user}`);
         setUser(response.data);
       } catch (err) {
         setError("Erreur lors de la récupération du profil.");
@@ -24,7 +24,7 @@ const ProfileCard = () => {
     };
   
     fetchUser();
-  }, [id]);
+  }, [id_user]);
   
   if (loading) {
     return (
@@ -53,7 +53,7 @@ const ProfileCard = () => {
           </Card.Body>
         </Card>
       </div>
-      <Footer />
+
     </div>
   );
 };
