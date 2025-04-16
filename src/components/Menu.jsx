@@ -8,7 +8,7 @@ import "./Menu.css";
 
 const Menu = () => { 
   return ( 
-    <div> 
+    <div>
       <Navbar className="navbar-custom navbar-dark" expand="xl">
         <Logo />
         <Container fluid> 

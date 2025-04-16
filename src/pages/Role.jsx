@@ -46,7 +46,7 @@ const Role = () => {
                 <td>
                   <Link
                     to={`/role/edit/${role.id}`}
-                    className="btn btn-dark me-2"
+                    className="btn btn-dark me-4"
                   >
                     Éditer
                   </Link>
