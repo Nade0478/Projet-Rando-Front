@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Menu from "../components/Menu";
 import Footer from "../components/Footer";
 import ModifProfil from "../components/profil/ModifProfil";
 import ContactProfil from "../components/profil/ContactProfil";
 import axios from "axios";
 import ProfileCard from "../components/profil/ProfileCard";
+import SidebarProfil from "../components/profil/SidebarProfil";
 
 function Profil() {
   const [id_user, setId_user] = useState("");
@@ -15,7 +15,7 @@ function Profil() {
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
 if (storedUserId) {
-  setId_user(storedUserId); // Utilisation de la variable
+  setId_user(storedUserId);
 }
 
       getCurrentUser(); 
@@ -40,7 +40,7 @@ if (storedUserId) {
 
   return (
     <div>
-      <Menu />
+      <SidebarProfil />
       {user ? (
         <>
           <h1>Bienvenue sur votre profil, {name_user}</h1>
