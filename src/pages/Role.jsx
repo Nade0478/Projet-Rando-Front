@@ -35,7 +35,7 @@ const Role = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Nom de la catégorie</th>
+              <th>Nom du role</th>
               <th>Actions</th>
             </tr>
           </thead>

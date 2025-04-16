@@ -4,7 +4,6 @@ import Form from "react-bootstrap/Form";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Footer from "./Footer";
 
 function LoginForm() {
   document.title = "Connexion au site";
@@ -95,7 +94,6 @@ function LoginForm() {
           Se connecter
         </Button>
       </Form>
-      <Footer />
     </>
   );
 }

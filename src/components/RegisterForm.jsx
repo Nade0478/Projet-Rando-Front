@@ -121,7 +121,7 @@ function RegisterForm() {
         {errors.password && <Form.Text className="text-danger">{errors.password.message}</Form.Text>}
       </Form.Group>
 
-      <Button type="submit" variant="primary">
+      <Button type="submit" variant="success">
         Créer un compte
       </Button>
     </Form>

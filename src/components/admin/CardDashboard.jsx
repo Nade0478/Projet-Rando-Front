@@ -17,7 +17,7 @@ const CardDashboard = () => {
     <div className="dashboard-container">
       <div className="row">
         {cards.map((card, index) => (
-          <div key={index} className="col-lg-6">
+          <div key={index} className="col-lg-8">
             <div className="card">
               <div className="card-header">
                 <h2>{card.title}</h2>
