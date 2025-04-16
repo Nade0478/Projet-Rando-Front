@@ -25,7 +25,7 @@ const NbrUserForm = () => {
 
   return (
     <div>
-      <h1>Nombre d'utilisateurs inscrits : {getUserCount()}</h1>
+      <h1>Nombre inscrits : {getUserCount()}</h1>
     </div>
   );
 };

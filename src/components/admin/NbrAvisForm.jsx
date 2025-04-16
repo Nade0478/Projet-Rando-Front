@@ -1,50 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
-import './CardDashboard.css';
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import "./CardDashboard.css";
 
 function NbrAvisForm() {
-  const [opinions, setOpinions] = useState([]);
+  const [opinionCount, setOpinionCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/opinion/')
-      .then(response => {
+    const fetchOpinions = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/opinion");
+  
         if (!response.ok) {
-          throw new Error('Erreur réseau : ' + response.statusText);
+          throw new Error("Erreur réseau : " + response.statusText);
         }
-        return response.json();
-      })
-      .then(data => {
-        setOpinions(data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Erreur lors de la récupération des avis :', error);
+  
+        const data = await response.json();
+        console.log("Données reçues :", data); // 👀 Vérifie ce que l'API renvoie
+  
+        if (data.meta && data.meta.total) {
+          setOpinionCount(data.meta.total);
+        } else {
+          setOpinionCount(data.data.length);
+        }
+      } catch (error) {
+        console.error("Erreur lors de la récupération des avis :", error);
         setError(error.message);
+      } finally {
         setLoading(false);
-      });
-    }, []);
-
-    const getOpinionCount = () => {
-      return opinions.length;
-  };
-
-  //   return () => {
-  //     // Nettoyage si nécessaire
-  //     console.log('Composant démonté');
-  //   };
-  // }, []);
-
+      }
+    };
+  
+    fetchOpinions();
+  }, []);
+  
   return (
-    <div className="nbr-avis-container">
+    <div className="nbr-avis-container text-center mt-4">
       {loading ? (
-        <h1>Chargement des données...</h1>
+        <h1 className="text-primary">Chargement des données...</h1>
       ) : error ? (
         <h1 className="text-danger">Erreur : {error}</h1>
       ) : (
-        <h1>Nombre d'avis : {getOpinionCount()}</h1>
+        <h1>Nombre total : <span className="text">{opinionCount}</span></h1>
       )}
     </div>
   );

@@ -1,11 +1,9 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import Menu from "../components/Menu";
 
 const PrivacyPage = () => {
   return (
     <div>
-      <Menu />
       <Container className="mt-5">
         <h1 className="text-center">Politique de Confidentialité</h1>
         <p>

@@ -39,7 +39,7 @@ function NbrLieuxForm() {
       ) : error ? (
         <h1 className="text-danger">Erreur : {error}</h1>
       ) : (
-        <h1>Nombre de lieux de randonnées : {getPlaceCount()}</h1>
+        <h1>Nombre total : {getPlaceCount()}</h1>
       )}
     </div>
   );
