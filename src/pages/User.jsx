@@ -58,7 +58,7 @@ const User = () => {
         </div>
         <div className="row">
           {filteredUsers.map((user) => (
-            <div className="col-md-4 mb-3" key={user.id}>
+            <div className="col-md-4 mb-4 sm-4" key={user.id}>
               <Card className="shadow">
                 <Card.Body>
                   <Card.Title>{user.name}</Card.Title>
