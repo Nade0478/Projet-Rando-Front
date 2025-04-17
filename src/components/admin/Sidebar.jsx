@@ -19,7 +19,6 @@ const Sidebar = () => {
         <li><Link to="/category">Catégories</Link></li>
         <li><Link to="/opinion">Opinions</Link></li>
         <li><Link to="/article">Articles</Link></li>
-        <li><Link to="/role">Roles</Link></li>
         <li><Link to="/user">Utilisateurs</Link></li>
         <li><Link to="/home">Contenu de la page d'accueil</Link></li>
         <hr />

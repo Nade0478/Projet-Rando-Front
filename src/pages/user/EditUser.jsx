@@ -92,27 +92,27 @@ const EditUser = () => {
               <Row>
                 <Col md={12}> {/* Tous les champs sont alignés sur une seule colonne */}
                   <Form.Group controlId="name">
-                    <Form.Label>Nom</Form.Label>
+                  <Form.Label className="text-center w-100">Nom</Form.Label>
                     <Form.Control type="text" value={name} onChange={(e) => setName(e.target.value)} />
                   </Form.Group>
 
                   <Form.Group controlId="email" className="mt-10">
-                    <Form.Label>Email</Form.Label>
+                  <Form.Label className="text-center w-100">Email</Form.Label>
                     <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                   </Form.Group>
 
                   <Form.Group controlId="password" className="mt-10">
-                    <Form.Label>Mot de passe (optionnel)</Form.Label>
+                  <Form.Label className="text-center w-100">Mot de passe (optionnel)</Form.Label>
                     <Form.Control type="password" placeholder="Nouveau mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} />
                   </Form.Group>
 
                   <Form.Group controlId="passwordConfirmation" className="mt-10">
-                    <Form.Label>Confirmation du mot de passe</Form.Label>
+                  <Form.Label className="text-center w-100">Confirmation du mot de passe</Form.Label>
                     <Form.Control type="password" placeholder="Confirmez votre mot de passe" value={passwordConfirmation} onChange={(e) => setPasswordConfirmation(e.target.value)} />
                   </Form.Group>
 
                   <Form.Group controlId="role_id" className="mt-10">
-                    <Form.Label>Rôle</Form.Label>
+                  <Form.Label className="text-center w-100">Rôle</Form.Label>
                     <Form.Control as="select" value={role_id} onChange={(e) => setRoleId(e.target.value)}>
                       <option value="">Sélectionnez un rôle</option>
                       {roles.map((role) => (

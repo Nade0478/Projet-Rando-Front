@@ -4,6 +4,7 @@
 }
 
 .card {
+    text-align: center;
     width:100%;
     max-width: 600px;
     border: 1px solid #ccc;
@@ -81,5 +82,11 @@
       width: 100%;
       min-height: 100vh; /* Prend toute la hauteur */
     }
+    .form-group label {
+      display: block; /* Assure que le texte occupe toute la largeur */
+      text-align: center; /* Centre le texte */
+      font-weight: bold; /* Optionnel : rend le texte plus visible */
+    }
+    
     
   }
