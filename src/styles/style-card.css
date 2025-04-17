@@ -4,19 +4,25 @@
 }
 
 .card {
-    width:95%;
-    max-width: 100%;
+    width:100%;
+    max-width: 600px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    padding: 2rem;
   }
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
   .card-userEdit{
     width:95%;
     text-align: right;
     width: auto; 
     max-width: 100%; 
-    padding: 10px; 
+    padding: 2rem; 
   }
   
   .card-header {
@@ -67,6 +73,13 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh; 
+    }
+    .card-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      min-height: 100vh; /* Prend toute la hauteur */
     }
     
   }

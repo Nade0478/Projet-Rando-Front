@@ -10,6 +10,8 @@
     align-items: center;
     flex-grow: 2;
     margin-bottom: 50px;
+    width: 600px;
+    margin: 100%;
 }
 
 /* Ajout d’un espacement uniforme */
@@ -30,8 +32,4 @@
         justify-content: center;
     }
 
-    .CardDashboard {
-        width: 90%;
-        min-height: 150px;
-    }
 }

@@ -193,7 +193,7 @@ const AddArticle = () => {
                       </Col>
                     </Row>
                     <Button
-                      variant="warning"
+                      variant="success"
                       className="mt-2"
                       size="lg"
                       block="block"

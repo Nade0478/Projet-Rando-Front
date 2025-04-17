@@ -88,14 +88,11 @@ const EditPlace = () => {
   return (
     <div>
       <Sidebar />
-      <div className="container mt-5">
-        <div className="row justify-content-center">
-          <div className="col-12 col-sm-12 col-md-6">
-            <div className="card">
-              <div className="card-body">
-                <h4 className="card-title">Modifier l'endroit</h4>
+      <div className="container mt-5 card-wrapper">
+        <div className="card">
+          <div className="card-body">
+            <h4 className="card-title text-center">Modifier une randonnée</h4>
                 <hr />
-                <div className="form-wrapper">
                   {Object.keys(validationError).length > 0 && (
                     <div className="row">
                       <div className="col-12">
@@ -265,9 +262,6 @@ const EditPlace = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
   );
 };
 

@@ -71,12 +71,10 @@ const AddPlace = () => {
   return (
     <div>
       <Sidebar />
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-12 col-sm-12 col-md-6">
-            <div className="card">
-              <div className="card-body">
-                <h4 className="card-title">Création d'un nouvel endroit</h4>
+      <div className="container mt-5 card-wrapper">
+        <div className="card">
+          <div className="card-body">
+            <h4 className="card-title text-center">Ajouter une randonnée</h4>
                 <hr />
                 <div className="form-wrapper">
                   {Object.keys(validationError).length > 0 && (
@@ -242,8 +240,6 @@ const AddPlace = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
   );
 };
 

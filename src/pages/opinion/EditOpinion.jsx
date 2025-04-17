@@ -79,116 +79,100 @@ const EditOpinion = () => {
   return (
     <div>
       <Sidebar />
-      <div className="container mt-5">
-        <div className="row justify-content-center">
-          <div className="col-12 col-sm-12 col-md-6">
-            <div className="card">
-              <div className="card-body">
-                <h4 className="card-title">Modifier une opinion</h4>
-                <hr />
-                <div className="form-wrapper">
-                  {Object.keys(validationError).length > 0 && (
-                    <div className="row">
-                      <div className="col-12">
-                        <div className="alert alert-danger">
-                          <ul className="mb-0">
-                            {Object.entries(validationError).map(([key, value]) => (
-                              <li key={key}>{value}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  <Form onSubmit={updateOpinion}>
-                    <Row>
-                      <Col>
-                        <Form.Group controlId="title_opinion">
-                          <Form.Label>Titre de l'opinion</Form.Label>
-                          <Form.Control
-                            type="text"
-                            value={title_opinion}
-                            onChange={(opinion) => setTitle_opinion(opinion.target.value)}
-                          />
-                        </Form.Group>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        <Form.Group controlId="Content">
-                          <Form.Label>Contenu</Form.Label>
-                          <Form.Control
-                            as="textarea"
-                            rows={5}
-                            value={content_opinion}
-                            onChange={(opinion) => setContent_opinion(opinion.target.value)}
-                          />
-                        </Form.Group>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        <Form.Group controlId="user_id">
-                          <Form.Label>Auteur</Form.Label>
-                          <Form.Control
-                            as="select"
-                            value={userId}
-                            onChange={(e) => setUserId(e.target.value)}
-                          >
-                            <option value="">Sélectionnez un utilisateur</option>
-                            {users.map((user) => (
-                              <option key={user.id} value={user.id}>
-                                {user.name}
-                              </option>
-                            ))}
-                          </Form.Control>
-                        </Form.Group>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        <Form.Group controlId="place_id">
-                          <Form.Label>Lieux</Form.Label>
-                          <Form.Control
-                            as="select"
-                            value={placeId}
-                            onChange={(e) => setPlaceId(e.target.value)}
-                          >
-                            <option value="">Sélectionnez un endroit</option>
-                            {places.map((place) => (
-                              <option key={place.id} value={place.id}>
-                                {place.name_place}
-                              </option>
-                            ))}
-                          </Form.Control>
-                        </Form.Group>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        <Form.Group controlId="Note">
-                          <Form.Label>Note de 0 à 5</Form.Label>
-                          <Form.Control
-                            type="number"
-                            value={note_opinion}
-                            onChange={(opinion) => setNote_opinion(opinion.target.value)}
-                          />
-                        </Form.Group>
-                      </Col>
-                    </Row>
-                    <Button
-                      variant="dark"
-                      className="mt-2"
-                      size="lg"
-                      block="block"
-                      type="submit"
-                    >
-                      Mettre à jour
-                    </Button>
-                  </Form>
-                </div>
+      <div className="container mt-5 card-wrapper">
+        <div className="card">
+          <div className="card-body">
+            <h4 className="card-title text-center">Modifier une opinion</h4>
+            <hr />
+            {Object.keys(validationError).length > 0 && (
+              <div className="alert alert-danger">
+                <ul className="mb-0">
+                  {Object.entries(validationError).map(([key, value]) => (
+                    <li key={key}>{value}</li>
+                  ))}
+                </ul>
               </div>
-            </div>
+            )}
+            <Form onSubmit={updateOpinion}>
+              <Row>
+                <Col>
+                  <Form.Group controlId="title_opinion">
+                    <Form.Label>Titre de l'opinion</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={title_opinion}
+                      onChange={(e) => setTitle_opinion(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group controlId="content_opinion">
+                    <Form.Label>Contenu</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={5}
+                      value={content_opinion}
+                      onChange={(e) => setContent_opinion(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group controlId="user_id">
+                    <Form.Label>Auteur</Form.Label>
+                    <Form.Control
+                      as="select"
+                      value={userId}
+                      onChange={(e) => setUserId(e.target.value)}
+                    >
+                      <option value="">Sélectionnez un utilisateur</option>
+                      {users.map((user) => (
+                        <option key={user.id} value={user.id}>
+                          {user.name}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group controlId="place_id">
+                    <Form.Label>Lieux</Form.Label>
+                    <Form.Control
+                      as="select"
+                      value={placeId}
+                      onChange={(e) => setPlaceId(e.target.value)}
+                    >
+                      <option value="">Sélectionnez un endroit</option>
+                      {places.map((place) => (
+                        <option key={place.id} value={place.id}>
+                          {place.name_place}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group controlId="note_opinion">
+                    <Form.Label>Note de 0 à 5</Form.Label>
+                    <Form.Control
+                      type="number"
+                      value={note_opinion}
+                      onChange={(e) => setNote_opinion(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Button variant="dark" className="mt-3 w-100" type="submit">
+                Mettre à jour
+              </Button>
+            </Form>
           </div>
         </div>
       </div>
@@ -197,4 +181,3 @@ const EditOpinion = () => {
 };
 
 export default EditOpinion;
-
