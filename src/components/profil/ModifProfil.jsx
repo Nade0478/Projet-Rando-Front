@@ -27,10 +27,11 @@ const ModifProfil = ({ id_user, name_user, email_user }) => {
     };
 
     try {
-      const response = await axios.patch(
+      await axios.patch(
         `http://127.0.0.1:8000/api/user/${id_user}`,
         userData
       );
+
 
       setMessage("Profil mis à jour avec succès !");
       setTimeout(() => navigate("/profil"), 2000); // Redirection après 2 sec
