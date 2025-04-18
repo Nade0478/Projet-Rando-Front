@@ -80,13 +80,30 @@
       justify-content: center;
       align-items: center;
       width: 100%;
-      min-height: 100vh; /* Prend toute la hauteur */
+      min-height: 100vh;
     }
     .form-group label {
-      display: block; /* Assure que le texte occupe toute la largeur */
-      text-align: center; /* Centre le texte */
-      font-weight: bold; /* Optionnel : rend le texte plus visible */
+      display: block; 
+      text-align: center;
+      font-weight: bold; 
     }
     
+    .content-wrapper {
+      display: flex;
+      flex-direction: row; /* Aligne les éléments horizontalement */
+      align-items: center; /* Centre verticalement */
+      min-width: 200vw; /* Assure une largeur suffisante pour le scroll */
+      height: 100vh;
+    }
+    
+    .image-component {
+      flex-shrink: 0; /* Empêche les images de rétrécir */
+      width: auto;
+    }
+    
+    .text-component {
+      flex-shrink: 0; /* Empêche le texte de bouger */
+      padding: 20px;
+    }
     
   }

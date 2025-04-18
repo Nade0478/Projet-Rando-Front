@@ -15,20 +15,17 @@ const EditCategory = () => {
   const [validationError, setValidationError] = useState({});
 
   useEffect(() => {
-    getCategory();
-  }, []);
-
-  // GET - Récupère les informations de la catégorie avec l'API
-  const getCategory = async () => {
-    await axios
-      .get(`http://127.0.0.1:8000/api/category/${category}`)
-      .then((res) => {
+    const fetchCategory = async () => {
+      try {
+        const res = await axios.get(`http://127.0.0.1:8000/api/category/${category}`);
         setNameCategory(res.data.name_category);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+      } catch (error) {
+        console.error("Erreur lors de la récupération de la catégorie :", error);
+      }
+    };
+
+    fetchCategory();
+  }, [category]); // Utilisation de `category` comme dépendance pour éviter l'erreur ESLint
 
   // Fonction de mise à jour de la catégorie
   const updateCategory = async (e) => {
@@ -38,14 +35,14 @@ const EditCategory = () => {
     formData.append("_method", "PATCH");
     formData.append("name_category", nameCategory);
 
-    await axios
-      .post(`http://127.0.0.1:8000/api/category/${category}`, formData)
-      .then(() => navigate("/category"))
-      .catch(({ response }) => {
-        if (response.status === 422) {
-          setValidationError(response.data.errors);
-        }
-      });
+    try {
+      await axios.post(`http://127.0.0.1:8000/api/category/${category}`, formData);
+      navigate("/category");
+    } catch (error) {
+      if (error.response && error.response.status === 422) {
+        setValidationError(error.response.data.errors);
+      }
+    }
   };
 
   return (
@@ -58,42 +55,28 @@ const EditCategory = () => {
             <hr />
             <div className="form-wrapper">
               {Object.keys(validationError).length > 0 && (
-                <div className="row">
-                  <div className="col-12">
-                    <div className="alert alert-danger">
-                      <ul className="mb-0">
-                        {Object.entries(validationError).map(([key, value]) => (
-                          <li key={key}>{value}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+                <div className="alert alert-danger">
+                  <ul className="mb-0">
+                    {Object.entries(validationError).map(([key, value]) => (
+                      <li key={key}>{value}</li>
+                    ))}
+                  </ul>
                 </div>
               )}
               <Form onSubmit={updateCategory}>
                 <Row>
                   <Col>
                     <Form.Group controlId="Name">
-                      <Form.Label className="text-center w-100">
-                        Nom de la catégorie
-                      </Form.Label>
+                      <Form.Label className="text-center w-100">Nom de la catégorie</Form.Label>
                       <Form.Control
                         type="text"
                         value={nameCategory}
-                        onChange={(category) =>
-                          setNameCategory(category.target.value)
-                        }
+                        onChange={(e) => setNameCategory(e.target.value)}
                       />
                     </Form.Group>
                   </Col>
                 </Row>
-                <Button
-                  variant="dark"
-                  className="mt-2"
-                  size="lg"
-                  block="block"
-                  type="submit"
-                >
+                <Button variant="dark" className="mt-2 w-100" type="submit">
                   Mettre à jour
                 </Button>
               </Form>

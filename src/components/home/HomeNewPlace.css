@@ -1,46 +1,46 @@
-.homeNewArticle {
+.homeNewPlace {
   padding: 50px 20px;
 }
 
-.homeNewArticle .items {
+.homeNewPlace .items {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
 }
 
-.homeNewArticle .item {
+.homeNewPlace .item {
   width: 250px; /* Taille uniforme des cartes */
   text-align: center;
   position: relative;
 }
 
-.homeNewArticle .image-container {
+.homeNewPlace .image-container {
   width: 100%;
   height: 200px; /* Hauteur fixe pour uniformiser les images */
   overflow: hidden;
 }
 
-.homeNewArticle .image-container img {
+.homeNewPlace .image-container img {
   width: 100%;
   height: 100%;
   object-fit: cover; /* Ajuste l’image sans déformation */
   border-radius: 10px;
 }
 
-.homeNewArticle .item-title {
+.homeNewPlace .item-title {
   font-size: 1.2rem;
   margin-top: 10px;
   max-width: 90%;
 }
 
 /* Responsive pour petits écrans */
-@media (max-width: 568px) {
-  .homeNewArticle .items {
+@media (max-width: 768px) {
+  .homeNewPlace .items {
     flex-direction: column;
     align-items: center;
   }
-  .homeNewArticle .item {
+  .homeNewPlace .item {
     width: 100%;
   }
 }

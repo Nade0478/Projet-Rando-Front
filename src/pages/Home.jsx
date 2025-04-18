@@ -14,7 +14,7 @@ const Home = () => {
             <DarkModeForm />
             <Menu />
             <HomeHead />
-            <hr /> {/* Corrected the horizontal rule */}
+            <hr /> 
             <h2>Nouveautés</h2>
             <HomeNewArticle />
             <HomeNewPlace />

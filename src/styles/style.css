@@ -12,6 +12,7 @@ code {
 
 .image-component {
   display: flex;
+  max-width: 500px;
   justify-content: center; /* Centre horizontalement */
   align-items: center; /* Centre verticalement */
   height: 100vh; /* Prend toute la hauteur de la fenêtre */
@@ -24,4 +25,44 @@ code {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajoute une ombre légère */
   max-width: 100%; /* Limite la largeur de l'image à celle du conteneur */
   height: auto; /* Maintient le ratio de l'image */
+}
+
+.image-container, .map-container {
+  width: 100%;
+  height: 100%; /* Taille fixe pour éviter le débordement */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container img {
+  width: 90%;
+  height: 100%;
+  max-width:90%;
+  object-fit: cover; /* Évite la déformation */
+  border-radius: 15px;
+}
+
+.map-container {
+  height: 100%;
+}
+
+.map-content {
+  width: 100%;
+  height: 100%;
+}
+
+.row {
+  margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+  .image-container, .map-container {
+    width: 100%;
+    height: auto;
+  }
 }

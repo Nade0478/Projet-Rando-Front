@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Menu from "../../components/Menu";
 import Footer from "../../components/Footer";
+import "../../styles/style.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -14,7 +15,7 @@ const ImageComponent = ({ imageUrl, altText }) => (
 
 const MapComponent = ({ longitude, latitude, name }) => (
   <div className="map-component" style={{ width: "100%", height: "300px" }}>
-    <MapContainer center={[latitude, longitude]} zoom={13} style={{ width: "100%", height: "100%" }}>
+    <MapContainer center={[latitude, longitude]} zoom={10} style={{ width: "100%", height: "100%" }}>
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Marker position={[latitude, longitude]}>
         <Popup>{name}</Popup>
@@ -56,14 +57,16 @@ const ShowPlace = () => {
       <Menu />
       <div className="container mt-5">
         <h1>{place.name_place}</h1>
+        <hr/>
         <p><strong>Description :</strong> {place.description_place}</p>
         <p><strong>Longitude :</strong> {place.longitude_place}</p>
         <p><strong>Latitude :</strong> {place.latitude_place}</p>
         <p><strong>Distance :</strong> {place.distance_place} km</p>
         <p><strong>Difficulté :</strong> {place.difficulty_place}</p>
         <p><strong>Temps estimé :</strong> {place.estimated_time_place}</p>
+        <hr/>
         {/* Image Component */}
-        <div className="row">
+        <div className="row d-flex align-items-center">
           {/* Image Component */}
           <div className="col-md-6">
             {place.image_place && (
