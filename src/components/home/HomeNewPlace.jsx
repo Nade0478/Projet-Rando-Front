@@ -7,16 +7,19 @@ import { Link } from "react-router-dom";
 const HomeNewPlace = () => {
   const items = [
     {
-      title: "Cartes interactives",
+      title: "Parcours de randonnée ville",
       image: "http://127.0.0.1:8000/storage/public/uploads/cite-plantagenet72.jpg",
+      alt: "parcours cité Plantagenet 72 ville"
     },
     {
-      title: "Cartes interactives",
+      title: "Parcours de randonnée mer",
       image: "http://127.0.0.1:8000/storage/public/uploads/GR34-Bretagne.jpg",
+      alt: "Parcours GR34 bretagne"
     },
     {
-      title: "Cartes interactives",
+      title: "Parcours de randonnée campagne",
       image: "http://127.0.0.1:8000/storage/public/uploads/Vallee-Blavet56.jpg",
+      alt : "parcours vallée Blavet 56 campagne"
     },
   ];
 

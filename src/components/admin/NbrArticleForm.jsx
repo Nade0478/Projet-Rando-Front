@@ -41,6 +41,7 @@ function NbrArticleForm() {
   }, []);
 
   return (
+    
     <div className="nbr-article-container text-center mt-4">
       {loading ? (
         <h1 className="text-primary">Chargement des données...</h1>

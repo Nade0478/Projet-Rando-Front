@@ -1,35 +1,30 @@
-.CardDashboard {
-    border-radius: 45px;
-    text-align: center;
-    padding: 20px;
-    width: 300px;
-    min-height: 200px;
+.cardNbrForm .card {
+    width: 100%;  /* Ajuste la largeur pour coller au parent */
+    max-width: 550px; /* Limite la taille max des cartes */
+    min-height: 220px; /* Assure une hauteur cohérente */
     display: flex;
+    max-width: 450px;
+    min-height: 220px;
+    text-align: center;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    flex-grow: 2;
-    margin-bottom: 50px;
-    width: 600px;
-    margin: 100%;
+    padding: 20px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Ajout d’un espacement uniforme */
-.dashboard-container {
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    padding: 50px 20px; 
-    position: relative;
-}
-
-/* Gestion du responsive */
 @media (max-width: 768px) {
-    .dashboard-container {
-        padding-left: 0;
-        justify-content: center;
+    .cardNbrForm .card {
+        max-width: 100%;
     }
-
 }
+
+/* Ajout d’un espacement */
+.cardNbrForm .dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 100px; 
+    padding: 50px 40px;
+    min-height: 100vh;
+}
+

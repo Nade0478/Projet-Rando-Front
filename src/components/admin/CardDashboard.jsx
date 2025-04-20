@@ -3,21 +3,23 @@ import NbrUserForm from './NbrUserFrom';
 import NbrArticleForm from './NbrArticleForm';
 import NbrLieuxForm from './NbrLieuxForm';
 import NbrAvisForm from './NbrAvisForm';
+import "./CardDashboard.css";
 
 const CardDashboard = () => {
   // Données pour chaque carte
   const cards = [
-    { title: "Nombre de lieux de randonnées", content: <NbrLieuxForm /> },
+    { title: "Nombre de randonnées", content: <NbrLieuxForm /> },
     { title: "Nombre d'avis", content: <NbrAvisForm /> },
     { title: "Nombre d'articles", content: <NbrArticleForm /> },
     { title: "Nombre d'utilisateurs", content: <NbrUserForm /> },
   ];
 
   return (
-    <div className="dashboard-container">
-      <div className="row">
+    <section className="cardNbrForm">
+    <div className="dashboard-container center-container">
+      <div className="row center-container">
         {cards.map((card, index) => (
-          <div key={index} className="col-lg-8">
+          <div key={index} className="col-lg-6 col-md-6 col-sm-12">
             <div className="card">
               <div className="card-header">
                 <h2>{card.title}</h2>
@@ -32,6 +34,7 @@ const CardDashboard = () => {
         ))}
       </div>
     </div>
+    </section>
   );
 };
 
