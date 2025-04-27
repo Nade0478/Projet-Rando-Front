@@ -15,7 +15,9 @@ const Role = () => {
 
   const displayRole = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/api/role");
+      const res = await axios.get("http://127.0.0.1:8000/api/role",       
+        { headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` } }
+    )
       if (res.data ) {
         setRole(res.data);
       }

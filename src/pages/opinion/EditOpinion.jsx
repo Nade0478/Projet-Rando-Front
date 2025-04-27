@@ -23,7 +23,9 @@ const EditOpinion = () => {
   useEffect(() => {
     const getOpinion = async () => {
       try {
-        const res = await axios.get(`http://127.0.0.1:8000/api/opinion/${opinion}`);
+        const res = await axios.get(`http://127.0.0.1:8000/api/opinion/${opinion}`
+
+        );
         setTitle_opinion(res.data.title_opinion);
         setContent_opinion(res.data.content_opinion);
         setNote_opinion(res.data.note_opinion);
@@ -67,7 +69,9 @@ const EditOpinion = () => {
     formData.append("place_id", parseInt(placeId, 10));
 
     try {
-      await axios.post(`http://127.0.0.1:8000/api/opinion/${opinion}`, formData);
+      await axios.post(`http://127.0.0.1:8000/api/opinion/${opinion}`,formData,
+        { headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` } }
+    )
       navigate("/opinion");
     } catch ({ response }) {
       if (response.status === 422) {

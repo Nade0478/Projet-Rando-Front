@@ -21,11 +21,14 @@ const EditArticle = () => {
   const [categories, setCategories] = useState([]);
   const [validationError, setValidationError] = useState({});
 
-  // Fetch the article details
+  // Récupérer les détails de l'article
   const getArticle = useCallback(async () => {
     try {
-      const res = await axios.get(`http://127.0.0.1:8000/api/article/${article}`);
-      setTitle_article(res.data.title_article || ""); // Assurez que ces champs ne sont jamais undefined
+      const res = await axios.get(
+        `http://127.0.0.1:8000/api/article/${article}`,
+        { headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` } }
+      );
+      setTitle_article(res.data.title_article || "");
       setDate_article(res.data.date_article || "");
       setContent_article(res.data.content_article || "");
       setCategoryId(res.data.category_id || "");
@@ -34,27 +37,28 @@ const EditArticle = () => {
       console.error("Erreur lors de la récupération de l'article :", error);
     }
   }, [article]);
-  
-  // Fetch the users and categories
+
+  // Récupérer les utilisateurs
   const fetchUsers = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/api/user");
       setUsers(response.data);
     } catch (error) {
-      console.error("Erreur lors de la récupération des utilisateurs:", error);
+      console.error("Erreur lors de la récupération des utilisateurs :", error);
     }
   };
 
+  // Récupérer les catégories
   const fetchCategories = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/api/category");
       setCategories(response.data);
     } catch (error) {
-      console.error("Erreur lors de la récupération des catégories:", error);
+      console.error("Erreur lors de la récupération des catégories :", error);
     }
   };
 
-  // Use useEffect to fetch data
+  // Charger les données au montage du composant
   useEffect(() => {
     getArticle();
     fetchUsers();
@@ -67,7 +71,7 @@ const EditArticle = () => {
 
   const updateArticle = async (e) => {
     e.preventDefault();
-  
+
     if (!title_article || !date_article || !content_article || !userId || !categoryId) {
       setValidationError({
         title_article: !title_article ? "Le titre est requis." : "",
@@ -78,7 +82,7 @@ const EditArticle = () => {
       });
       return;
     }
-  
+
     const formData = new FormData();
     formData.append("_method", "PATCH");
     formData.append("title_article", title_article);
@@ -89,13 +93,16 @@ const EditArticle = () => {
     if (image_article) {
       formData.append("image_article", image_article);
     }
-  
+
     try {
-      await axios.post(`http://127.0.0.1:8000/api/article/${article}`, formData);
-      navigate("/article");
+      await axios.post(
+        `http://127.0.0.1:8000/api/article/${article}`, 
+        formData
+      );
+      navigate("/article"); // Redirection après la mise à jour
     } catch (error) {
       if (error.response && error.response.status === 422) {
-        setValidationError(error.response.data.errors);
+        setValidationError(error.response.data.errors); // Gestion des erreurs de validation
       } else {
         console.error("Erreur inattendue :", error);
       }
@@ -114,16 +121,12 @@ const EditArticle = () => {
                 <hr />
                 <div className="form-wrapper">
                   {Object.keys(validationError).length > 0 && (
-                    <div className="row">
-                      <div className="col-12">
-                        <div className="alert alert-danger">
-                          <ul className="mb-0">
-                            {Object.entries(validationError).map(([key, value]) => (
-                              <li key={key}>{value}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
+                    <div className="alert alert-danger">
+                      <ul>
+                        {Object.entries(validationError).map(([key, value]) => (
+                          <li key={key}>{value}</li>
+                        ))}
+                      </ul>
                     </div>
                   )}
                   <Form onSubmit={updateArticle}>
@@ -142,7 +145,7 @@ const EditArticle = () => {
                     <Row>
                       <Col>
                         <Form.Group controlId="date_article">
-                          <Form.Label>Date et heure</Form.Label>
+                          <Form.Label>Date</Form.Label>
                           <Form.Control
                             type="datetime-local"
                             value={date_article}
@@ -154,7 +157,7 @@ const EditArticle = () => {
                     <Row>
                       <Col>
                         <Form.Group controlId="content_article">
-                          <Form.Label>Description</Form.Label>
+                          <Form.Label>Contenu</Form.Label>
                           <Form.Control
                             as="textarea"
                             rows={5}
@@ -173,7 +176,7 @@ const EditArticle = () => {
                             value={userId}
                             onChange={(e) => setUserId(e.target.value)}
                           >
-                            <option value="">Sélectionnez un utilisateur</option>
+                            <option value="">Sélectionnez un auteur</option>
                             {users.map((user) => (
                               <option key={user.id} value={user.id}>
                                 {user.name}
@@ -204,18 +207,17 @@ const EditArticle = () => {
                     </Row>
                     <Row>
                       <Col>
-                        <Form.Group controlId="image_article" className="mb-3">
-                          <Form.Label>Photo</Form.Label>
+                        <Form.Group controlId="image_article">
+                          <Form.Label>Image</Form.Label>
                           <Form.Control type="file" onChange={changeHandler} />
                         </Form.Group>
                       </Col>
                     </Row>
                     <Button
                       variant="success"
-                      className="mt-2"
-                      size="lg"
-                      block="block"
                       type="submit"
+                      className="mt-3"
+                      block="block"
                     >
                       Mettre à jour
                     </Button>
@@ -226,10 +228,8 @@ const EditArticle = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };
 
 export default EditArticle;
-

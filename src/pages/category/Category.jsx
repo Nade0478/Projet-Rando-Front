@@ -8,13 +8,17 @@ import Sidebar from "../../components/admin/Sidebar";
 const Category = () => {
   const [category, setCategory] = useState([]);
 
+  // Chargement des catégories au montage du composant
   useEffect(() => {
     displayCategory();
   }, []);
 
+  // Fonction pour récupérer les catégories depuis l'API
   const displayCategory = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/api/category");
+      const res = await axios.get("http://127.0.0.1:8000/api/category",
+        { headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` } }
+    )
       if (res.data) {
         setCategory(res.data);
       }
@@ -23,19 +27,25 @@ const Category = () => {
     }
   };
 
-  const deleteCategory = (id) => {
-    axios
-      .delete(`http://127.0.0.1:8000/api/category/${id}`)
-      .then(displayCategory);
+  // Fonction pour supprimer une catégorie
+  const deleteCategory = async (id) => {
+    try {
+      await axios.delete(`http://127.0.0.1:8000/api/category/${id}`,
+        { headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` } }
+    )
+      displayCategory(); // Rafraîchit la liste après suppression
+    } catch (error) {
+      console.error("Erreur lors de la suppression de la catégorie :", error);
+    }
   };
 
   return (
     <div>
       <Sidebar />
       <div className="container mt-5">
-      <Link to={`/category/add`} className="btn btn-dark me-2">
-        Ajouter un catégorie
-      </Link>
+        <Link to={`/category/add`} className="btn btn-dark me-2">
+          Ajouter une catégorie
+        </Link>
         <Table striped bordered hover>
           <thead>
             <tr>

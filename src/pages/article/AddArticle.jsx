@@ -32,7 +32,7 @@ const AddArticle = () => {
       const response = await axios.get("http://127.0.0.1:8000/api/user");
       setUsers(response.data);
     } catch (error) {
-      console.error("Erreur lors de la récupération des utilisateurs:", error);
+      console.error("Erreur lors de la récupération des utilisateurs :", error);
     }
   };
 
@@ -41,8 +41,12 @@ const AddArticle = () => {
       const response = await axios.get("http://127.0.0.1:8000/api/category");
       setCategories(response.data);
     } catch (error) {
-      console.error("Erreur lors de la récupération des catégories:", error);
+      console.error("Erreur lors de la récupération des catégories :", error);
     }
+  };
+
+  const changeHandler = (e) => {
+    setImage_article(e.target.files[0]);
   };
 
   // Ajouter un article
@@ -60,17 +64,21 @@ const AddArticle = () => {
     }
 
     await axios
-      .post(`http://127.0.0.1:8000/api/article`, formData)
-      .then(() => navigate('/article'))
+      .post(
+        `http://127.0.0.1:8000/api/article`,
+        formData,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` },
+        }
+      )
+      .then(() => navigate("/article")) // Redirection après succès
       .catch(({ response }) => {
-        if (response.status === 422) {
-          setValidationError(response.data.errors);
+        if (response && response.status === 422) {
+          setValidationError(response.data.errors); // Gestion des erreurs de validation
+        } else {
+          console.error("Erreur inattendue :", response);
         }
       });
-  };
-
-  const changeHandler = (e) => {
-    setImage_article(e.target.files[0]);
   };
 
   return (
@@ -89,11 +97,9 @@ const AddArticle = () => {
                       <div className="col-12">
                         <div className="alert alert-danger">
                           <ul className="mb-0">
-                            {Object.entries(validationError).map(
-                              ([key, value]) => (
-                                <li key={key}>{value}</li>
-                              )
-                            )}
+                            {Object.entries(validationError).map(([key, value]) => (
+                              <li key={key}>{value}</li>
+                            ))}
                           </ul>
                         </div>
                       </div>
@@ -107,9 +113,7 @@ const AddArticle = () => {
                           <Form.Control
                             type="text"
                             value={title_article}
-                            onChange={(article) => {
-                              setTitle_article(article.target.value);
-                            }}
+                            onChange={(e) => setTitle_article(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -121,9 +125,7 @@ const AddArticle = () => {
                           <Form.Control
                             type="datetime-local"
                             value={date_article}
-                            onChange={(article) => {
-                              setDate_article(article.target.value);
-                            }}
+                            onChange={(e) => setDate_article(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -133,11 +135,10 @@ const AddArticle = () => {
                         <Form.Group controlId="content_article">
                           <Form.Label>Description</Form.Label>
                           <Form.Control
-                            type="textarea"
+                            as="textarea"
+                            rows={5}
                             value={content_article}
-                            onChange={(article) => {
-                              setContent_article(article.target.value);
-                            }}
+                            onChange={(e) => setContent_article(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -149,9 +150,7 @@ const AddArticle = () => {
                           <Form.Control
                             as="select"
                             value={userId}
-                            onChange={(article) => {
-                              setUserId(article.target.value);
-                            }}
+                            onChange={(e) => setUserId(e.target.value)}
                           >
                             <option value="">Sélectionnez un utilisateur</option>
                             {users.map((user) => (
@@ -170,9 +169,7 @@ const AddArticle = () => {
                           <Form.Control
                             as="select"
                             value={categoryId}
-                            onChange={(article) => {
-                              setCategoryId(article.target.value);
-                            }}
+                            onChange={(e) => setCategoryId(e.target.value)}
                           >
                             <option value="">Sélectionnez une catégorie</option>
                             {categories.map((category) => (

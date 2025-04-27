@@ -13,28 +13,29 @@ function LoginForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: "onChange" }); // Suppression de setError
-  const [serverError, setServerError] = useState(""); // Gestion des erreurs serveur
+  } = useForm({ mode: "onChange" }); // Enables validation on change
+  const [serverError, setServerError] = useState(""); // For handling server errors
 
   const onSubmit = async (data) => {
     try {
-      // Appel à l'API pour la connexion
+      // API call for authentication
       const response = await axios.post(
         "http://127.0.0.1:8000/api/login/",
         data,
         {
           headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json",
+            Accept: "application/json",
           },
         }
       );
 
       if (response.status === 200) {
-        const { token } = response.data.data.access_token;
-        const role_id = parseInt(response.data.data.user.role_id, 10); // Conversion de role_id en entier
-        localStorage.setItem("access_token", token);
+        const token = response.data.data.access_token; // Correct token extraction
+        const role_id = parseInt(response.data.data.user.role_id, 10); // Ensure role_id is an integer
+        localStorage.setItem("access_token", token); // Save token in localStorage
 
+        // Navigate based on role_id
         if (role_id === 1) {
           navigate("/dashboard", { replace: true });
         } else if (role_id === 2) {
@@ -44,6 +45,7 @@ function LoginForm() {
         }
       }
     } catch (error) {
+      // Error handling
       if (error.response && error.response.status === 401) {
         setServerError("Identifiants incorrects. Veuillez réessayer.");
       } else if (error.response && error.response.data.message) {

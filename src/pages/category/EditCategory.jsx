@@ -1,89 +1,116 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import Sidebar from "../../components/admin/Sidebar";
+import axios from "axios";
 
 const EditCategory = () => {
-  const { category } = useParams();
+  const { category } = useParams(); // Récupération de l'ID de la catégorie depuis l'URL
   const navigate = useNavigate();
 
-  const [nameCategory, setNameCategory] = useState("");
-  const [validationError, setValidationError] = useState({});
+  const [nameCategory, setNameCategory] = useState(""); // État pour le nom de la catégorie
+  const [validationError, setValidationError] = useState({}); // État pour les erreurs de validation
 
+  // Charger les données de la catégorie au montage
   useEffect(() => {
     const fetchCategory = async () => {
       try {
-        const res = await axios.get(`http://127.0.0.1:8000/api/category/${category}`);
-        setNameCategory(res.data.name_category);
+        const token = localStorage.getItem("access_token"); // Vérifie si le token existe
+        if (!token) {
+          console.error("Aucun token trouvé. Redirection vers la connexion.");
+          navigate("/login"); // Redirection si le token est absent
+          return;
+        }
+
+        const response = await axios.get(
+          `http://127.0.0.1:8000/api/category/${category}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Accept": "application/json", // Assure une réponse JSON
+            },
+          }
+        );
+        setNameCategory(response.data.name_category); // Assigner le nom existant au champ
       } catch (error) {
-        console.error("Erreur lors de la récupération de la catégorie :", error);
+        if (error.response && error.response.status === 401) {
+          console.error("Non autorisé. Redirection vers la connexion.");
+          navigate("/login"); // Redirection si la requête n'est pas autorisée
+        } else {
+          console.error("Erreur lors de la récupération de la catégorie :", error);
+        }
       }
     };
 
     fetchCategory();
-  }, [category]); // Utilisation de `category` comme dépendance pour éviter l'erreur ESLint
+  }, [category, navigate]);
 
-  // Fonction de mise à jour de la catégorie
+  // Fonction pour mettre à jour la catégorie
   const updateCategory = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("_method", "PATCH");
-    formData.append("name_category", nameCategory);
+    const data = {
+      name_category: nameCategory, // Champ pour la mise à jour
+    };
 
     try {
-      await axios.post(`http://127.0.0.1:8000/api/category/${category}`, formData);
-      navigate("/category");
+      const token = localStorage.getItem("access_token"); // Vérifie si le token existe
+      if (!token) {
+        console.error("Aucun token trouvé. Redirection vers la connexion.");
+        navigate("/login");
+        return;
+      }
+
+      await axios.put(`http://127.0.0.1:8000/api/category/${category}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json", // Spécifie l'envoi en JSON
+        },
+      });
+
+      navigate("/category"); // Redirection après succès
     } catch (error) {
       if (error.response && error.response.status === 422) {
-        setValidationError(error.response.data.errors);
+        setValidationError(error.response.data.errors); // Affiche les erreurs de validation
+      } else if (error.response && error.response.status === 401) {
+        console.error("Non autorisé. Redirection vers la connexion.");
+        navigate("/login"); // Redirection si non autorisé
+      } else {
+        console.error("Erreur inattendue :", error);
       }
     }
   };
 
   return (
-    <div>
-      <Sidebar />
-      <div className="container mt-5 card-wrapper">
-        <div className="card">
-          <div className="card-body">
-            <h4 className="card-title text-center">Modifier une catégorie</h4>
-            <hr />
-            <div className="form-wrapper">
-              {Object.keys(validationError).length > 0 && (
-                <div className="alert alert-danger">
-                  <ul className="mb-0">
-                    {Object.entries(validationError).map(([key, value]) => (
-                      <li key={key}>{value}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              <Form onSubmit={updateCategory}>
-                <Row>
-                  <Col>
-                    <Form.Group controlId="Name">
-                      <Form.Label className="text-center w-100">Nom de la catégorie</Form.Label>
-                      <Form.Control
-                        type="text"
-                        value={nameCategory}
-                        onChange={(e) => setNameCategory(e.target.value)}
-                      />
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Button variant="dark" className="mt-2 w-100" type="submit">
-                  Mettre à jour
-                </Button>
-              </Form>
-            </div>
-          </div>
+    <div className="container mt-5">
+      <h2>Modifier une catégorie</h2>
+
+      {/* Affichage des erreurs de validation */}
+      {Object.keys(validationError).length > 0 && (
+        <div className="alert alert-danger">
+          <ul>
+            {Object.entries(validationError).map(([key, value]) => (
+              <li key={key}>{value}</li>
+            ))}
+          </ul>
         </div>
-      </div>
+      )}
+
+      {/* Formulaire pour la mise à jour */}
+      <Form onSubmit={updateCategory}>
+        <Form.Group controlId="nameCategory" className="mb-3">
+          <Form.Label>Nom de la catégorie</Form.Label>
+          <Form.Control
+            type="text"
+            value={nameCategory}
+            placeholder="Entrez le nom de la catégorie"
+            onChange={(e) => setNameCategory(e.target.value)}
+          />
+        </Form.Group>
+        <Button variant="dark" type="submit">
+          Mettre à jour
+        </Button>
+      </Form>
     </div>
   );
 };

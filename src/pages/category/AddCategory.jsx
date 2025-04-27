@@ -18,8 +18,11 @@ const AddCategory = () => {
     formData.append("name_category", nameCategory);
 
     await axios
-      .post("http://127.0.0.1:8000/api/category", formData)
-      .then(() => navigate("/category"))
+      .post("http://127.0.0.1:8000/api/category",  formData ,
+        { headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` } }
+    )
+      .then(() => navigate("/category",         
+    ))
       .catch(({ response }) => {
         if (response.status === 422) {
           setValidationError(response.data.errors);

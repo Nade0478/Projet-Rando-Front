@@ -1,54 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Menu from "../../components/Menu";
 import Footer from "../../components/Footer";
-import "../../styles/style.css";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
 
-const ImageComponent = ({ imageUrl, altText }) => (
-  <div className="image-component">
-    <img src={imageUrl} alt={altText} width="100%" style={{ borderRadius: "8px" }} />
-  </div>
-);
-
-const MapComponent = ({ longitude, latitude, name }) => (
-  <div className="map-component" style={{ width: "100%", height: "300px" }}>
-    <MapContainer center={[latitude, longitude]} zoom={10} style={{ width: "100%", height: "100%" }}>
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      <Marker position={[latitude, longitude]}>
-        <Popup>{name}</Popup>
-      </Marker>
-    </MapContainer>
-  </div>
-);
-
-const ShowPlace = () => {
+const ShowOpinion = () => {
   const { id } = useParams();
-  const [place, setPlace] = useState(null);
+  const [opinion, setOpinion] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchPlace();
-  }, [id]);
-
-  const fetchPlace = async () => {
+  // Utilisation de useCallback pour stabiliser la fonction fetchOpinion
+  const fetchOpinion = useCallback(async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/place/${id}`);
-      setPlace(response.data);
+      const response = await axios.get(`http://127.0.0.1:8000/api/opinion/${id}`);
+      setOpinion(response.data);
       setLoading(false);
     } catch (error) {
       console.error("Erreur lors de la récupération des détails :", error);
       setLoading(false);
     }
-  };
+  }, [id]); // Dépendance sur 'id'
+
+  useEffect(() => {
+    fetchOpinion();
+  }, [fetchOpinion]); // Ajout de fetchOpinion comme dépendance
 
   if (loading) {
     return <p>Chargement des informations...</p>;
   }
 
-  if (!place) {
+  if (!opinion) {
     return <p>Le lieu demandé est introuvable.</p>;
   }
 
@@ -56,36 +37,15 @@ const ShowPlace = () => {
     <div>
       <Menu />
       <div className="container mt-5">
-        <h1>{place.name_place}</h1>
-        <hr/>
-        <p><strong>Description :</strong> {place.description_place}</p>
-        <p><strong>Longitude :</strong> {place.longitude_place}</p>
-        <p><strong>Latitude :</strong> {place.latitude_place}</p>
-        <p><strong>Distance :</strong> {place.distance_place} km</p>
-        <p><strong>Difficulté :</strong> {place.difficulty_place}</p>
-        <p><strong>Temps estimé :</strong> {place.estimated_time_place}</p>
-        <hr/>
+        <h1>{opinion.title_opinion}</h1>
+        <p><strong>Titre de l'opinion :</strong> {opinion.title_opinion}</p>
+        <p><strong>Contenu :</strong> {opinion.content_opinion}</p>
+        <p><strong>Note :</strong> {opinion.note_opinion}</p>
+        <p><strong>Auteur :</strong> {opinion.user && opinion.user.name}</p>
+        <p><strong>Lieux :</strong> {opinion.place && opinion.place.name_place}</p>
         {/* Image Component */}
-        <div className="row d-flex align-items-center">
+        <div className="row">
           {/* Image Component */}
-          <div className="col-md-6">
-            {place.image_place && (
-              <ImageComponent
-                imageUrl={`http://127.0.0.1:8000/storage/public/uploads/${place.image_place}`}
-                altText={place.name_place}
-              />
-            )}
-          </div>
-          {/* Map Component */}
-          <div className="col-md-6">
-            {place.latitude_place && place.longitude_place && (
-              <MapComponent
-                latitude={place.latitude_place}
-                longitude={place.longitude_place}
-                name={place.name_place}
-              />
-            )}
-          </div>
         </div>
       </div>
       <Footer />
@@ -93,4 +53,4 @@ const ShowPlace = () => {
   );
 };
 
-export default ShowPlace;
+export default ShowOpinion;

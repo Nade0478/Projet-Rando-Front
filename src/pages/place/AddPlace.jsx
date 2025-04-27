@@ -43,7 +43,9 @@ const AddPlace = () => {
     }
 
     await axios
-      .post(`http://127.0.0.1:8000/api/place/`, formData)
+      .post(`http://127.0.0.1:8000/api/place/`, formData,
+        { headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` } }
+      )
       .then(() => navigate("/place"))
       .catch(({ response }) => {
         if (response.status === 422) {

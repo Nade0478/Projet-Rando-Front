@@ -16,7 +16,9 @@ const User = () => {
 
   const displayUsers = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/user");
+      const response = await axios.get("http://127.0.0.1:8000/api/user",
+        { headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` } }
+      );
       const fetchedUsers = response.data || [];
       const filteredUsers = fetchedUsers.filter((user) => user.role_id === 2);
       setUsers(filteredUsers);
@@ -29,7 +31,9 @@ const User = () => {
 
   const deleteUser = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/user/${id}`);
+      await axios.delete(`http://127.0.0.1:8000/api/user/${id}`,
+        { headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` } }
+    )
       alert("Utilisateur supprimé avec succès !");
       displayUsers();
     } catch (error) {

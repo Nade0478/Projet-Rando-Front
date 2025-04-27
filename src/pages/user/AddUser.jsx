@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const AddUser = () => {
   const navigate = useNavigate();
 
-  // ✅ Création des états pour chaque champ
+  // ✅ States for each input field
   const [nameUser, setNameUser] = useState("");
   const [emailUser, setEmailUser] = useState("");
   const [passwordUser, setPasswordUser] = useState("");
@@ -18,20 +18,26 @@ const AddUser = () => {
   const addUser = async (e) => {
     e.preventDefault();
 
-    // ✅ Correction : utiliser les bons noms de champs attendus par Laravel
+    // ✅ Correcting field names expected by Laravel backend
     const formData = new FormData();
     formData.append("name", nameUser);
     formData.append("email", emailUser);
     formData.append("password", passwordUser);
 
-    await axios
-      .post("http://127.0.0.1:8000/api/user", formData)
-      .then(() => navigate("/user"))
-      .catch(({ response }) => {
-        if (response.status === 422) {
-          setValidationError(response.data.errors);
-        }
-      });
+    try {
+      await axios.post(
+        "http://127.0.0.1:8000/api/user",
+        formData,
+        { headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` } }
+    )
+      navigate("/user"); // Redirect after successful user creation
+    } catch ({ response }) {
+      if (response && response.status === 422) {
+        setValidationError(response.data.errors); // Handle validation errors
+      } else {
+        console.error("Unexpected error:", response);
+      }
+    }
   };
 
   return (

@@ -27,7 +27,9 @@ const EditPlace = () => {
   // Fetch the Place details
   const getPlace = useCallback(async () => {
     try {
-      const res = await axios.get(`http://127.0.0.1:8000/api/place/${place}`);
+      const res = await axios.get(`http://127.0.0.1:8000/api/place/${place}`,
+        { headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` } }
+    )
       const placeData = res.data;
       setName_place(placeData.name_place);
       setImage_place(placeData.image_place);
@@ -76,7 +78,9 @@ const EditPlace = () => {
     }
 
     await axios
-      .post(`http://127.0.0.1:8000/api/place/${place}`, formData)
+      .post(`http://127.0.0.1:8000/api/place/${place}`, formData,
+        { headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` } }
+    )
       .then(() => navigate("/place"))
       .catch(({ response }) => {
         if (response.status === 422) {

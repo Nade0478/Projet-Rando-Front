@@ -17,7 +17,9 @@ const Opinion = () => {
 
   const displayOpinion = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/api/opinion");
+      const res = await axios.get("http://127.0.0.1:8000/api/opinion",
+        { headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` } }
+    )
       if (res.data && res.data.data) {
         setOpinion(res.data.data);
         setTitle_opinion(
@@ -33,7 +35,9 @@ const Opinion = () => {
 
   const deleteOpinion = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/opinion/${id}`);
+      await axios.delete(`http://127.0.0.1:8000/api/opinion/${id}`,
+        { headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` } }
+      );
       displayOpinion(); // Rafraîchir la liste après suppression
     } catch (error) {
       console.error("Erreur lors de la suppression de l'opinion :", error);
