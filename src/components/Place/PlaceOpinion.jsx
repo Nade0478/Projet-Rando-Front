@@ -81,6 +81,12 @@ const PlaceOpinion = () => {
                                         >
                                             Voir
                                         </Link>
+                                        <button
+                                            onClick={() => deleteOpinion(opinion.id)}
+                                            className="btn btn-danger"
+                                        >
+                                            Supprimer
+                                        </button>
                                     </td>
                                 </tr>
                             ))}

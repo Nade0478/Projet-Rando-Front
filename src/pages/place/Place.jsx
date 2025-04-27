@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom"; // Import du hook useNavigate
+import { Link } from "react-router-dom"; // Suppression du hook useNavigate
 import FilterDropdown from "../../components/FilterDropdown";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
@@ -17,11 +17,11 @@ const customIcon = new L.Icon({
   iconAnchor: [16, 32],
   popupAnchor: [0, -32],
 });
+
 const Place = () => {
   const [place, setPlace] = useState([]); // Liste des lieux
   const [name_place, setName_place] = useState([]); // Liste des noms de lieux
   const [selectedName_place, setSelectedName_place] = useState(null); // Nom sélectionné pour le filtre
-  const navigate = useNavigate(); // Hook pour gérer les redirections
 
   // Charger les lieux au montage du composant
   useEffect(() => {
@@ -49,11 +49,6 @@ const Place = () => {
     }
   };
 
-  // Fonction pour rediriger vers la page de détail
-  const showPlace = (id) => {
-    navigate(`/place/show/${id}`); // Redirige vers la page avec les détails du lieu
-  };
-
   // Filtrage des lieux selon le nom sélectionné
   const filteredPlaces = place.filter((place) => {
     return !selectedName_place || place.name_place === selectedName_place;
@@ -63,12 +58,9 @@ const Place = () => {
     <div>
       <Sidebar />
       <div className="container mt-5">
-      <Link
-                    to={`/place/add`}
-                    className="btn btn-dark me-2"
-                  >
-                    Ajouter un lieu de randonnée
-                  </Link>
+        <Link to={`/place/add`} className="btn btn-dark me-2">
+          Ajouter un lieu de randonnée
+        </Link>
         {/* Dropdown pour le filtrage */}
         <div className="d-flex justify-content-between mb-3">
           <FilterDropdown
@@ -99,7 +91,7 @@ const Place = () => {
                 <td>{place.name_place}</td>
                 <td>
                   <img
-                    src={`http://127.0.0.1:8000/storage/public/uploads/${place.image_place}`}// Utilisation de l'URL complète depuis le backend
+                    src={`http://127.0.0.1:8000/storage/public/uploads/${place.image_place}`} // Utilisation de l'URL complète depuis le backend
                     alt={place.name_place}
                     width="75px"
                   />
@@ -142,10 +134,7 @@ const Place = () => {
                   >
                     Détails
                   </Link>
-                  <Button
-                    variant="dark"
-                    onClick={() => deletePlace(place.id)}
-                  >
+                  <Button variant="dark" onClick={() => deletePlace(place.id)}>
                     Supprimer
                   </Button>
                 </td>
