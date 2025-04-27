@@ -91,7 +91,7 @@ const Place = () => {
                 <td>{place.name_place}</td>
                 <td>
                   <img
-                    src={`http://127.0.0.1:8000/storage/public/uploads/${place.image_place}`} // Utilisation de l'URL complète depuis le backend
+                    src={`http://127.0.0.1:8000/storage/public/uploads/${place.image_place}`}
                     alt={place.name_place}
                     width="75px"
                   />
