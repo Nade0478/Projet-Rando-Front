@@ -18,7 +18,7 @@ function NbrAvisForm() {
         }
   
         const data = await response.json();
-        console.log("Données reçues :", data); // 👀 Vérifie ce que l'API renvoie
+        console.log("Données reçues :", data);
   
         if (data.meta && data.meta.total) {
           setOpinionCount(data.meta.total);
